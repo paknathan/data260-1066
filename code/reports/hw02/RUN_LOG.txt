@@ -26,3 +26,26 @@
 [2026-09-14T19:49:48Z] run 25/30: classification=valid_first_attempt attempts=1 latency_ms=19776.4
 [2026-09-14T19:50:07Z] run 26/30: classification=valid_first_attempt attempts=1 latency_ms=19974.1
 [2026-09-14T19:50:27Z] run 27/30: classification=valid_first_attempt attempts=1 latency_ms=19539.2
+[2026-09-14T19:50:47Z] run 28/30: classification=valid_first_attempt attempts=1 latency_ms=19591.4
+[2026-09-14T19:51:06Z] run 29/30: classification=valid_first_attempt attempts=1 latency_ms=19758.5
+[2026-09-14T19:51:27Z] run 30/30: classification=valid_first_attempt attempts=1 latency_ms=20198.0
+[2026-09-14T19:51:27Z] schema-validation summary: {"valid_first_attempt": {"count": 30, "mean_latency_ms": 19480.6}, "valid_after_1_retry": {"count": 0, "mean_latency_ms": null}, "valid_after_2plus_retries": {"count": 0, "mean_latency_ms": null}, "hit_turn_ceiling": {"count": 0, "mean_latency_ms": null}}
+[2026-09-14T19:51:27Z] === Part 4 Sec 4: turn-ceiling comparison, n=20 per ceiling, ceilings=(2, 10) ===
+[2026-09-14T19:51:47Z] ceiling=2 run 1/20: valid=True latency_ms=20206.6
+[2026-09-14T19:52:06Z] ceiling=2 run 2/20: valid=True latency_ms=19579.5
+[2026-09-14T19:52:26Z] ceiling=2 run 3/20: valid=True latency_ms=19409.9
+[2026-09-14T19:52:45Z] ceiling=2 run 4/20: valid=True latency_ms=19338.0
+[2026-09-14T19:53:04Z] ceiling=2 run 5/20: valid=True latency_ms=19356.9
+[2026-09-14T19:53:24Z] ceiling=2 run 6/20: valid=True latency_ms=19727.3
+[2026-09-14T19:53:43Z] ceiling=2 run 7/20: valid=True latency_ms=19228.6
+[2026-09-14T19:54:02Z] ceiling=2 run 8/20: valid=True latency_ms=18734.8
+[2026-09-14T19:54:21Z] ceiling=2 run 9/20: valid=True latency_ms=19237.5
+[2026-09-14T19:54:40Z] ceiling=2 run 10/20: valid=True latency_ms=18525.9
+[2026-09-14T19:55:00Z] ceiling=2 run 11/20: valid=True latency_ms=19844.5
+[2026-09-14T19:55:19Z] ceiling=2 run 12/20: valid=True latency_ms=18777.0
+[2026-09-14T19:55:37Z] ceiling=2 run 13/20: valid=True latency_ms=18492.4
+[2026-09-14T19:55:55Z] ceiling=2 run 14/20: valid=True latency_ms=18299.4
+[2026-09-14T19:56:14Z] ceiling=2 run 15/20: valid=True latency_ms=18556.8
+[2026-09-14T19:56:33Z] ceiling=2 run 16/20: valid=True latency_ms=18717.0
+[2026-09-14T19:56:51Z] ceiling=2 run 17/20: valid=True latency_ms=18702.4
+[2026-09-14T19:57:10Z] ceiling=2 run 18/20: valid=True latency_ms=18516.4
