@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import sys
 from typing import Any, Dict, List, Optional, TypedDict
 
@@ -161,6 +162,20 @@ def planner_node(state: AgentState) -> Dict[str, Any]:
 
 def reviewer_node(state: AgentState) -> Dict[str, Any]:
     print("---NODE: Reviewer ---", file=sys.stderr)
+
+    # Step 6 test hook: FORCE_INVALID=1 makes this node always report an
+    # issue, regardless of what the model actually returns, so you can
+    # watch the Planner<->Reviewer self-correction loop run for real
+    # without hand-editing this function. Remove/unset for normal runs.
+    if os.environ.get("FORCE_INVALID") == "1":
+        print("  [Reviewer] FORCE_INVALID=1 set -> reporting a fake issue", file=sys.stderr)
+        return {
+            "reviewer_feedback": {
+                "valid": False,
+                "error": "FORCE_INVALID debug mode: pretending validation failed.",
+            }
+        }
+
     system_prompt, user_prompt = _reviewer_prompts(state)
     out = call_model(state, system_prompt, user_prompt)
     tags = out.get("tags", [])
