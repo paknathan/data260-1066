@@ -44,6 +44,7 @@ class AgentState(TypedDict, total=False):
     # Loop control
     turn_count: int
     turn_ceiling: int
+    attempts: int   # number of times the Reviewer has evaluated a proposal
 
 
 # ---------------------------------------------------------------------------
@@ -162,6 +163,11 @@ def planner_node(state: AgentState) -> Dict[str, Any]:
 
 def reviewer_node(state: AgentState) -> Dict[str, Any]:
     print("---NODE: Reviewer ---", file=sys.stderr)
+    # Counts how many times the Reviewer has evaluated a proposal in this
+    # run (regardless of outcome). Used by the Part 4 experiment runner to
+    # classify each run as valid-first-attempt / valid-after-N-retries /
+    # abandoned, without having to re-derive it from turn_count.
+    attempts = state.get("attempts", 0) + 1
 
     # Step 6 test hook: FORCE_INVALID=1 makes this node always report an
     # issue, regardless of what the model actually returns, so you can
@@ -170,10 +176,11 @@ def reviewer_node(state: AgentState) -> Dict[str, Any]:
     if os.environ.get("FORCE_INVALID") == "1":
         print("  [Reviewer] FORCE_INVALID=1 set -> reporting a fake issue", file=sys.stderr)
         return {
+            "attempts": attempts,
             "reviewer_feedback": {
                 "valid": False,
                 "error": "FORCE_INVALID debug mode: pretending validation failed.",
-            }
+            },
         }
 
     system_prompt, user_prompt = _reviewer_prompts(state)
@@ -184,11 +191,12 @@ def reviewer_node(state: AgentState) -> Dict[str, Any]:
     try:
         validated = ReviewedOutput(tags=tags, summary=summary)
         return {
+            "attempts": attempts,
             "reviewer_feedback": {
                 "valid": True,
                 "tags": validated.tags,
                 "summary": validated.summary,
-            }
+            },
         }
     except ValidationError as exc:
         if not state.get("strict", True):
@@ -201,17 +209,18 @@ def reviewer_node(state: AgentState) -> Dict[str, Any]:
             try:
                 validated = ReviewedOutput(tags=fixed_tags, summary=fixed_summary)
                 return {
+                    "attempts": attempts,
                     "reviewer_feedback": {
                         "valid": True,
                         "tags": validated.tags,
                         "summary": validated.summary,
                         "auto_repaired": True,
-                    }
+                    },
                 }
             except ValidationError:
                 pass  # fall through to reporting the original failure
 
-        return {"reviewer_feedback": {"valid": False, "error": str(exc)}}
+        return {"attempts": attempts, "reviewer_feedback": {"valid": False, "error": str(exc)}}
 
 
 def supervisor_node(state: AgentState) -> Dict[str, Any]:
@@ -226,13 +235,16 @@ def supervisor_node(state: AgentState) -> Dict[str, Any]:
 # Step 4: Routing function -- reads state, returns "planner", "reviewer", or END
 # ---------------------------------------------------------------------------
 def router_logic(state: AgentState) -> str:
-    turn_count = state.get("turn_count", 0)
-    ceiling = state.get("turn_ceiling", DEFAULT_TURN_CEILING)
+    """(No Proposal) -> Planner ; (Has Proposal, unreviewed) -> Reviewer ;
+    (Has Issues) -> Planner, UNLESS the turn ceiling has been reached, in
+    which case -> END ; (No Issues) -> END.
 
-    if turn_count >= ceiling:
-        print(f"  [Router] turn ceiling ({ceiling}) reached -> END", file=sys.stderr)
-        return "end"
-
+    The ceiling is only consulted when we're about to send the task back
+    for ANOTHER attempt -- it never blocks the very first Planner->Reviewer
+    pass. That matters for Part 4 Sec 4: a ceiling of 2 should mean "no
+    retries allowed" (still get one full attempt), not "abort before the
+    Reviewer ever runs."
+    """
     proposal = state.get("planner_proposal")
     if not proposal:
         print("  [Router] no proposal yet -> planner", file=sys.stderr)
@@ -245,6 +257,12 @@ def router_logic(state: AgentState) -> str:
 
     if feedback.get("valid"):
         print("  [Router] proposal valid -> END", file=sys.stderr)
+        return "end"
+
+    turn_count = state.get("turn_count", 0)
+    ceiling = state.get("turn_ceiling", DEFAULT_TURN_CEILING)
+    if turn_count >= ceiling:
+        print(f"  [Router] proposal invalid and turn ceiling ({ceiling}) reached -> END", file=sys.stderr)
         return "end"
 
     print("  [Router] proposal invalid -> planner (retry)", file=sys.stderr)
@@ -296,6 +314,7 @@ def build_initial_state(
         "reviewer_feedback": {},
         "turn_count": 0,
         "turn_ceiling": turn_ceiling,
+        "attempts": 0,
     }
 
 
@@ -325,13 +344,23 @@ def run_pipeline(
         final_state = app.invoke(initial_state)
 
     feedback = final_state.get("reviewer_feedback") or {}
+    attempts = final_state.get("attempts", 0)
+    turns = final_state.get("turn_count", 0)
     if feedback.get("valid"):
-        return {"tags": feedback["tags"], "summary": feedback["summary"], "abandoned": False}
+        return {
+            "tags": feedback["tags"],
+            "summary": feedback["summary"],
+            "abandoned": False,
+            "attempts": attempts,
+            "turns": turns,
+        }
 
     return {
         "tags": feedback.get("tags", []),
         "summary": feedback.get("summary", ""),
         "abandoned": True,
+        "attempts": attempts,
+        "turns": turns,
         "error": feedback.get("error", "turn ceiling reached before a valid result"),
     }
 
