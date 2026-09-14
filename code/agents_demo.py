@@ -1,6 +1,8 @@
+import argparse
 import json
 import sys
 import requests
+from src.model_client import complete
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
 MODEL = "qwen3:8b"
@@ -9,35 +11,16 @@ NUM_TAGS = 3
 MAX_RETRIES = 3
 
 
-def call_model(system_prompt: str, user_prompt: str) -> dict:
-
-    payload = {
-        "model": MODEL,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-        "format": "json", 
-        "stream": False,
-        "think": False,
-    }
-
-    last_error = None
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            resp = requests.post(OLLAMA_URL, json=payload, timeout=240)
-            resp.raise_for_status()
-            content = resp.json()["message"]["content"]
-            return json.loads(content)
-        except (requests.RequestException, KeyError, json.JSONDecodeError) as exc:
-            last_error = exc
-            print(f"  [retry {attempt}/{MAX_RETRIES}] model call failed: {exc}",
-                  file=sys.stderr)
-
-    raise RuntimeError(f"Model call failed after {MAX_RETRIES} attempts: {last_error}")
+def call_model(system_prompt: str, user_prompt: str, temperature: float = 0.0) -> dict:
+    """Delegates execution directly to the central model-adapter."""
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+    return complete(messages=messages, temperature=temperature, response_format="json")
 
 
-def planner_step(title: str, content: str) -> dict:
+def planner_step(title: str, content: str, temperature: float = 0.0) -> dict:
 
     system_prompt = (
         "You are the Planner agent in a small multi-agent pipeline. "
@@ -52,10 +35,10 @@ def planner_step(title: str, content: str) -> dict:
         '{"candidate_tags": ["...", "...", ...], "draft_summary": "..."}'
     )
     user_prompt = f"Title: {title}\nContent: {content}"
-    return call_model(system_prompt, user_prompt)
+    return call_model(system_prompt, user_prompt, temperature=temperature)
 
 
-def reviewer_step(planner_output: dict, title: str, content: str) -> dict:
+def reviewer_step(planner_output: dict, title: str, content: str, temperature: float = 0.0) -> dict:
 
     system_prompt = (
         "You are the Reviewer agent in a small multi-agent pipeline. You "
@@ -73,10 +56,10 @@ def reviewer_step(planner_output: dict, title: str, content: str) -> dict:
         f"Title: {title}\nContent: {content}\n\n"
         f"Planner draft: {json.dumps(planner_output)}"
     )
-    return call_model(system_prompt, user_prompt)
+    return call_model(system_prompt, user_prompt, temperature=temperature)
 
 
-def finalizer_step(reviewer_output: dict, title: str, content: str) -> dict:
+def finalizer_step(reviewer_output: dict, title: str, content: str, temperature: float = 0.0) -> dict:
 
     tags = reviewer_output.get("tags", [])
     summary = reviewer_output.get("summary", "")
@@ -97,7 +80,7 @@ def finalizer_step(reviewer_output: dict, title: str, content: str) -> dict:
             f"Title: {title}\nContent: {content}\n\n"
             f"Invalid output to fix: {json.dumps(reviewer_output)}"
         )
-        fixed = call_model(system_prompt, user_prompt)
+        fixed = call_model(system_prompt, user_prompt, temperature=temperature)
         tags = fixed.get("tags", tags)
         summary = fixed.get("summary", summary)
     except RuntimeError as exc:
@@ -124,21 +107,26 @@ def _is_valid(tags, summary) -> bool:
     )
 
 
-def run_pipeline(title: str, content: str) -> dict:
+def run_pipeline(title: str, content: str, temperature: float = 0.0) -> dict:
     print("Planner working...", file=sys.stderr)
-    planner_output = planner_step(title, content)
+    planner_output = planner_step(title, content, temperature=temperature)
     print(f"  Planner output: {json.dumps(planner_output)}", file=sys.stderr)
 
     print("Reviewer working...", file=sys.stderr)
-    reviewer_output = reviewer_step(planner_output, title, content)
+    reviewer_output = reviewer_step(planner_output, title, content, temperature=temperature)
     print(f"  Reviewer output: {json.dumps(reviewer_output)}", file=sys.stderr)
 
     print("Finalizer working...", file=sys.stderr)
-    final_output = finalizer_step(reviewer_output, title, content)
+    final_output = finalizer_step(reviewer_output, title, content, temperature=temperature)
     return final_output
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run the multi-agent transit incident pipeline.")
+    parser.add_argument("--temperature", type=float, default=0.0,
+                        help="Temperature passed to the Ollama model calls.")
+    args = parser.parse_args()
+
     # Example input matching the Municipal Transit Incident domain schema
     # (route_or_line as the primary field, description as the content field).
     sample_title = "Route 22 Bus Breakdown Near Downtown Transit Center"
@@ -151,5 +139,5 @@ if __name__ == "__main__":
         "off-route roughly 45 minutes after the initial report."
     )
 
-    result = run_pipeline(sample_title, sample_content)
+    result = run_pipeline(sample_title, sample_content, temperature=args.temperature)
     print(json.dumps(result))

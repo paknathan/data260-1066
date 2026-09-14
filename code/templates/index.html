@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipal Transit Incidents</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; max-width: 600px; }
+        form { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+        input, textarea, select, button { padding: 0.5rem; width: 100%; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+        th { background-color: #f4f4f5; }
+
+        .update-banner {
+            background-color: #e6f7ec;
+            border: 1px solid #34a853;
+            color: #1e7a3a;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        @keyframes flash-highlight {
+            0%   { background-color: #c8f2d4; }
+            100% { background-color: transparent; }
+        }
+        .row-updated {
+            animation: flash-highlight 2s ease-out;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .search-bar input { width: auto; flex: 1; }
+        .search-bar button, .search-bar a.clear-link {
+            width: auto;
+            white-space: nowrap;
+        }
+        .search-bar a.clear-link {
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            text-decoration: none;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Municipal transit incidents</h1>
+
+    <!-- Ensure action and method point to FastAPI -->
+    <form action="/add" method="POST" id="incidentForm">
+        <input type="text" id="incident_id" name="incident_id" required autofocus
+            placeholder="Enter the id of the incident (e.g., INC-00147)">
+        
+        <input type="text" id="route_or_line" name="route_or_line" required
+            placeholder="Enter the affected route or line (e.g., Route 22, Blue Line)">
+        
+        <input type="text" id="email" name="email" required placeholder="Enter your email">
+        
+        <textarea id="description" name="description" required
+                placeholder="Describe what happened (e.g., cause, impact on riders, actions taken)"></textarea>
+
+        <select name="incident_type" id="incident_type">
+            <option value="Mechanical Breakdown">Mechanical Breakdown</option>
+            <option value="Collision">Collision</option>
+            <option value="Delay">Delay</option>
+            <option value="Route Detour">Route Detour</option>
+        </select>
+
+        <div>
+            <input type="checkbox" id="Acceptance" name="Acceptance" value="yes" required>
+            <label for="Acceptance">I agree to the terms and conditions.</label>
+        </div>
+
+        <button type="submit" id="submitButton">Submit</button>
+    </form>
+
+    <hr>
+
+    <!-- Updated List View Section -->
+    <h2>Logged Incidents</h2>
+
+    <!-- Search by primary (route/line) or secondary (incident type) field -->
+    <form action="/" method="GET" class="search-bar">
+        <input type="text" name="q" value="{{ search_query }}"
+            placeholder="Search by route/line or incident type...">
+        <button type="submit">Search</button>
+        {% if search_query %}
+        <a href="/" class="clear-link">Clear</a>
+        {% endif %}
+    </form>
+
+    {% if has_incidents %}
+    <form action="/delete-highest" method="POST" style="margin-bottom: 1rem;">
+        <button type="submit" style="width: auto; background-color: #fdecea; border: 1px solid #d93025; color: #a50e0e;">
+            Delete Highest ID
+        </button>
+    </form>
+    {% endif %}
+
+    {% if updated_id %}
+    <div class="update-banner">
+        &#10003; Incident {{ updated_id }} updated successfully.
+    </div>
+    {% endif %}
+
+    {% if incidents %}
+    <table>
+        <thead>
+            <tr>
+                <th>Incident ID</th>
+                <th>Route / Line</th>
+                <th>Type</th>
+                <th>Email</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for incident in incidents %}
+            <tr {% if incident.incident_id == updated_id %}class="row-updated"{% endif %}>
+                <td>{{ incident.incident_id }}</td>
+                <td>
+                    <input type="text" name="route_or_line" value="{{ incident.route_or_line }}"
+                        form="update-form-{{ loop.index }}" required>
+                </td>
+                <td>
+                    <select name="incident_type" form="update-form-{{ loop.index }}">
+                        {% for option in ["Mechanical Breakdown", "Collision", "Delay", "Route Detour"] %}
+                        <option value="{{ option }}" {% if incident.incident_type == option %}selected{% endif %}>{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>{{ incident.email }}</td>
+                <td>{{ incident.description }}</td>
+                <td>
+                    <!-- Empty form: holds the action/method that the inputs above bind to via form="..." -->
+                    <form id="update-form-{{ loop.index }}" action="/update/{{ incident.incident_id }}" method="POST"></form>
+                    <button type="submit" form="update-form-{{ loop.index }}">Update</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {% if search_query %}
+        <p>No incidents match "{{ search_query }}".</p>
+        {% else %}
+        <p>No transit incidents submitted.</p>
+        {% endif %}
+    {% endif %}
+
+</body>
+</html>
