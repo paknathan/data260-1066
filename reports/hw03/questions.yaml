@@ -1,0 +1,25 @@
+questions:
+  - id: Q1
+    question: "What caused SEPTA Trolley 111's pantograph to become entangled with the overhead catenary system on September 25, 2025?"
+    expected_answer: "The pantograph became entangled with sagging contact wires at the Scenic Road crossover. The contact wires were likely sagging because of inadequate tension or improper configuration, creating conditions in which the pantograph and wires could bounce and become entangled."
+    expected_source: "RIR2613.pdf"
+
+  - id: Q2
+    question: "How many pantograph damage incidents occurred on the D Line in the 14 months before the September 25, 2025 accident, and how did this compare with the previous long-term average?"
+    expected_answer: "In the 14 months before the accident, SEPTA recorded 47 occasions when a trolley experienced pantograph damage requiring removal from service for repairs. Before that period, the D Line fleet averaged about 10 such occurrences per year."
+    expected_source: "RIR2613.pdf"
+
+  - id: Q3
+    question: "What problems did PennDOT's 2016 and 2019 audits identify regarding SEPTA's inspection and maintenance of the D Line overhead catenary system?"
+    expected_answer: "In 2016, the audit found that SEPTA's traction power maintenance department lacked a compiled maintenance plan containing specific inspection and maintenance procedures and information about its power infrastructure. In 2019, the audit found that inspection and maintenance frequencies were inconsistent with SEPTA's documented plans, some inspections and maintenance activities had not been performed, and records of annual D Line inspections were missing."
+    expected_source: "RIR2613.pdf"
+
+  - id: Q4
+    question: "What actions did SEPTA and federal and state safety agencies take after the Trolley 111 accident to improve overhead catenary system safety?"
+    expected_answer: "After the accident, SEPTA inspected and repaired the D Line OCS, identified 46 conditions requiring repair, began installing roof-mounted cameras on D Line trolleys, and initiated six corrective action plans concerning OCS inspection and maintenance. The FTA issued Special Directive 25-1 requiring SEPTA to develop and implement a formal OCS inspection and maintenance program, while Special Directive 25-2 required PennDOT SSOA to strengthen its oversight. SEPTA's new formal OCS inspection and maintenance program went into effect on April 28, 2026."
+    expected_source: "RIR2613.pdf"
+
+  - id: Q5
+    question: "According to the NTSB, what was the probable cause of the September 25, 2025 SEPTA Trolley 111 accident, and what was the contributing factor?"
+    expected_answer: "The probable cause was SEPTA's lack of a formal inspection and maintenance program for its overhead catenary system, which resulted in unsafe catenary conditions that caused the pantograph to become entangled and separate from the trolley. A contributing factor was the Pennsylvania Department of Transportation State Safety Oversight Agency's failure to require SEPTA to implement a formal and enduring OCS inspection and maintenance program after identifying inadequate inspection and maintenance activities."
+    expected_source: "RIR2613.pdf"
