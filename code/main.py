@@ -1,10 +1,22 @@
+#main.py
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from routers.auth import router
 import re
 import uvicorn
+from starlette.middleware.sessions import SessionMiddleware
 
 app = FastAPI(title="Municipal Transit Incident API")
+
+app.add_middleware(
+    SessionMiddleware,
+    secret_key="data260-session-secret",
+    https_only=True,
+    same_site="lax",
+    max_age=3600)
+
+app.include_router(router)
 
 templates = Jinja2Templates(directory="templates")
 
@@ -96,4 +108,4 @@ def delete_highest_incident():
     return RedirectResponse(url="/", status_code=303)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8166, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8166, reload=True, ssl_keyfile="key.pem", ssl_certfile="cert.pem")

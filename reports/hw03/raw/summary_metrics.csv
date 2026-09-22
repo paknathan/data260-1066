@@ -1,0 +1,4 @@
+Technique,Chunks,Avg chunk length,Top-1 cosine,Mean@5 cosine,Recall@5,Mean retrieval latency (ms)
+Token,27,1139.63,0.6327,0.5831,1.0,9.89
+Semantic,7,3515.0,0.5683,0.4825,1.0,8.63
+Sentence-Window,120,205.04,0.6856,0.6075,1.0,9.74
