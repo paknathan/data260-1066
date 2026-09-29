@@ -1,0 +1,4 @@
+cat << 'EOF' > docs/policy_delays.txt
+Transit Delay Compensation Policy:
+Passengers experiencing service delays exceeding 30 minutes on any primary rail or bus route are eligible for full fare reimbursement or a complimentary single-ride pass. Standard traffic congestion on highway routes does not qualify for compensation. All claims must be submitted within 7 business days via the web portal or customer service desk.
+EOF

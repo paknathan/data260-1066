@@ -1,0 +1,4 @@
+cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiated, operators must immediately notify central dispatch via channel 4. Maintenance crew members entering active tracks must wear full Personal Protective Equipment (PPE), including Class 3 high-visibility jackets, hard hats, and steel-toe boots. Track access is strictly forbidden without active dispatch clearance.
+EOF

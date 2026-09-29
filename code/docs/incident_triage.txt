@@ -1,0 +1,4 @@
+cat << 'EOF' > docs/incident_triage.txt
+Incident Triage & Escalation Guidelines:
+Incidents are classified into four severity tiers. Severity 1 covers collisions and major signal blackouts, requiring dispatch response within 15 minutes. Severity 2 covers minor mechanical delays. Severity 3 and 4 handle customer feedback and non-urgent maintenance requests. High-severity incidents must trigger immediate automated alerts to regional safety controllers.
+EOF

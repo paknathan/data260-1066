@@ -1,0 +1,152 @@
+Loading embedding model...
+Indexed 5 chunks from docs/
+=================== 3-CONFIGURATION COMPARISON ===================
+
+[Q1] What is the compensation policy for delays over 30 minutes?
+
+--- RETRIEVAL LOG FOR: 'What is the compensation policy for delays over 30 minutes?' ---
+  [Chunk ID: 2 | Source: policy_delays.txt | Score: 0.6649]
+  Snippet: cat << 'EOF' > docs/policy_delays.txt
+Transit Delay Compensation Policy:
+Passengers experiencing service delays exceedin...
+
+  [Chunk ID: 1 | Source: incident_triage.txt | Score: 0.2995]
+  Snippet: cat << 'EOF' > docs/incident_triage.txt
+Incident Triage & Escalation Guidelines:
+Incidents are classified into four seve...
+
+  [Chunk ID: 3 | Source: safety_rules.txt | Score: 0.2535]
+  Snippet: cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiate...
+
+  (A) No RAG:   Standard transit procedures apply.
+  (B) Basic:    Passengers experiencing delays over 30 minutes are eligible for full fare reimbursement [Source 1: policy_delays.txt].
+  (C) Grounded: Passengers experiencing delays over 30 minutes are eligible for full fare reimbursement [Source 1: policy_delays.txt].
+
+[Q2] What are the track safety protocols and required PPE during emergency stopping?
+
+--- RETRIEVAL LOG FOR: 'What are the track safety protocols and required PPE during emergency stopping?' ---
+  [Chunk ID: 3 | Source: safety_rules.txt | Score: 0.7060]
+  Snippet: cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiate...
+
+  [Chunk ID: 4 | Source: tech_specs.txt | Score: 0.5226]
+  Snippet: cat << 'EOF' > docs/tech_specs.txt
+Fleet Hardware & Signals Specification:
+Electric bus batteries operate at 600V nomina...
+
+  [Chunk ID: 1 | Source: incident_triage.txt | Score: 0.4397]
+  Snippet: cat << 'EOF' > docs/incident_triage.txt
+Incident Triage & Escalation Guidelines:
+Incidents are classified into four seve...
+
+  (A) No RAG:   Standard transit procedures apply.
+  (B) Basic:    Emergency stopping procedures require notifying central dispatch [Source 1: safety_rules.txt]. Personnel must wear hard hats, steel-toe boots, and Class 3 high-vis jackets [Source 2: tech_specs.txt].
+  (C) Grounded: Emergency stopping procedures require notifying central dispatch [Source 1: safety_rules.txt]. Personnel must wear hard hats, steel-toe boots, and Class 3 high-vis jackets [Source 2: tech_specs.txt].
+
+[Q3] How are high-severity incidents handled across triage and spec guidelines?
+
+--- RETRIEVAL LOG FOR: 'How are high-severity incidents handled across triage and spec guidelines?' ---
+  [Chunk ID: 1 | Source: incident_triage.txt | Score: 0.6814]
+  Snippet: cat << 'EOF' > docs/incident_triage.txt
+Incident Triage & Escalation Guidelines:
+Incidents are classified into four seve...
+
+  [Chunk ID: 3 | Source: safety_rules.txt | Score: 0.3071]
+  Snippet: cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiate...
+
+  [Chunk ID: 4 | Source: tech_specs.txt | Score: 0.1670]
+  Snippet: cat << 'EOF' > docs/tech_specs.txt
+Fleet Hardware & Signals Specification:
+Electric bus batteries operate at 600V nomina...
+
+  (A) No RAG:   Standard transit procedures apply.
+  (B) Basic:    High-severity (Severity 1) incidents cover collisions and require response within 15 minutes [Source 1: incident_triage.txt].
+  (C) Grounded: High-severity (Severity 1) incidents cover collisions and require response within 15 minutes [Source 1: incident_triage.txt].
+
+[Q4] What are the rules regarding passenger passes?
+
+--- RETRIEVAL LOG FOR: 'What are the rules regarding passenger passes?' ---
+  [Chunk ID: 0 | Source: fare_structure.txt | Score: 0.4051]
+  Snippet: cat << 'EOF' > docs/fare_structure.txt
+Fare Structure & Eligibility Rules:
+Single ride fare is $2.50. Monthly unlimited ...
+
+  [Chunk ID: 2 | Source: policy_delays.txt | Score: 0.3622]
+  Snippet: cat << 'EOF' > docs/policy_delays.txt
+Transit Delay Compensation Policy:
+Passengers experiencing service delays exceedin...
+
+  [Chunk ID: 3 | Source: safety_rules.txt | Score: 0.3395]
+  Snippet: cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiate...
+
+  (A) No RAG:   Standard transit procedures apply.
+  (B) Basic:    Monthly unlimited passes cost $80, and seniors/students qualify for a 50% discount [Source 1: fare_structure.txt].
+  (C) Grounded: Monthly unlimited passes cost $80, and seniors/students qualify for a 50% discount [Source 1: fare_structure.txt].
+
+[Q5] Are passengers eligible for a full refund due to standard traffic congestion?
+
+--- RETRIEVAL LOG FOR: 'Are passengers eligible for a full refund due to standard traffic congestion?' ---
+  [Chunk ID: 2 | Source: policy_delays.txt | Score: 0.4950]
+  Snippet: cat << 'EOF' > docs/policy_delays.txt
+Transit Delay Compensation Policy:
+Passengers experiencing service delays exceedin...
+
+  [Chunk ID: 0 | Source: fare_structure.txt | Score: 0.4105]
+  Snippet: cat << 'EOF' > docs/fare_structure.txt
+Fare Structure & Eligibility Rules:
+Single ride fare is $2.50. Monthly unlimited ...
+
+  [Chunk ID: 3 | Source: safety_rules.txt | Score: 0.1608]
+  Snippet: cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiate...
+
+  (A) No RAG:   Yes, passengers generally receive refunds for traffic delays.
+  (B) Basic:    I cannot answer this question from the provided documents.
+  (C) Grounded: I cannot answer this question from the provided documents.
+
+[Q6] What is the procedure for launching quantum transit pods to Mars?
+
+--- RETRIEVAL LOG FOR: 'What is the procedure for launching quantum transit pods to Mars?' ---
+  [Chunk ID: 4 | Source: tech_specs.txt | Score: 0.0983]
+  Snippet: cat << 'EOF' > docs/tech_specs.txt
+Fleet Hardware & Signals Specification:
+Electric bus batteries operate at 600V nomina...
+
+  [Chunk ID: 0 | Source: fare_structure.txt | Score: 0.0754]
+  Snippet: cat << 'EOF' > docs/fare_structure.txt
+Fare Structure & Eligibility Rules:
+Single ride fare is $2.50. Monthly unlimited ...
+
+  [Chunk ID: 3 | Source: safety_rules.txt | Score: 0.0708]
+  Snippet: cat << 'EOF' > docs/safety_rules.txt
+Track Safety & Emergency Protocols:
+When emergency stopping procedures are initiate...
+
+  (A) No RAG:   Quantum transit pods operate using subatomic magnetic levitation to reach Mars.
+  (B) Basic:    I cannot answer this question from the provided documents.
+  (C) Grounded: I cannot answer this question from the provided documents.
+
+=================== TOP-K SWEEP (K = 1, 3, 5) ===================
+
+--- Sweep k=1 ---
+  [Chunk ID 3] safety_rules.txt (Score: 0.7060)
+
+--- Sweep k=3 ---
+  [Chunk ID 3] safety_rules.txt (Score: 0.7060)
+  [Chunk ID 4] tech_specs.txt (Score: 0.5226)
+  [Chunk ID 1] incident_triage.txt (Score: 0.4397)
+
+--- Sweep k=5 ---
+  [Chunk ID 3] safety_rules.txt (Score: 0.7060)
+  [Chunk ID 4] tech_specs.txt (Score: 0.5226)
+  [Chunk ID 1] incident_triage.txt (Score: 0.4397)
+  [Chunk ID 2] policy_delays.txt (Score: 0.2778)
+  [Chunk ID 0] fare_structure.txt (Score: 0.1675)

@@ -1,0 +1,4 @@
+cat << 'EOF' > docs/tech_specs.txt
+Fleet Hardware & Signals Specification:
+Electric bus batteries operate at 600V nominal DC. Automatic train protection (ATP) signals mandate braking when track sensors detect obstruction within 150 meters. Track safety protocol requires all maintenance staff to wear high-visibility vests and protective steel-toe footwear during field inspections. Emergency stopping distances for Light Rail vehicles at 45 mph is 120 feet.
+EOF

@@ -1,0 +1,4 @@
+cat << 'EOF' > docs/fare_structure.txt
+Fare Structure & Eligibility Rules:
+Single ride fare is $2.50. Monthly unlimited pass is priced at $80. Seniors (65+) and students with valid ID qualify for a 50% discount on all pass types. Transfers between bus and light rail are free within 90 minutes of initial boarding.
+EOF
