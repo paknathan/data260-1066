@@ -10,6 +10,9 @@ from pydantic import BaseModel, EmailStr
 import bcrypt
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship
+from sqlalchemy.orm import joinedload
+from sqlalchemy import event, Engine
+import time
 
 # ------------------------------------------------------------------------------
 # 1. Database Configuration & Models (Database: Municipal_Rel)
@@ -55,6 +58,20 @@ class IncidentModel(Base):
     route_or_line = Column(String(100), nullable=False)  # Primary field
     incident_type = Column(String(100), nullable=False)  # Secondary field
     description = Column(Text, nullable=True)
+
+class IncidentLogModel(Base):
+    __tablename__ = "incident_logs"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    incident_id = Column(Integer, ForeignKey("incidents.id"), nullable=False, index=False) # Start without index for Step 8
+    notes = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+    # Relationship
+    incident = relationship("IncidentModel", back_populates="logs")
+
+# Add back_populates relationship to IncidentModel:
+IncidentModel.logs = relationship("IncidentLogModel", back_populates="incident", lazy="select")
 
 # Create tables in MySQL if they do not exist
 Base.metadata.create_all(bind=engine)
@@ -295,6 +312,68 @@ def delete_incident(
     db_session_basede26.delete(incident)
     db_session_basede26.commit()
     return {"message": f"Incident record {incident_id} successfully deleted"}
+
+# Part 3
+
+# Response schemas
+class LogResponse(BaseModel):
+    id: int
+    notes: str
+    class Config:
+        from_attributes = True
+
+class IncidentWithLogsResponse(BaseModel):
+    incident_id: int
+    route_or_line: str
+    incident_type: str
+    logs: List[LogResponse]
+    class Config:
+        from_attributes = True
+
+
+# 1. Naive Endpoint (Triggers N+1 query problem)
+@app.get("/incidents-naive", response_model=List[IncidentWithLogsResponse])
+def get_incidents_naive(
+    limit: int = 10,
+    current_user: UserModel = Depends(get_current_user),
+    db_session_basede26: Session = Depends(get_db)
+):
+    incidents = db_session_basede26.query(IncidentModel).limit(limit).all()
+    
+    result = []
+    for inc in incidents:
+        # Accessing inc.logs triggers a separate SELECT query per incident
+        log_list = [LogResponse(id=l.id, notes=l.notes) for l in inc.logs]
+        result.append(IncidentWithLogsResponse(
+            incident_id=inc.id,
+            route_or_line=inc.route_or_line,
+            incident_type=inc.incident_type,
+            logs=log_list
+        ))
+    return result
+
+# 2. Fixed Endpoint (Solves N+1 using Eager Loading / JOIN)
+@app.get("/incidents-fixed", response_model=List[IncidentWithLogsResponse])
+def get_incidents_fixed(
+    limit: int = 10,
+    current_user: UserModel = Depends(get_current_user),
+    db_session_basede26: Session = Depends(get_db)
+):
+    incidents = db_session_basede26.query(IncidentModel).options(
+        joinedload(IncidentModel.logs)
+    ).limit(limit).all()
+
+    result = []
+    for inc in incidents:
+        log_list = [LogResponse(id=l.id, notes=l.notes) for l in inc.logs]
+        result.append(IncidentWithLogsResponse(
+            incident_id=inc.id,
+            route_or_line=inc.route_or_line,
+            incident_type=inc.incident_type,
+            logs=log_list
+        ))
+    return result
+
 
 # ------------------------------------------------------------------------------
 # 8. Frontend Index Route
