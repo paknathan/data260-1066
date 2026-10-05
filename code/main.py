@@ -3,22 +3,19 @@ import uuid
 from datetime import datetime, timedelta
 from typing import List, Optional
 
-from fastapi import FastAPI, Depends, HTTPException, status, Response, Request
+from fastapi import FastAPI, Depends, HTTPException, status, Response, Request, Query
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, FileResponse
-from pydantic import BaseModel, EmailStr
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, EmailStr, Field
 import bcrypt
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey, func
 from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship
 from sqlalchemy.orm import joinedload
-from sqlalchemy import event, Engine
-import time
+from sqlalchemy.exc import IntegrityError
 
 # ------------------------------------------------------------------------------
-# 1. Database Configuration & Models (Database: Municipal_Rel)
+# 1. Database Configuration & Models
 # ------------------------------------------------------------------------------
-# Update host, user, and password as per your local MySQL setup
-# Reads from terminal environment variable; falls back or raises an error if missing
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
@@ -28,7 +25,7 @@ engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# User Table
+# --- Auth Models ---
 class UserModel(Base):
     __tablename__ = "users"
 
@@ -39,45 +36,58 @@ class UserModel(Base):
 
     sessions = relationship("SessionModel", back_populates="user", cascade="all, delete-orphan")
 
-# Server-Side Sessions Table
 class SessionModel(Base):
     __tablename__ = "sessions"
 
-    id = Column(String(64), primary_key=True, index=True)  # Opaque Session Token (UUID)
+    id = Column(String(64), primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     expires_at = Column(DateTime, nullable=False)
 
     user = relationship("UserModel", back_populates="sessions")
 
-# Primary Domain Entity Table (Incident)
+# --- HW5 Secondary Entity Table ---
+class CongestionIndexModel(Base):
+    __tablename__ = "Congestion_indexes"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    level_name = Column(String(100), nullable=False)          # Primary text field
+    description = Column(Text, nullable=True)                 # Secondary text field
+    index_code = Column(String(20), unique=True, nullable=False, index=True) # Unique field
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    incidents = relationship("IncidentModel", back_populates="congestion_index")
+
+# --- HW5 Updated Primary Entity Table ---
 class IncidentModel(Base):
     __tablename__ = "incidents"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    route_or_line = Column(String(100), nullable=False)  # Primary field
-    incident_type = Column(String(100), nullable=False)  # Secondary field
-    description = Column(Text, nullable=True)
+    title = Column(String(255), nullable=False)               # Primary text field
+    incident_code = Column(String(50), unique=True, nullable=False, index=True) # Unique field
+    delay_minutes = Column(Integer, nullable=False, default=0) # Numeric field with default
+    congestion_index_id = Column(Integer, ForeignKey("Congestion_indexes.id", ondelete="RESTRICT"), nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+
+    congestion_index = relationship("CongestionIndexModel", back_populates="incidents")
+    logs = relationship("IncidentLogModel", back_populates="incident", lazy="select")
 
 class IncidentLogModel(Base):
     __tablename__ = "incident_logs"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    incident_id = Column(Integer, ForeignKey("incidents.id"), nullable=False, index=False) # Start without index for Step 8
+    incident_id = Column(Integer, ForeignKey("incidents.id"), nullable=False)
     notes = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
-    # Relationship
     incident = relationship("IncidentModel", back_populates="logs")
 
-# Add back_populates relationship to IncidentModel:
-IncidentModel.logs = relationship("IncidentLogModel", back_populates="incident", lazy="select")
-
-# Create tables in MySQL if they do not exist
 Base.metadata.create_all(bind=engine)
 
 # ------------------------------------------------------------------------------
-# 2. Database Dependency (Strictly using db_session_basede26)
+# 2. Database Dependency
 # ------------------------------------------------------------------------------
 def get_db():
     db_session_basede26 = SessionLocal()
@@ -87,8 +97,9 @@ def get_db():
         db_session_basede26.close()
 
 # ------------------------------------------------------------------------------
-# 3. Pydantic Schemas
+# 3. Pydantic Schemas with Format Validation
 # ------------------------------------------------------------------------------
+# Auth Schemas
 class UserCreate(BaseModel):
     name: str
     email: EmailStr
@@ -98,22 +109,65 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
-class IncidentCreate(BaseModel):
-    route_or_line: str
-    incident_type: str
+# Congestion Index Schemas
+class CongestionIndexCreate(BaseModel):
+    level_name: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
+    index_code: str = Field(..., pattern=r"^CONG-[A-Z0-9]+-[0-9]+$")
+
+class CongestionIndexUpdate(BaseModel):
+    level_name: Optional[str] = Field(None, min_length=1, max_length=100)
+    description: Optional[str] = None
+    index_code: Optional[str] = Field(None, pattern=r"^CONG-[A-Z0-9]+-[0-9]+$")
+
+class CongestionIndexResponse(BaseModel):
+    id: int
+    level_name: str
+    description: Optional[str] = None
+    index_code: str
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# Incident Schemas
+class IncidentCreate(BaseModel):
+    title: str = Field(..., min_length=1, max_length=255)
+    incident_code: str = Field(..., pattern=r"^INC-\d{4}-\d{3,}$")
+    delay_minutes: int = Field(0, ge=0)
+    congestion_index_id: int
 
 class IncidentUpdate(BaseModel):
-    route_or_line: Optional[str] = None
-    incident_type: Optional[str] = None
-    description: Optional[str] = None
+    title: Optional[str] = Field(None, min_length=1, max_length=255)
+    incident_code: Optional[str] = Field(None, pattern=r"^INC-\d{4}-\d{3,}$")
+    delay_minutes: Optional[int] = Field(None, ge=0)
+    congestion_index_id: Optional[int] = None
 
 class IncidentResponse(BaseModel):
-    incident_id: int
-    route_or_line: str
-    incident_type: str
-    description: Optional[str] = None
+    id: int
+    title: str
+    incident_code: str
+    delay_minutes: int
+    congestion_index_id: int
+    created_at: datetime
+    updated_at: datetime
 
+    class Config:
+        from_attributes = True
+
+# Log Schemas
+class LogResponse(BaseModel):
+    id: int
+    notes: str
+    class Config:
+        from_attributes = True
+
+class IncidentWithLogsResponse(BaseModel):
+    id: int
+    title: str
+    incident_code: str
+    logs: List[LogResponse]
     class Config:
         from_attributes = True
 
@@ -121,8 +175,6 @@ class IncidentResponse(BaseModel):
 # 4. FastAPI Setup
 # ------------------------------------------------------------------------------
 app = FastAPI(title="Municipal Transit Incident Manager")
-
-# Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # ------------------------------------------------------------------------------
@@ -150,7 +202,7 @@ def get_current_user(request: Request, db_session_basede26: Session = Depends(ge
 # ------------------------------------------------------------------------------
 # 6. Auth Endpoints
 # ------------------------------------------------------------------------------
-@app.post("/register", status_code=status.HTTP_210_CREATED if hasattr(status, 'HTTP_210_CREATED') else 201)
+@app.post("/register", status_code=status.HTTP_201_CREATED)
 def register(user_data: UserCreate, db_session_basede26: Session = Depends(get_db)):
     existing_user = db_session_basede26.query(UserModel).filter(UserModel.email == user_data.email).first()
     if existing_user:
@@ -159,11 +211,7 @@ def register(user_data: UserCreate, db_session_basede26: Session = Depends(get_d
     salt = bcrypt.gensalt()
     hashed_pw = bcrypt.hashpw(user_data.password.encode('utf-8'), salt).decode('utf-8')
 
-    new_user = UserModel(
-        name=user_data.name,
-        email=user_data.email,
-        password_hash=hashed_pw
-    )
+    new_user = UserModel(name=user_data.name, email=user_data.email, password_hash=hashed_pw)
     db_session_basede26.add(new_user)
     db_session_basede26.commit()
     return {"message": "User registered successfully"}
@@ -174,28 +222,17 @@ def login(login_data: UserLogin, response: Response, db_session_basede26: Sessio
     if not user or not bcrypt.checkpw(login_data.password.encode('utf-8'), user.password_hash.encode('utf-8')):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
-    # Generate opaque server-side session token
     session_token = str(uuid.uuid4())
     created_at = datetime.utcnow()
     expires_at = created_at + timedelta(hours=8)
 
     session_record = SessionModel(
-        id=session_token,
-        user_id=user.id,
-        created_at=created_at,
-        expires_at=expires_at
+        id=session_token, user_id=user.id, created_at=created_at, expires_at=expires_at
     )
     db_session_basede26.add(session_record)
     db_session_basede26.commit()
 
-    # Set HTTP-Only opaque cookie
-    response.set_cookie(
-        key="session_id",
-        value=session_token,
-        httponly=True,
-        samesite="lax",
-        secure=False  # Set True in HTTPS production
-    )
+    response.set_cookie(key="session_id", value=session_token, httponly=True, samesite="lax", secure=False)
     return {"email": user.email, "name": user.name}
 
 @app.post("/logout")
@@ -213,170 +250,186 @@ def get_me(current_user: UserModel = Depends(get_current_user)):
     return {"email": current_user.email, "name": current_user.name}
 
 # ------------------------------------------------------------------------------
-# 7. Domain Entity CRUD Endpoints (POST, GET all, GET by ID, PUT, DELETE)
+# 7. Secondary Entity CRUD Endpoints (Congestion Indexes)
 # ------------------------------------------------------------------------------
+@app.post("/congestion-indexes", response_model=CongestionIndexResponse, status_code=status.HTTP_201_CREATED)
+def create_congestion_index(
+    data: CongestionIndexCreate,
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    try:
+        index_obj = CongestionIndexModel(**data.model_dump())
+        db.add(index_obj)
+        db.commit()
+        db.refresh(index_obj)
+        return index_obj
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail=f"Index code '{data.index_code}' already exists.")
 
-# 1. Add a new record (POST)
+@app.get("/congestion-indexes", response_model=List[CongestionIndexResponse])
+def get_all_congestion_indexes(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(10, ge=1, le=100),
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return db.query(CongestionIndexModel).offset(skip).limit(limit).all()
+
+@app.get("/congestion-indexes/{index_id}", response_model=CongestionIndexResponse)
+def get_congestion_index(
+    index_id: int,
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    obj = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
+    if not obj:
+        raise HTTPException(status_code=404, detail="Congestion index not found")
+    return obj
+
+@app.put("/congestion-indexes/{index_id}", response_model=CongestionIndexResponse)
+def update_congestion_index(
+    index_id: int,
+    data: CongestionIndexUpdate,
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    obj = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
+    if not obj:
+        raise HTTPException(status_code=404, detail="Congestion index not found")
+
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(obj, key, value)
+
+    try:
+        db.commit()
+        db.refresh(obj)
+        return obj
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Index code conflict.")
+
+@app.delete("/congestion-indexes/{index_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_congestion_index(
+    index_id: int,
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    obj = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
+    if not obj:
+        raise HTTPException(status_code=404, detail="Congestion index not found")
+
+    try:
+        db.delete(obj)
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot delete congestion index with existing associated transit incidents."
+        )
+# ------------------------------------------------------------------------------
+# 8. Primary Entity CRUD Endpoints (Transit Incidents)
+# ------------------------------------------------------------------------------
 @app.post("/incidents", response_model=IncidentResponse, status_code=status.HTTP_201_CREATED)
 def create_incident(
     data: IncidentCreate,
     current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
-    incident = IncidentModel(
-        route_or_line=data.route_or_line,
-        incident_type=data.incident_type,
-        description=data.description
-    )
-    db_session_basede26.add(incident)
-    db_session_basede26.commit()
-    db_session_basede26.refresh(incident)
-    return IncidentResponse(
-        incident_id=incident.id,
-        route_or_line=incident.route_or_line,
-        incident_type=incident.incident_type,
-        description=incident.description
-    )
+    related = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == data.congestion_index_id).first()
+    if not related:
+        raise HTTPException(status_code=400, detail=f"Congestion index ID {data.congestion_index_id} does not exist.")
 
-# 2. View all records (GET)
+    try:
+        incident = IncidentModel(**data.model_dump())
+        db.add(incident)
+        db.commit()
+        db.refresh(incident)
+        return incident
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail=f"Incident code '{data.incident_code}' already exists.")
+
 @app.get("/incidents", response_model=List[IncidentResponse])
 def get_all_incidents(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=1000),  # Increased max limit to 1000 & default to 50
     current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
-    records = db_session_basede26.query(IncidentModel).all()
-    return [
-        IncidentResponse(
-            incident_id=item.id,
-            route_or_line=item.route_or_line,
-            incident_type=item.incident_type,
-            description=item.description
-        ) for item in records
-    ]
+    # Sorts by newest created incidents first
+    return db.query(IncidentModel).order_by(IncidentModel.id.desc()).offset(skip).limit(limit).all()
 
 @app.get("/incidents/{incident_id}", response_model=IncidentResponse)
 def get_incident_by_id(
     incident_id: int,
     current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
-    incident = db_session_basede26.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
+    incident = db.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
     if not incident:
         raise HTTPException(status_code=404, detail="Incident record not found")
-    return IncidentResponse(
-        incident_id=incident.id,
-        route_or_line=incident.route_or_line,
-        incident_type=incident.incident_type,
-        description=incident.description
-    )
+    return incident
 
-# 4. Update record details (PUT)
 @app.put("/incidents/{incident_id}", response_model=IncidentResponse)
 def update_incident(
     incident_id: int,
     data: IncidentUpdate,
     current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
-    incident = db_session_basede26.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
+    incident = db.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
     if not incident:
         raise HTTPException(status_code=404, detail="Incident record not found")
 
-    if data.route_or_line is not None:
-        incident.route_or_line = data.route_or_line
-    if data.incident_type is not None:
-        incident.incident_type = data.incident_type
-    if data.description is not None:
-        incident.description = data.description
+    if data.congestion_index_id is not None:
+        related = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == data.congestion_index_id).first()
+        if not related:
+            raise HTTPException(status_code=400, detail="Target congestion index ID does not exist.")
 
-    db_session_basede26.commit()
-    db_session_basede26.refresh(incident)
-    return IncidentResponse(
-        incident_id=incident.id,
-        route_or_line=incident.route_or_line,
-        incident_type=incident.incident_type,
-        description=incident.description
-    )
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(incident, key, value)
 
-# 5. Delete a record (DELETE)
-@app.delete("/incidents/{incident_id}")
+    try:
+        db.commit()
+        db.refresh(incident)
+        return incident
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Incident code conflict.")
+
+@app.delete("/incidents/{incident_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_incident(
     incident_id: int,
     current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
+    db: Session = Depends(get_db)
 ):
-    incident = db_session_basede26.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
+    incident = db.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
     if not incident:
         raise HTTPException(status_code=404, detail="Incident record not found")
 
-    db_session_basede26.delete(incident)
-    db_session_basede26.commit()
-    return {"message": f"Incident record {incident_id} successfully deleted"}
-
-# Part 3
-
-# Response schemas
-class LogResponse(BaseModel):
-    id: int
-    notes: str
-    class Config:
-        from_attributes = True
-
-class IncidentWithLogsResponse(BaseModel):
-    incident_id: int
-    route_or_line: str
-    incident_type: str
-    logs: List[LogResponse]
-    class Config:
-        from_attributes = True
-
-
-# 1. Naive Endpoint (Triggers N+1 query problem)
-@app.get("/incidents-naive", response_model=List[IncidentWithLogsResponse])
-def get_incidents_naive(
-    limit: int = 10,
-    current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
-):
-    incidents = db_session_basede26.query(IncidentModel).limit(limit).all()
-    
-    result = []
-    for inc in incidents:
-        # Accessing inc.logs triggers a separate SELECT query per incident
-        log_list = [LogResponse(id=l.id, notes=l.notes) for l in inc.logs]
-        result.append(IncidentWithLogsResponse(
-            incident_id=inc.id,
-            route_or_line=inc.route_or_line,
-            incident_type=inc.incident_type,
-            logs=log_list
-        ))
-    return result
-
-# 2. Fixed Endpoint (Solves N+1 using Eager Loading / JOIN)
-@app.get("/incidents-fixed", response_model=List[IncidentWithLogsResponse])
-def get_incidents_fixed(
-    limit: int = 10,
-    current_user: UserModel = Depends(get_current_user),
-    db_session_basede26: Session = Depends(get_db)
-):
-    incidents = db_session_basede26.query(IncidentModel).options(
-        joinedload(IncidentModel.logs)
-    ).limit(limit).all()
-
-    result = []
-    for inc in incidents:
-        log_list = [LogResponse(id=l.id, notes=l.notes) for l in inc.logs]
-        result.append(IncidentWithLogsResponse(
-            incident_id=inc.id,
-            route_or_line=inc.route_or_line,
-            incident_type=inc.incident_type,
-            logs=log_list
-        ))
-    return result
-
+    db.delete(incident)
+    db.commit()
 
 # ------------------------------------------------------------------------------
-# 8. Frontend Index Route
+# 9. Relationship Query Endpoint
+# ------------------------------------------------------------------------------
+@app.get("/congestion-indexes/{index_id}/incidents", response_model=List[IncidentResponse])
+def get_incidents_by_congestion_index(
+    index_id: int,
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    parent = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
+    if not parent:
+        raise HTTPException(status_code=404, detail="Congestion index not found")
+
+    return db.query(IncidentModel).filter(IncidentModel.congestion_index_id == index_id).all()
+
+# ------------------------------------------------------------------------------
+# 10. Frontend Catch-All Route
 # ------------------------------------------------------------------------------
 @app.get("/{full_path:path}")
 def serve_react_app(full_path: str):

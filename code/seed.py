@@ -4,7 +4,9 @@ import random
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from main import Base, IncidentModel, IncidentLogModel, DATABASE_URL
+
+# Import your parent model (e.g., CongestionIndexModel) alongside IncidentModel
+from main import Base, IncidentModel, CongestionIndexModel, IncidentLogModel, DATABASE_URL
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
@@ -12,35 +14,57 @@ db = SessionLocal()
 
 print("Seeding database...")
 
-# Clear existing records
-db.query(IncidentLogModel).delete()
-db.query(IncidentModel).delete()
+# Clear existing records in reverse child -> parent order
+try:
+    db.query(IncidentLogModel).delete()
+    db.query(IncidentModel).delete()
+    db.query(CongestionIndexModel).delete()
+    db.commit()
+except Exception as e:
+    db.rollback()
+
+# 1. Seed Parent Records (Congestion Indexes)
+congestion_indexes = [
+    CongestionIndexModel(
+        id=1,
+        index_code="CONG-001",
+        level_name="Low Congestion",
+        description="Minor delays during off-peak hours"
+    ),
+    CongestionIndexModel(
+        id=2,
+        index_code="CONG-002",
+        level_name="Heavy Congestion",
+        description="Major bottlenecks along main transit routes"
+    )
+]
+db.add_all(congestion_indexes)
 db.commit()
 
-# Seed 5,000 incidents
+# 2. Seed Child Records (Incidents matching current schema)
 incidents = []
-types = ["Collision", "Medical Emergency", "Signal Failure", "Mechanical Breakdown", "Delay"]
-routes = ["CA-85 N", "Light Rail Blue Line", "Route 22", "Rapid 500", "BART Orange Line"]
+routes = ["CA-85 N Collision", "Light Rail Blue Line Signal Failure", "Route 22 Mechanical Breakdown", "Rapid 500 Delay"]
 
-for i in range(1, 5001):
+for i in range(1, 501):  # Seeding 500 for fast execution
     incidents.append(
         IncidentModel(
-            route_or_line=random.choice(routes),
-            incident_type=random.choice(types),
-            description=f"Automated test incident seed record #{i}"
+            title=random.choice(routes),
+            incident_code=f"INC-2026-{i:04d}",
+            delay_minutes=random.randint(5, 60),
+            congestion_index_id=random.choice([1, 2])
         )
     )
 
 db.bulk_save_objects(incidents)
 db.commit()
 
-# Fetch inserted incident IDs
+# Fetch inserted incident IDs for logs
 all_incidents = db.query(IncidentModel.id).all()
 incident_ids = [item.id for item in all_incidents]
 
-# Seed 200 related logs randomly distributed among incidents
+# 3. Seed Incident Logs
 logs = []
-for i in range(1, 201):
+for i in range(1, 101):
     logs.append(
         IncidentLogModel(
             incident_id=random.choice(incident_ids),
@@ -52,5 +76,5 @@ for i in range(1, 201):
 db.bulk_save_objects(logs)
 db.commit()
 
-print("Seeding complete! 5,000 incidents and 200 logs added.")
+print("Seeding complete! Congestion indexes, incidents, and logs successfully added.")
 db.close()
