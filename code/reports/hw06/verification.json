@@ -1,0 +1,67 @@
+{
+  "homework": 6,
+  "sid4": 1066,
+  "port_base": 8166,
+  "commit": "d3ee4099bb6ea3fd0eed5a2ecadab97f618c98b9",
+  "tag_hw6_commit": "d3ee4099bb6ea3fd0eed5a2ecadab97f618c98b9",
+  "model": "llama3.2:3b",
+  "embed_model": "nomic-embed-text",
+  "config": {
+    "SHORT_TERM_N": "12",
+    "SUMMARIZE_EVERY_USER_MSGS": "4",
+    "MEMORY_POLICY": "none"
+  },
+  "seed": 1066,
+  "verify_seed": 261066,
+  "run_at": "2026-10-19T22:00:31.091360+00:00",
+  "checks": [
+    {
+      "name": "backend responds on PORT_BASE 8166",
+      "passed": true,
+      "detail": "GET http://127.0.0.1:8166/openapi.json"
+    },
+    {
+      "name": "Part 1 CRUD on /api/items (201/200/200/204/404)",
+      "passed": true,
+      "detail": "get=200; list=200; put=200; delete=204; get-after-delete=404"
+    },
+    {
+      "name": "Part 1 validation errors return 422",
+      "passed": true,
+      "detail": "invalid payload status codes [422, 422, 422, 422]"
+    },
+    {
+      "name": "Part 1 bad ObjectId returns 400",
+      "passed": true,
+      "detail": "GET /api/items/123"
+    },
+    {
+      "name": "Part 2 POST /api/chat returns a reply + memory_used",
+      "passed": true,
+      "detail": "reply chars=304, prompt_tokens=1171"
+    },
+    {
+      "name": "Part 2 GET /api/memory/{user_id}",
+      "passed": true,
+      "detail": "status 200, messages=2"
+    },
+    {
+      "name": "Part 2 GET /api/aggregate/{user_id}",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "Part 4 /help command via /api/chat",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "Part 4 consolidation (temp copy) 55 -> <40 lines",
+      "passed": true,
+      "detail": "temp MEMORY.md 55 -> 35 lines, 4 contradictions"
+    }
+  ],
+  "passed": 9,
+  "total": 9,
+  "all_passed": true
+}
