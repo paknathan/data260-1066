@@ -1,0 +1,65 @@
+{
+  "run_id": "217972",
+  "model": "llama3.2:latest",
+  "extract_mode": "heuristic",
+  "turns": 15,
+  "settings": [
+    {
+      "setting": "SHORT_TERM_N=4",
+      "mean_prompt_tokens": 550.6,
+      "mean_completion_tokens": 68.3,
+      "mean_latency_ms": 8053.2,
+      "mean_short_term_tokens": 173.3,
+      "mean_long_term_tokens": 228.5,
+      "mean_episodic_tokens": 60.1,
+      "probe_quality": 4.2,
+      "cost_per_conversation_usd": 0.013382,
+      "cost_10k_conversations_usd": 133.81
+    },
+    {
+      "setting": "SHORT_TERM_N=12",
+      "mean_prompt_tokens": 881,
+      "mean_completion_tokens": 122.3,
+      "mean_latency_ms": 11832.2,
+      "mean_short_term_tokens": 667.9,
+      "mean_long_term_tokens": 108.8,
+      "mean_episodic_tokens": 60.1,
+      "probe_quality": 3.6,
+      "cost_per_conversation_usd": 0.022387,
+      "cost_10k_conversations_usd": 223.87
+    },
+    {
+      "setting": "SHORT_TERM_N=30",
+      "mean_prompt_tokens": 1082.3,
+      "mean_completion_tokens": 90.1,
+      "mean_latency_ms": 7932.0,
+      "mean_short_term_tokens": 890.3,
+      "mean_long_term_tokens": 95.4,
+      "mean_episodic_tokens": 60.1,
+      "probe_quality": 5,
+      "cost_per_conversation_usd": 0.022992,
+      "cost_10k_conversations_usd": 229.92
+    },
+    {
+      "setting": "Compress policy (N=12)",
+      "mean_prompt_tokens": 567.9,
+      "mean_completion_tokens": 76.1,
+      "mean_latency_ms": 7586.3,
+      "mean_short_term_tokens": 313.9,
+      "mean_long_term_tokens": 105.7,
+      "mean_episodic_tokens": 60.1,
+      "probe_quality": 4.2,
+      "cost_per_conversation_usd": 0.014226,
+      "cost_10k_conversations_usd": 142.26
+    }
+  ],
+  "best": "SHORT_TERM_N=30",
+  "worst": "SHORT_TERM_N=30",
+  "eviction_compression_comparison": {
+    "baseline": "SHORT_TERM_N=12",
+    "policy": "Compress policy (N=12)",
+    "prompt_tokens_saved_per_turn": 313.1,
+    "prompt_token_savings_pct": 35.5,
+    "probe_quality_change": 0.6
+  }
+}

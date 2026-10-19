@@ -1,0 +1,250 @@
+{
+  "SHORT_TERM_N=4": [
+    {
+      "id": "p1_identity",
+      "question": "Quick check: what is my name and which station do I start my commute from?",
+      "reply": "Your name is Nathan, and you start your commute from Campbell light rail station. I'll make sure to send you service alerts by email from now on.",
+      "score": 5,
+      "prompt_tokens": 822,
+      "episodic_facts": [
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p2_route",
+      "question": "Which light rail line do I ride, and what time do I usually leave home?",
+      "reply": "Thank you for the reminder. You ride the Green Line light rail and typically leave home at 7:15 am. I'll make sure to send you service alerts by email, as you prefer.",
+      "score": 5,
+      "prompt_tokens": 856,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p3_incident",
+      "question": "What was the code of the incident I reported, and what kind of vehicle was involved?",
+      "reply": "You reported incident INC-2026-104, and the vehicle involved was a bus.",
+      "score": 5,
+      "prompt_tokens": 810,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station."
+      ]
+    },
+    {
+      "id": "p4_alerts",
+      "question": "How do I prefer to receive service alerts?",
+      "reply": "You prefer to receive service alerts by email. I'll make sure to send you updates on your commute, including any further information about the bus breakdown on Winchester Blvd.",
+      "score": 5,
+      "prompt_tokens": 783,
+      "episodic_facts": [
+        "Please always send me service alerts by email, I never read SMS.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "Give me a one-sentence tip for writing a clear incident title."
+      ]
+    },
+    {
+      "id": "p5_subway_delay",
+      "question": "How many minutes was the subway delay I told you about, and which station was it at?",
+      "reply": "I don't have any information about a subway delay you reported. You mentioned earlier that the incident you reported involved a bus, not a subway.",
+      "score": 1,
+      "prompt_tokens": 784,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd."
+      ]
+    }
+  ],
+  "SHORT_TERM_N=12": [
+    {
+      "id": "p1_identity",
+      "question": "Quick check: what is my name and which station do I start my commute from?",
+      "reply": "Thank you for the quick check, Nathan.\n\nTo confirm, here are the details:\n\n* Your name is Nathan.\n* You start your commute from Campbell light rail station.\n* You ride the Green Line light rail and usually leave home at 7:15 am.\n\nI'll make sure to send you service alerts by email, as you prefer not to receive SMS alerts.\n\nI'll keep you updated on the status of your commute and any incidents that may affect your journey.",
+      "score": 5,
+      "prompt_tokens": 1370,
+      "episodic_facts": [
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p2_route",
+      "question": "Which light rail line do I ride, and what time do I usually leave home?",
+      "reply": "To confirm, here are the details:\n\n* You ride the Green Line light rail.\n* You usually leave home at 7:15 am.\n\nI'll make sure to send you service alerts by email, as you prefer not to receive SMS alerts.\n\nI'll keep you updated on the status of your commute and any incidents that may affect your journey.",
+      "score": 5,
+      "prompt_tokens": 1407,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p3_incident",
+      "question": "What was the code of the incident I reported, and what kind of vehicle was involved?",
+      "reply": "To confirm, here are the details:\n\n* The code of the incident you reported was INC-2026-104.\n* The vehicle involved was a bus.\n\nI'll make sure to keep these details in mind as we continue to track the incident and provide updates on your commute.\n\nHere's a summary of the incident:\n\n* Incident: Bus Breakdown on Winchester Blvd (INC-2026-104)\n* Vehicle involved: Bus\n* Location: Winchester Blvd\n* Time of incident: (Unknown, but reported this morning)\n* Status: Investigating\n* Next steps: (To be determined)\n\nI'll send you an email with any updates on the incident status.",
+      "score": 5,
+      "prompt_tokens": 1337,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station."
+      ]
+    },
+    {
+      "id": "p4_alerts",
+      "question": "How do I prefer to receive service alerts?",
+      "reply": "To confirm, you prefer to receive service alerts by email, as you never read SMS.\n\nI've also remembered that you reported incident INC-2026-104 this morning, which involved a bus breaking down on Winchester Blvd.\n\nHere's a one-sentence tip for writing a clear incident title: Use a clear and concise format, such as \"Bus Breakdown on Winchester Blvd (INC-2026-104)\" to quickly convey the essential details of the incident.\n\nI'll make sure to send you an email with any updates on the incident status, including the current status of INC-2026-104.",
+      "score": 2,
+      "prompt_tokens": 1333,
+      "episodic_facts": [
+        "Please always send me service alerts by email, I never read SMS.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "Give me a one-sentence tip for writing a clear incident title."
+      ]
+    },
+    {
+      "id": "p5_subway_delay",
+      "question": "How many minutes was the subway delay I told you about, and which station was it at?",
+      "reply": "I don't have any information about a subway delay. You didn't mention a subway delay earlier. You only mentioned a bus breakdown on Winchester Blvd, which is incident INC-2026-104.\n\nHowever, I do have the relevant facts you mentioned earlier:\n\n* You ride the Green Line light rail.\n* You usually leave home at 7:15 am.\n* Your name is Nathan.\n* You commute every weekday from Campbell light rail station.\n* This morning, you reported incident INC-2026-104: a bus broke down on Winchester Blvd.\n\nI'll keep these details in mind as we continue to track the incident and provide updates on your commute.",
+      "score": 1,
+      "prompt_tokens": 1346,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd."
+      ]
+    }
+  ],
+  "SHORT_TERM_N=30": [
+    {
+      "id": "p1_identity",
+      "question": "Quick check: what is my name and which station do I start my commute from?",
+      "reply": "Quick check!\n\nYou're right, I've got all the relevant facts about you, Nathan:\n\n* Your name is Nathan.\n* You commute every weekday from Campbell light rail station.\n* You ride the Green Line light rail and usually leave home at 7:15 am.\n* You prefer to receive service alerts by email, and I'll make sure to send them to you via email.\n\nI've got all the details, and I'll keep them in mind as we continue to track incidents and service alerts for your commute!",
+      "score": 5,
+      "prompt_tokens": 2065,
+      "episodic_facts": [
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p2_route",
+      "question": "Which light rail line do I ride, and what time do I usually leave home?",
+      "reply": "To confirm:\n\n* You ride the Green Line light rail.\n* You usually leave home at 7:15 am.\n\nI'll make sure to keep these details in mind as we continue to track incidents and service alerts for your commute!",
+      "score": 5,
+      "prompt_tokens": 2198,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p3_incident",
+      "question": "What was the code of the incident I reported, and what kind of vehicle was involved?",
+      "reply": "I've got all the relevant facts!\n\n* The code of the incident you reported is: INC-2026-104\n* The vehicle involved in the incident was a bus.\n* You ride the Green Line light rail and usually leave home at 7:15 am.\n* Your name is Nathan, and you commute from Campbell light rail station.\n* This morning, you reported an incident involving a bus that broke down on Winchester Blvd.\n\nI'll keep all these details in mind as we continue to track the status of your reported incident!",
+      "score": 5,
+      "prompt_tokens": 2170,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station."
+      ]
+    },
+    {
+      "id": "p4_alerts",
+      "question": "How do I prefer to receive service alerts?",
+      "reply": "Thank you for reminding me of your preferences!\n\nYou prefer to receive service alerts by email, and I'll make sure to send them to you via email.\n\nAnd, just to recap, I've got all the relevant facts about your reported incident:\n\n* Incident code: INC-2026-104\n* Type of incident: bus\n* Location: Winchester Blvd\n* Time of incident: this morning (no specific time given)\n* Vehicle involved: bus\n* Your commute details: Campbell light rail station, Green Line light rail, 7:15 am\n* Preferred communication method: email\n\nI'll keep all these details in mind as we continue to track the status of your reported incident!",
+      "score": 5,
+      "prompt_tokens": 2209,
+      "episodic_facts": [
+        "Please always send me service alerts by email, I never read SMS.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "Give me a one-sentence tip for writing a clear incident title."
+      ]
+    },
+    {
+      "id": "p5_subway_delay",
+      "question": "How many minutes was the subway delay I told you about, and which station was it at?",
+      "reply": "Thank you for reminding me of the relevant facts!\n\n* The subway delay you mentioned was 25 minutes long.\n* The station where the delay occurred was Market Street station.\n\nI'll keep all these details in mind as we continue to track incidents and service alerts for your commute!",
+      "score": 5,
+      "prompt_tokens": 2290,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd."
+      ]
+    }
+  ],
+  "Compress policy (N=12)": [
+    {
+      "id": "p1_identity",
+      "question": "Quick check: what is my name and which station do I start my commute from?",
+      "reply": "You are Nathan, and you start your commute from Campbell light rail station on the Green Line. I'll make sure to send you service alerts by email.",
+      "score": 5,
+      "prompt_tokens": 649,
+      "episodic_facts": [
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p2_route",
+      "question": "Which light rail line do I ride, and what time do I usually leave home?",
+      "reply": "You ride the Green Line light rail, and you usually leave home at 7:15 am. I'll make sure to send you service alerts by email, as you prefer.",
+      "score": 5,
+      "prompt_tokens": 717,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "Please always send me service alerts by email, I never read SMS."
+      ]
+    },
+    {
+      "id": "p3_incident",
+      "question": "What was the code of the incident I reported, and what kind of vehicle was involved?",
+      "reply": "The code of the incident you reported was INC-2026-104, and the vehicle involved was a bus.",
+      "score": 5,
+      "prompt_tokens": 724,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station."
+      ]
+    },
+    {
+      "id": "p4_alerts",
+      "question": "How do I prefer to receive service alerts?",
+      "reply": "I'll send you service alerts by email, as you prefer.",
+      "score": 5,
+      "prompt_tokens": 709,
+      "episodic_facts": [
+        "Please always send me service alerts by email, I never read SMS.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd.",
+        "Give me a one-sentence tip for writing a clear incident title."
+      ]
+    },
+    {
+      "id": "p5_subway_delay",
+      "question": "How many minutes was the subway delay I told you about, and which station was it at?",
+      "reply": "There is no mention of a subway delay. You only mentioned a bus incident (INC-2026-104) and a light rail incident (which you didn't specify).",
+      "score": 1,
+      "prompt_tokens": 700,
+      "episodic_facts": [
+        "I ride the Green Line light rail and I usually leave home at 7:15 am.",
+        "My name is Nathan and I commute every weekday from Campbell light rail station.",
+        "This morning I reported incident INC-2026-104: a bus broke down on Winchester Blvd."
+      ]
+    }
+  ]
+}

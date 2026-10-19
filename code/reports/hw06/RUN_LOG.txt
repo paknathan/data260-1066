@@ -1,0 +1,86 @@
+[2026-10-19T14:26:48] === Part 3 experiments run_id=217972 model=llama3.2:latest extract=heuristic turns=15 ===
+[2026-10-19T14:26:48] --- SHORT_TERM_N=4 user_id=exp-217972-4-none
+[2026-10-19T14:26:54] SHORT_TERM_N=4 turn 01: prompt=105 completion=66 window=0 latency=5932.9ms
+[2026-10-19T14:26:58] SHORT_TERM_N=4 turn 02: prompt=223 completion=81 window=2 latency=4113.8ms
+[2026-10-19T14:27:01] SHORT_TERM_N=4 turn 03: prompt=347 completion=59 window=4 latency=3661.9ms
+[2026-10-19T14:27:11] SHORT_TERM_N=4 turn 04: prompt=358 completion=57 window=4 latency=9785.8ms
+[2026-10-19T14:27:18] SHORT_TERM_N=4 turn 05: prompt=391 completion=91 window=4 latency=6693.9ms
+[2026-10-19T14:27:25] SHORT_TERM_N=4 turn 06: prompt=417 completion=115 window=4 latency=7322.6ms
+[2026-10-19T14:27:32] SHORT_TERM_N=4 turn 07: prompt=467 completion=102 window=4 latency=6428.7ms
+[2026-10-19T14:28:03] SHORT_TERM_N=4 turn 08: prompt=487 completion=110 window=4 latency=31787.3ms
+[2026-10-19T14:28:11] SHORT_TERM_N=4 turn 09: prompt=857 completion=42 window=4 latency=7143.6ms
+[2026-10-19T14:28:17] SHORT_TERM_N=4 turn 10: prompt=800 completion=104 window=4 latency=6777.0ms
+[2026-10-19T14:28:20] SHORT_TERM_N=4 turn 11: prompt=791 completion=28 window=4 latency=2938.3ms
+[2026-10-19T14:28:38] SHORT_TERM_N=4 turn 12: prompt=776 completion=20 window=4 latency=17233.7ms
+[2026-10-19T14:28:40] SHORT_TERM_N=4 turn 13: prompt=745 completion=29 window=4 latency=2731.2ms
+[2026-10-19T14:28:43] SHORT_TERM_N=4 turn 14: prompt=741 completion=25 window=4 latency=2295.5ms
+[2026-10-19T14:28:49] SHORT_TERM_N=4 turn 15: prompt=754 completion=96 window=4 latency=5951.2ms
+[2026-10-19T14:29:23] SHORT_TERM_N=4 probe p1_identity: score=5 reply="Your name is Nathan, and you start your commute from Campbell light rail station. I'll make sure to send you service ale"
+[2026-10-19T14:29:30] SHORT_TERM_N=4 probe p2_route: score=5 reply="Thank you for the reminder. You ride the Green Line light rail and typically leave home at 7:15 am. I'll make sure to se"
+[2026-10-19T14:29:32] SHORT_TERM_N=4 probe p3_incident: score=5 reply='You reported incident INC-2026-104, and the vehicle involved was a bus.'
+[2026-10-19T14:29:35] SHORT_TERM_N=4 probe p4_alerts: score=5 reply="You prefer to receive service alerts by email. I'll make sure to send you updates on your commute, including any further"
+[2026-10-19T14:29:51] SHORT_TERM_N=4 probe p5_subway_delay: score=1 reply="I don't have any information about a subway delay you reported. You mentioned earlier that the incident you reported inv"
+[2026-10-19T14:29:51] --- SHORT_TERM_N=12 user_id=exp-217972-12-none
+[2026-10-19T14:29:55] SHORT_TERM_N=12 turn 01: prompt=105 completion=66 window=0 latency=3207.8ms
+[2026-10-19T14:29:59] SHORT_TERM_N=12 turn 02: prompt=223 completion=81 window=2 latency=4040.0ms
+[2026-10-19T14:30:02] SHORT_TERM_N=12 turn 03: prompt=347 completion=59 window=4 latency=3706.9ms
+[2026-10-19T14:30:10] SHORT_TERM_N=12 turn 04: prompt=450 completion=65 window=6 latency=8030.7ms
+[2026-10-19T14:30:21] SHORT_TERM_N=12 turn 05: prompt=619 completion=153 window=8 latency=11002.8ms
+[2026-10-19T14:30:33] SHORT_TERM_N=12 turn 06: prompt=789 completion=191 window=10 latency=11396.7ms
+[2026-10-19T14:30:43] SHORT_TERM_N=12 turn 07: prompt=1001 completion=162 window=12 latency=9923.9ms
+[2026-10-19T14:31:08] SHORT_TERM_N=12 turn 08: prompt=1098 completion=121 window=12 latency=25134.1ms
+[2026-10-19T14:31:17] SHORT_TERM_N=12 turn 09: prompt=1225 completion=40 window=12 latency=9356.1ms
+[2026-10-19T14:31:30] SHORT_TERM_N=12 turn 10: prompt=1207 completion=148 window=12 latency=12965.5ms
+[2026-10-19T14:31:44] SHORT_TERM_N=12 turn 11: prompt=1281 completion=154 window=12 latency=14264.7ms
+[2026-10-19T14:32:07] SHORT_TERM_N=12 turn 12: prompt=1286 completion=130 window=12 latency=22815.2ms
+[2026-10-19T14:32:20] SHORT_TERM_N=12 turn 13: prompt=1225 completion=120 window=12 latency=13148.7ms
+[2026-10-19T14:32:32] SHORT_TERM_N=12 turn 14: prompt=1177 completion=119 window=12 latency=11727.9ms
+[2026-10-19T14:32:49] SHORT_TERM_N=12 turn 15: prompt=1182 completion=226 window=12 latency=16761.5ms
+[2026-10-19T14:33:20] SHORT_TERM_N=12 probe p1_identity: score=5 reply='Thank you for the quick check, Nathan.\n\nTo confirm, here are the details:\n\n* Your name is Nathan.\n* You start your commu'
+[2026-10-19T14:33:31] SHORT_TERM_N=12 probe p2_route: score=5 reply="To confirm, here are the details:\n\n* You ride the Green Line light rail.\n* You usually leave home at 7:15 am.\n\nI'll make"
+[2026-10-19T14:33:44] SHORT_TERM_N=12 probe p3_incident: score=5 reply='To confirm, here are the details:\n\n* The code of the incident you reported was INC-2026-104.\n* The vehicle involved was '
+[2026-10-19T14:33:57] SHORT_TERM_N=12 probe p4_alerts: score=2 reply="To confirm, you prefer to receive service alerts by email, as you never read SMS.\n\nI've also remembered that you reporte"
+[2026-10-19T14:34:25] SHORT_TERM_N=12 probe p5_subway_delay: score=1 reply="I don't have any information about a subway delay. You didn't mention a subway delay earlier. You only mentioned a bus b"
+[2026-10-19T14:34:25] --- SHORT_TERM_N=30 user_id=exp-217972-30-none
+[2026-10-19T14:34:30] SHORT_TERM_N=30 turn 01: prompt=105 completion=66 window=0 latency=4218.3ms
+[2026-10-19T14:34:34] SHORT_TERM_N=30 turn 02: prompt=223 completion=81 window=2 latency=4323.2ms
+[2026-10-19T14:34:38] SHORT_TERM_N=30 turn 03: prompt=347 completion=59 window=4 latency=3695.3ms
+[2026-10-19T14:34:45] SHORT_TERM_N=30 turn 04: prompt=450 completion=65 window=6 latency=6943.9ms
+[2026-10-19T14:34:52] SHORT_TERM_N=30 turn 05: prompt=619 completion=153 window=8 latency=7610.7ms
+[2026-10-19T14:35:03] SHORT_TERM_N=30 turn 06: prompt=789 completion=191 window=10 latency=10672.5ms
+[2026-10-19T14:35:13] SHORT_TERM_N=30 turn 07: prompt=1001 completion=162 window=12 latency=10137.6ms
+[2026-10-19T14:35:27] SHORT_TERM_N=30 turn 08: prompt=1190 completion=122 window=14 latency=13952.6ms
+[2026-10-19T14:35:37] SHORT_TERM_N=30 turn 09: prompt=1358 completion=42 window=16 latency=10162.8ms
+[2026-10-19T14:35:44] SHORT_TERM_N=30 turn 10: prompt=1424 completion=106 window=18 latency=6347.8ms
+[2026-10-19T14:35:47] SHORT_TERM_N=30 turn 11: prompt=1550 completion=45 window=20 latency=3375.7ms
+[2026-10-19T14:36:00] SHORT_TERM_N=30 turn 12: prompt=1617 completion=53 window=22 latency=12954.2ms
+[2026-10-19T14:36:15] SHORT_TERM_N=30 turn 13: prompt=1788 completion=56 window=24 latency=15280.4ms
+[2026-10-19T14:36:17] SHORT_TERM_N=30 turn 14: prompt=1859 completion=25 window=26 latency=2203.0ms
+[2026-10-19T14:36:24] SHORT_TERM_N=30 turn 15: prompt=1914 completion=126 window=28 latency=7102.7ms
+[2026-10-19T14:36:51] SHORT_TERM_N=30 probe p1_identity: score=5 reply="Quick check!\n\nYou're right, I've got all the relevant facts about you, Nathan:\n\n* Your name is Nathan.\n* You commute eve"
+[2026-10-19T14:37:08] SHORT_TERM_N=30 probe p2_route: score=5 reply="To confirm:\n\n* You ride the Green Line light rail.\n* You usually leave home at 7:15 am.\n\nI'll make sure to keep these de"
+[2026-10-19T14:37:26] SHORT_TERM_N=30 probe p3_incident: score=5 reply="I've got all the relevant facts!\n\n* The code of the incident you reported is: INC-2026-104\n* The vehicle involved in the"
+[2026-10-19T14:37:45] SHORT_TERM_N=30 probe p4_alerts: score=5 reply="Thank you for reminding me of your preferences!\n\nYou prefer to receive service alerts by email, and I'll make sure to se"
+[2026-10-19T14:38:15] SHORT_TERM_N=30 probe p5_subway_delay: score=5 reply='Thank you for reminding me of the relevant facts!\n\n* The subway delay you mentioned was 25 minutes long.\n* The station w'
+[2026-10-19T14:38:15] --- Compress policy (N=12) user_id=exp-217972-12-compress
+[2026-10-19T14:38:19] Compress policy (N=12) turn 01: prompt=105 completion=66 window=0 latency=3614.7ms
+[2026-10-19T14:38:23] Compress policy (N=12) turn 02: prompt=223 completion=81 window=2 latency=4062.9ms
+[2026-10-19T14:38:27] Compress policy (N=12) turn 03: prompt=347 completion=59 window=4 latency=3979.5ms
+[2026-10-19T14:38:35] Compress policy (N=12) turn 04: prompt=405 completion=66 window=6 latency=8556.3ms
+[2026-10-19T14:38:44] Compress policy (N=12) turn 05: prompt=516 completion=102 window=8 latency=8706.3ms
+[2026-10-19T14:38:55] Compress policy (N=12) turn 06: prompt=597 completion=177 window=10 latency=10608.6ms
+[2026-10-19T14:39:05] Compress policy (N=12) turn 07: prompt=754 completion=175 window=12 latency=10587.6ms
+[2026-10-19T14:39:27] Compress policy (N=12) turn 08: prompt=822 completion=113 window=12 latency=21387.2ms
+[2026-10-19T14:39:33] Compress policy (N=12) turn 09: prompt=821 completion=42 window=12 latency=6768.9ms
+[2026-10-19T14:39:41] Compress policy (N=12) turn 10: prompt=688 completion=104 window=12 latency=7911.6ms
+[2026-10-19T14:39:45] Compress policy (N=12) turn 11: prompt=666 completion=18 window=12 latency=3376.4ms
+[2026-10-19T14:39:57] Compress policy (N=12) turn 12: prompt=651 completion=40 window=12 latency=12887.8ms
+[2026-10-19T14:40:01] Compress policy (N=12) turn 13: prompt=642 completion=31 window=12 latency=3898.5ms
+[2026-10-19T14:40:05] Compress policy (N=12) turn 14: prompt=647 completion=26 window=12 latency=3516.4ms
+[2026-10-19T14:40:09] Compress policy (N=12) turn 15: prompt=635 completion=41 window=12 latency=3932.3ms
+[2026-10-19T14:40:30] Compress policy (N=12) probe p1_identity: score=5 reply="You are Nathan, and you start your commute from Campbell light rail station on the Green Line. I'll make sure to send yo"
+[2026-10-19T14:40:36] Compress policy (N=12) probe p2_route: score=5 reply="You ride the Green Line light rail, and you usually leave home at 7:15 am. I'll make sure to send you service alerts by "
+[2026-10-19T14:40:40] Compress policy (N=12) probe p3_incident: score=5 reply='The code of the incident you reported was INC-2026-104, and the vehicle involved was a bus.'
+[2026-10-19T14:40:43] Compress policy (N=12) probe p4_alerts: score=5 reply="I'll send you service alerts by email, as you prefer."
+[2026-10-19T14:40:57] Compress policy (N=12) probe p5_subway_delay: score=1 reply='There is no mention of a subway delay. You only mentioned a bus incident (INC-2026-104) and a light rail incident (which'
+[2026-10-19T14:40:57] Wrote /Users/nathanpak/Desktop/Data260/data260-1066/code/reports/hw06/METRICS.md; best=SHORT_TERM_N=30 worst=SHORT_TERM_N=30

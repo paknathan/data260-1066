@@ -1,0 +1,16 @@
+setting,turn,prompt_tokens,completion_tokens,system_primer_tokens,long_term_tokens,short_term_tokens,episodic_tokens,current_message_tokens,model_latency_ms,request_latency_ms,short_term_count,episodes_retrieved
+Compress policy (N=12),1,105,66,74,0,0,0,21,3524.3,3614.7,0,0
+Compress policy (N=12),2,223,81,74,0,94,32,18,4024.8,4062.9,2,1
+Compress policy (N=12),3,347,59,74,0,197,50,16,3929.7,3979.5,4,2
+Compress policy (N=12),4,405,66,74,0,228,66,21,4420.7,8556.3,6,3
+Compress policy (N=12),5,516,102,74,78,258,67,15,8647.2,8706.3,8,3
+Compress policy (N=12),6,597,177,74,78,337,70,14,10491.1,10608.6,10,3
+Compress policy (N=12),7,754,175,74,78,521,70,15,10554.0,10587.6,12,3
+Compress policy (N=12),8,822,113,74,78,634,67,15,9264.1,21387.2,12,3
+Compress policy (N=12),9,821,42,74,152,548,70,16,6752.3,6768.9,12,3
+Compress policy (N=12),10,688,104,74,152,373,69,18,7881.5,7911.6,12,3
+Compress policy (N=12),11,666,18,74,152,369,69,15,3328.9,3376.4,12,3
+Compress policy (N=12),12,651,40,74,152,340,69,19,4246.4,12887.8,12,3
+Compress policy (N=12),13,642,31,74,222,267,69,18,3850.4,3898.5,12,3
+Compress policy (N=12),14,647,26,74,222,279,65,17,3486.4,3516.4,12,3
+Compress policy (N=12),15,635,41,74,222,263,69,20,3895.9,3932.3,12,3

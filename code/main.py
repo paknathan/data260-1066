@@ -5,13 +5,17 @@ from typing import List, Optional
 
 from fastapi import FastAPI, Depends, HTTPException, status, Response, Request, Query
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, EmailStr, Field
 import bcrypt
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey, func
 from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship
 from sqlalchemy.orm import joinedload
 from sqlalchemy.exc import IntegrityError
+from routers import documents, memory  # HW6: Mongo document API + chat memory
+from database import init_mongo, PORT_BASE
 
 # ------------------------------------------------------------------------------
 # 1. Database Configuration & Models
@@ -175,7 +179,36 @@ class IncidentWithLogsResponse(BaseModel):
 # 4. FastAPI Setup
 # ------------------------------------------------------------------------------
 app = FastAPI(title="Municipal Transit Incident Manager")
+
+# HW6: CORS middleware (FastAPI parses JSON request bodies into the Pydantic models)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.getenv("CORS_ORIGINS", "*").split(","),
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_error_handler(request: Request, exc: RequestValidationError):
+    """Return clear, field-level validation messages with HTTP 422."""
+    errors = [
+        {"field": ".".join(str(p) for p in e["loc"] if p != "body"), "message": e["msg"], "type": e["type"]}
+        for e in exc.errors()
+    ]
+    return JSONResponse(status_code=422, content={"detail": "Validation failed", "errors": errors})
+
+
+@app.on_event("startup")
+def _startup_mongo():
+    init_mongo()
+
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
+# HW6 routers (must be registered before the catch-all frontend route)
+app.include_router(documents.router)
+app.include_router(memory.router)
 
 # ------------------------------------------------------------------------------
 # 5. Session Authentication Helper
@@ -437,4 +470,4 @@ def serve_react_app(full_path: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8166, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=PORT_BASE, reload=True)  # 8166

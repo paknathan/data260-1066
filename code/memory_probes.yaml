@@ -1,0 +1,43 @@
+# Part 3.2 - fixed memory probes (created BEFORE running the experiments).
+# Each probe is asked after the 30-message conversation in the same session.
+# Auto-score = 1 + round(4 * matched_criteria / total_criteria)   (1..5)
+# A criterion matches if ANY of its accepted keywords appears in the reply (case-insensitive).
+# "forbidden" keywords (a wrong/contradicting answer) cap the score at 2.
+
+rubric:
+  5: All expected facts recalled correctly, no wrong facts.
+  4: Most expected facts recalled (e.g. 2 of 2 with minor wording issues, or 3 of 4).
+  3: About half of the expected facts recalled.
+  2: Only a small part recalled, or the answer contains a contradicting/wrong fact.
+  1: Nothing relevant recalled, or the model says it does not know.
+
+probes:
+  - id: p1_identity
+    question: "Quick check: what is my name and which station do I start my commute from?"
+    criteria:
+      - ["nathan"]
+      - ["campbell"]
+    forbidden: ["winchester"]
+  - id: p2_route
+    question: "Which light rail line do I ride, and what time do I usually leave home?"
+    criteria:
+      - ["green line", "green"]
+      - ["7:15", "7.15", "seven fifteen"]
+    forbidden: ["blue line"]
+  - id: p3_incident
+    question: "What was the code of the incident I reported, and what kind of vehicle was involved?"
+    criteria:
+      - ["inc-2026-104", "2026-104"]
+      - ["bus"]
+    forbidden: []
+  - id: p4_alerts
+    question: "How do I prefer to receive service alerts?"
+    criteria:
+      - ["email", "e-mail"]
+    forbidden: ["sms", "text message"]
+  - id: p5_subway_delay
+    question: "How many minutes was the subway delay I told you about, and which station was it at?"
+    criteria:
+      - ["25", "twenty-five", "twenty five"]
+      - ["market street", "market st"]
+    forbidden: []

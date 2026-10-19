@@ -1,0 +1,86 @@
+"""Generate the 55-line MEMORY_original.md test fixture (duplicates + contradictions) for Part 4.5.
+
+Usage: python scripts/make_memory_fixture.py   -> writes MEMORY_original.md and copies it to MEMORY.md
+"""
+import shutil
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+BASE = [
+    ("2026-09-14", "project.name", "Municipal Transit Incident Manager"),
+    ("2026-09-14", "project.port", "8166"),
+    ("2026-09-14", "project.prefix", "s1066"),
+    ("2026-10-05", "db.mongo_database", "s1066_doc"),
+    ("2026-09-28", "db.sql_database", "MySQL database Municipal_rel"),
+    ("2026-09-14", "stack.backend", "FastAPI with Uvicorn"),
+    ("2026-09-14", "stack.llm", "local Ollama model via llm_adapter.py"),
+    ("2026-09-14", "user.name", "Nathan"),
+    ("2026-09-20", "user.preferred_contact", "email alerts"),             # contradicted later
+    ("2026-09-20", "user.home_station", "Campbell light-rail station"),    # contradicted later
+    ("2026-09-21", "user.commute_line", "Green Line light rail"),          # contradicted later
+    ("2026-09-14", "user.timezone", "America/Los_Angeles"),
+    ("2026-09-28", "incidents.code_format", "INC-YYYY-NNN"),
+    ("2026-10-05", "incidents.categories", "bus, light_rail, subway"),
+    ("2026-10-05", "incidents.statuses", "reported, investigating, resolved"),
+    ("2026-09-28", "congestion.code_format", "CONG-<LEVEL>-<N>"),
+    ("2026-09-28", "policy.delete_index", "a congestion index with linked incidents cannot be deleted"),
+    ("2026-10-01", "report.formatting", "headings 14pt bold, subheadings 12pt bold, body 11pt"),
+    ("2026-09-28", "auth.session_ttl", "8 hours (confirmed)"),             # contradicted by an unconfirmed value
+    ("2026-10-19", "memory.short_term_n", "12"),
+    ("2026-10-19", "memory.summarize_every", "4 user messages"),
+    ("2026-09-14", "testing.framework", "pytest"),
+    ("2026-09-14", "style.naming", "snake_case"),
+    ("2026-09-14", "ops.ollama_url", "http://localhost:11434"),
+    ("2026-10-19", "deadline.hw6", "2026-10-19 at 3 PM"),
+    ("2026-09-14", "repo.collaborators", "Sbnikitha, supriyaselvanganesan"),
+]
+
+CONTRADICTIONS = [
+    ("2026-10-12", "user.preferred_contact", "SMS text alerts"),
+    ("2026-10-15", "user.home_station", "Winchester light-rail station"),
+    ("2026-10-16", "user.commute_line", "Blue Line light rail"),
+    ("2026-10-17", "auth.session_ttl", "24 hours (unconfirmed)"),          # newer but unconfirmed -> flagged
+]
+
+# 23 duplicated lines (same fact restated, sometimes with different case/punctuation/date)
+DUPLICATES = [
+    ("2026-09-15", "project.name", "municipal transit incident manager"),
+    ("2026-09-30", "project.name", "Municipal Transit Incident Manager."),
+    ("2026-09-20", "project.port", "8166"),
+    ("2026-10-05", "project.port", "8166"),
+    ("2026-09-22", "project.prefix", "S1066"),
+    ("2026-10-06", "db.mongo_database", "s1066_doc"),
+    ("2026-10-10", "db.mongo_database", "s1066_doc"),
+    ("2026-09-18", "stack.backend", "FastAPI with Uvicorn"),
+    ("2026-09-25", "stack.backend", "fastapi with uvicorn"),
+    ("2026-09-19", "user.name", "Nathan"),
+    ("2026-10-02", "user.name", "nathan"),
+    ("2026-09-26", "user.timezone", "America/Los_Angeles"),
+    ("2026-10-01", "incidents.code_format", "INC-YYYY-NNN"),
+    ("2026-10-06", "incidents.categories", "bus, light_rail, subway"),
+    ("2026-10-07", "incidents.statuses", "reported, investigating, resolved"),
+    ("2026-10-02", "report.formatting", "headings 14pt bold, subheadings 12pt bold, body 11pt"),
+    ("2026-09-20", "testing.framework", "pytest"),
+    ("2026-10-03", "testing.framework", "PyTest"),
+    ("2026-09-21", "style.naming", "snake_case"),
+    ("2026-09-30", "ops.ollama_url", "http://localhost:11434"),
+    ("2026-09-22", "repo.collaborators", "Sbnikitha, supriyaselvanganesan"),
+    ("2026-10-13", "user.preferred_contact", "SMS text alerts"),
+    ("2026-10-01", "congestion.code_format", "CONG-<LEVEL>-<N>"),
+]
+
+
+def build() -> str:
+    lines = ["# MEMORY.md - durable facts", "<!-- last_consolidated: 2026-10-10T09:00:00+00:00 -->"]
+    rows = BASE + CONTRADICTIONS + DUPLICATES
+    rows.sort(key=lambda r: r[0])  # chronological, so duplicates/contradictions are interleaved
+    lines += [f"- [{d}] {k}: {v}" for d, k, v in rows]
+    return "\n".join(lines) + "\n"
+
+
+if __name__ == "__main__":
+    text = build()
+    (ROOT / "MEMORY_original.md").write_text(text)
+    shutil.copy(ROOT / "MEMORY_original.md", ROOT / "MEMORY.md")
+    print(f"MEMORY_original.md written: {len(text.splitlines())} lines")

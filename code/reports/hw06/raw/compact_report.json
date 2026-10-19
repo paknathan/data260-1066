@@ -1,0 +1,247 @@
+{
+  "consolidated_at": "2026-10-19T21:50:34.979080+00:00",
+  "lines_before": 55,
+  "content_lines_before": 54,
+  "facts_before": 53,
+  "lines_after": 35,
+  "content_lines_after": 33,
+  "facts_after": 26,
+  "duplicates_merged": [
+    {
+      "key": "project.name",
+      "value": "Municipal Transit Incident Manager.",
+      "copies": 3,
+      "lines": [
+        3,
+        14,
+        32
+      ]
+    },
+    {
+      "key": "project.port",
+      "value": "8166",
+      "copies": 3,
+      "lines": [
+        4,
+        19,
+        43
+      ]
+    },
+    {
+      "key": "project.prefix",
+      "value": "S1066",
+      "copies": 2,
+      "lines": [
+        5,
+        23
+      ]
+    },
+    {
+      "key": "stack.backend",
+      "value": "fastapi with uvicorn",
+      "copies": 3,
+      "lines": [
+        6,
+        15,
+        25
+      ]
+    },
+    {
+      "key": "user.name",
+      "value": "nathan",
+      "copies": 3,
+      "lines": [
+        8,
+        16,
+        37
+      ]
+    },
+    {
+      "key": "user.timezone",
+      "value": "America/Los_Angeles",
+      "copies": 2,
+      "lines": [
+        9,
+        26
+      ]
+    },
+    {
+      "key": "testing.framework",
+      "value": "PyTest",
+      "copies": 3,
+      "lines": [
+        10,
+        20,
+        39
+      ]
+    },
+    {
+      "key": "style.naming",
+      "value": "snake_case",
+      "copies": 2,
+      "lines": [
+        11,
+        22
+      ]
+    },
+    {
+      "key": "ops.ollama_url",
+      "value": "http://localhost:11434",
+      "copies": 2,
+      "lines": [
+        12,
+        33
+      ]
+    },
+    {
+      "key": "repo.collaborators",
+      "value": "Sbnikitha, supriyaselvanganesan",
+      "copies": 2,
+      "lines": [
+        13,
+        24
+      ]
+    },
+    {
+      "key": "user.preferred_contact",
+      "value": "SMS text alerts",
+      "copies": 2,
+      "lines": [
+        48,
+        49
+      ]
+    },
+    {
+      "key": "incidents.code_format",
+      "value": "INC-YYYY-NNN",
+      "copies": 2,
+      "lines": [
+        28,
+        35
+      ]
+    },
+    {
+      "key": "congestion.code_format",
+      "value": "CONG-<LEVEL>-<N>",
+      "copies": 2,
+      "lines": [
+        29,
+        36
+      ]
+    },
+    {
+      "key": "report.formatting",
+      "value": "headings 14pt bold, subheadings 12pt bold, body 11pt",
+      "copies": 2,
+      "lines": [
+        34,
+        38
+      ]
+    },
+    {
+      "key": "db.mongo_database",
+      "value": "s1066_doc",
+      "copies": 3,
+      "lines": [
+        40,
+        44,
+        47
+      ]
+    },
+    {
+      "key": "incidents.categories",
+      "value": "bus, light_rail, subway",
+      "copies": 2,
+      "lines": [
+        41,
+        45
+      ]
+    },
+    {
+      "key": "incidents.statuses",
+      "value": "reported, investigating, resolved",
+      "copies": 2,
+      "lines": [
+        42,
+        46
+      ]
+    }
+  ],
+  "contradictions_resolved": [
+    {
+      "key": "user.preferred_contact",
+      "kept": {
+        "value": "SMS text alerts",
+        "date": "2026-10-13",
+        "line": 49
+      },
+      "superseded": [
+        {
+          "value": "email alerts",
+          "date": "2026-09-20",
+          "line": 17
+        }
+      ],
+      "rule": "newest dated fact wins",
+      "possibly_incorrect": false,
+      "review_note": ""
+    },
+    {
+      "key": "user.home_station",
+      "kept": {
+        "value": "Winchester light-rail station",
+        "date": "2026-10-15",
+        "line": 50
+      },
+      "superseded": [
+        {
+          "value": "Campbell light-rail station",
+          "date": "2026-09-20",
+          "line": 18
+        }
+      ],
+      "rule": "newest dated fact wins",
+      "possibly_incorrect": false,
+      "review_note": ""
+    },
+    {
+      "key": "user.commute_line",
+      "kept": {
+        "value": "Blue Line light rail",
+        "date": "2026-10-16",
+        "line": 51
+      },
+      "superseded": [
+        {
+          "value": "Green Line light rail",
+          "date": "2026-09-21",
+          "line": 21
+        }
+      ],
+      "rule": "newest dated fact wins",
+      "possibly_incorrect": false,
+      "review_note": ""
+    },
+    {
+      "key": "auth.session_ttl",
+      "kept": {
+        "value": "24 hours (unconfirmed)",
+        "date": "2026-10-17",
+        "line": 52
+      },
+      "superseded": [
+        {
+          "value": "8 hours (confirmed)",
+          "date": "2026-09-28",
+          "line": 31
+        }
+      ],
+      "rule": "newest dated fact wins",
+      "possibly_incorrect": true,
+      "review_note": "Newer value is unconfirmed while the older one was confirmed - 'newest wins' is probably wrong here; verify manually."
+    }
+  ],
+  "flagged_possibly_incorrect": [
+    "auth.session_ttl"
+  ]
+}

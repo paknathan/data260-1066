@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TransitBot Chat (s1066)</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 24px auto; padding: 0 16px; background: #f6f7f9; }
+  h1 { font-size: 20px; }
+  #log { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px; height: 60vh; overflow-y: auto; }
+  .msg { margin: 8px 0; padding: 8px 10px; border-radius: 8px; white-space: pre-wrap; }
+  .user { background: #e3efff; margin-left: 15%; }
+  .assistant { background: #eef7ee; margin-right: 15%; }
+  .meta { font-size: 11px; color: #666; margin-top: 4px; }
+  form { display: flex; gap: 8px; margin-top: 10px; }
+  input { padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+  #message { flex: 1; }
+  button { padding: 8px 14px; border: 0; border-radius: 6px; background: #1f6feb; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>TransitBot - memory chat (Nathan Pak · s1066 · port 8166)</h1>
+<div>User ID: <input id="user" value="nathan"> Session: <span id="sess">(new)</span></div>
+<div id="log"></div>
+<form id="f">
+  <input id="message" placeholder="Type a message or /help, /memory, /compact, /dream" autocomplete="off">
+  <button>Send</button>
+</form>
+<script>
+let sessionId = null;
+const log = document.getElementById('log');
+function add(role, text, meta) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + role;
+  d.textContent = text;
+  if (meta) { const m = document.createElement('div'); m.className = 'meta'; m.textContent = meta; d.appendChild(m); }
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
+}
+document.getElementById('f').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const input = document.getElementById('message');
+  const message = input.value.trim(); if (!message) return;
+  input.value = ''; add('user', message);
+  const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user_id: document.getElementById('user').value, session_id: sessionId, message }) });
+  const data = await res.json();
+  if (!res.ok) { add('assistant', 'Error: ' + JSON.stringify(data.detail || data)); return; }
+  if (data.session_id) { sessionId = data.session_id; document.getElementById('sess').textContent = sessionId; }
+  const mu = data.memory_used;
+  const meta = mu ? `window=${mu.short_term_count} · episodes=${mu.episodic_facts.length} · ` +
+    `summary=${mu.session_summary ? 'yes' : 'no'} · prompt_tokens=${data.usage.prompt_tokens} · ${data.usage.request_latency_ms} ms` : data.command;
+  add('assistant', data.reply, meta);
+});
+</script>
+</body>
+</html>

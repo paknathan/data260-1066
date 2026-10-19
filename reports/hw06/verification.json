@@ -1,0 +1,13 @@
+{
+  "homework": "HW6",
+  "sid4": "YOUR_SID4",
+  "commit_hash": "YOUR_COMMIT_HASH",
+  "seed": 0,
+  "checks": [
+    {
+      "check": "FastAPI Health / Docs",
+      "status": "FAIL",
+      "error": "HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /docs (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10df0bdd0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    }
+  ]
+}
