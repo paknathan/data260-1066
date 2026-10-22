@@ -1,0 +1,5 @@
+-r requirements-hw6.txt
+pyjwt>=2.8
+httpx            # FastAPI TestClient (tests/test_auth_jwt.py)
+ruff
+pre-commit

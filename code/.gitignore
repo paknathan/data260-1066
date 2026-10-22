@@ -2,3 +2,5 @@ venv/
 hw6_local.db
 __pycache__/
 .pytest_cache/
+.env
+.ruff_cache/

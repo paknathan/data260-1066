@@ -17,3 +17,9 @@ memory-fixture:
 
 compact:
 	python scripts/memory_cli.py /compact
+
+migrate-users-hw07:
+	python scripts/migrate_users_hw07.py
+	
+expired-token:
+	@python scripts/make_expired_token.py reader_1066

@@ -1,54 +1,40 @@
 import os
-import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import List, Optional
 
-from fastapi import FastAPI, Depends, HTTPException, status, Response, Request, Query
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Depends, FastAPI, HTTPException, Query, Request, status
 from fastapi.exceptions import RequestValidationError
-from pydantic import BaseModel, EmailStr, Field
-import bcrypt
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey, func
-from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship
-from sqlalchemy.orm import joinedload
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.exc import IntegrityError
-from routers import documents, memory  # HW6: Mongo document API + chat memory
-from database import init_mongo, PORT_BASE
+from sqlalchemy.orm import Session, relationship
+
+from database import PORT_BASE, init_mongo
+from routers import auth, documents, memory  # HW7: JWT auth; HW6: Mongo document API + chat memory
+from security import get_current_user, require_roles
+from sql_db import (  # noqa: F401  (re-exported for seed.py)
+    DATABASE_URL,
+    Base,
+    Role,
+    SessionLocal,
+    UserModel,
+    engine,
+    get_db,
+)
 
 # ------------------------------------------------------------------------------
-# 1. Database Configuration & Models
+# 1. Database Models
+#    Engine, get_db() and the HW7 `users` table now live in sql_db.py.
+#    The HW4 cookie-session tables/endpoints were removed (history: git tag hw4).
 # ------------------------------------------------------------------------------
-DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL environment variable is not set. Run `export DATABASE_URL=...` first.")
-
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-# --- Auth Models ---
-class UserModel(Base):
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    name = Column(String(100), nullable=False)
-    email = Column(String(120), unique=True, index=True, nullable=False)
-    password_hash = Column(String(255), nullable=False)
-
-    sessions = relationship("SessionModel", back_populates="user", cascade="all, delete-orphan")
-
-class SessionModel(Base):
-    __tablename__ = "sessions"
-
-    id = Column(String(64), primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    expires_at = Column(DateTime, nullable=False)
-
-    user = relationship("UserModel", back_populates="sessions")
+# HW7 permission policy for the graded domain routes
+ANY_ROLE = get_current_user                                      # list / read
+CAN_WRITE = require_roles(Role.writer, Role.moderator)           # create / update
+CAN_DELETE = require_roles(Role.moderator)                       # delete
 
 # --- HW5 Secondary Entity Table ---
 class CongestionIndexModel(Base):
@@ -91,28 +77,8 @@ class IncidentLogModel(Base):
 Base.metadata.create_all(bind=engine)
 
 # ------------------------------------------------------------------------------
-# 2. Database Dependency
-# ------------------------------------------------------------------------------
-def get_db():
-    db_session_basede26 = SessionLocal()
-    try:
-        yield db_session_basede26
-    finally:
-        db_session_basede26.close()
-
-# ------------------------------------------------------------------------------
 # 3. Pydantic Schemas with Format Validation
 # ------------------------------------------------------------------------------
-# Auth Schemas
-class UserCreate(BaseModel):
-    name: str
-    email: EmailStr
-    password: str
-
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
-
 # Congestion Index Schemas
 class CongestionIndexCreate(BaseModel):
     level_name: str = Field(..., min_length=1, max_length=100)
@@ -207,80 +173,9 @@ def _startup_mongo():
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # HW6 routers (must be registered before the catch-all frontend route)
+app.include_router(auth.router)  # HW7: POST /auth/login, GET /auth/me
 app.include_router(documents.router)
 app.include_router(memory.router)
-
-# ------------------------------------------------------------------------------
-# 5. Session Authentication Helper
-# ------------------------------------------------------------------------------
-def get_current_user(request: Request, db_session_basede26: Session = Depends(get_db)) -> UserModel:
-    session_token = request.cookies.get("session_id")
-    if not session_token:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
-
-    session_record = db_session_basede26.query(SessionModel).filter(
-        SessionModel.id == session_token
-    ).first()
-
-    if not session_record:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid session")
-
-    if datetime.utcnow() > session_record.expires_at:
-        db_session_basede26.delete(session_record)
-        db_session_basede26.commit()
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Session expired")
-
-    return session_record.user
-
-# ------------------------------------------------------------------------------
-# 6. Auth Endpoints
-# ------------------------------------------------------------------------------
-@app.post("/register", status_code=status.HTTP_201_CREATED)
-def register(user_data: UserCreate, db_session_basede26: Session = Depends(get_db)):
-    existing_user = db_session_basede26.query(UserModel).filter(UserModel.email == user_data.email).first()
-    if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-
-    salt = bcrypt.gensalt()
-    hashed_pw = bcrypt.hashpw(user_data.password.encode('utf-8'), salt).decode('utf-8')
-
-    new_user = UserModel(name=user_data.name, email=user_data.email, password_hash=hashed_pw)
-    db_session_basede26.add(new_user)
-    db_session_basede26.commit()
-    return {"message": "User registered successfully"}
-
-@app.post("/login")
-def login(login_data: UserLogin, response: Response, db_session_basede26: Session = Depends(get_db)):
-    user = db_session_basede26.query(UserModel).filter(UserModel.email == login_data.email).first()
-    if not user or not bcrypt.checkpw(login_data.password.encode('utf-8'), user.password_hash.encode('utf-8')):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
-
-    session_token = str(uuid.uuid4())
-    created_at = datetime.utcnow()
-    expires_at = created_at + timedelta(hours=8)
-
-    session_record = SessionModel(
-        id=session_token, user_id=user.id, created_at=created_at, expires_at=expires_at
-    )
-    db_session_basede26.add(session_record)
-    db_session_basede26.commit()
-
-    response.set_cookie(key="session_id", value=session_token, httponly=True, samesite="lax", secure=False)
-    return {"email": user.email, "name": user.name}
-
-@app.post("/logout")
-def logout(request: Request, response: Response, db_session_basede26: Session = Depends(get_db)):
-    session_token = request.cookies.get("session_id")
-    if session_token:
-        db_session_basede26.query(SessionModel).filter(SessionModel.id == session_token).delete()
-        db_session_basede26.commit()
-
-    response.delete_cookie("session_id")
-    return {"message": "Logged out successfully"}
-
-@app.get("/me")
-def get_me(current_user: UserModel = Depends(get_current_user)):
-    return {"email": current_user.email, "name": current_user.name}
 
 # ------------------------------------------------------------------------------
 # 7. Secondary Entity CRUD Endpoints (Congestion Indexes)
@@ -288,7 +183,7 @@ def get_me(current_user: UserModel = Depends(get_current_user)):
 @app.post("/congestion-indexes", response_model=CongestionIndexResponse, status_code=status.HTTP_201_CREATED)
 def create_congestion_index(
     data: CongestionIndexCreate,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(CAN_WRITE),
     db: Session = Depends(get_db)
 ):
     try:
@@ -297,15 +192,15 @@ def create_congestion_index(
         db.commit()
         db.refresh(index_obj)
         return index_obj
-    except IntegrityError:
+    except IntegrityError as exc:
         db.rollback()
-        raise HTTPException(status_code=409, detail=f"Index code '{data.index_code}' already exists.")
+        raise HTTPException(status_code=409, detail=f"Index code '{data.index_code}' already exists.") from exc
 
 @app.get("/congestion-indexes", response_model=List[CongestionIndexResponse])
 def get_all_congestion_indexes(
     skip: int = Query(0, ge=0),
     limit: int = Query(10, ge=1, le=100),
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(ANY_ROLE),
     db: Session = Depends(get_db)
 ):
     return db.query(CongestionIndexModel).offset(skip).limit(limit).all()
@@ -313,7 +208,7 @@ def get_all_congestion_indexes(
 @app.get("/congestion-indexes/{index_id}", response_model=CongestionIndexResponse)
 def get_congestion_index(
     index_id: int,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(ANY_ROLE),
     db: Session = Depends(get_db)
 ):
     obj = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
@@ -325,7 +220,7 @@ def get_congestion_index(
 def update_congestion_index(
     index_id: int,
     data: CongestionIndexUpdate,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(CAN_WRITE),
     db: Session = Depends(get_db)
 ):
     obj = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
@@ -339,14 +234,14 @@ def update_congestion_index(
         db.commit()
         db.refresh(obj)
         return obj
-    except IntegrityError:
+    except IntegrityError as exc:
         db.rollback()
-        raise HTTPException(status_code=409, detail="Index code conflict.")
+        raise HTTPException(status_code=409, detail="Index code conflict.") from exc
 
 @app.delete("/congestion-indexes/{index_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_congestion_index(
     index_id: int,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(CAN_DELETE),
     db: Session = Depends(get_db)
 ):
     obj = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()
@@ -356,19 +251,19 @@ def delete_congestion_index(
     try:
         db.delete(obj)
         db.commit()
-    except IntegrityError:
+    except IntegrityError as exc:
         db.rollback()
         raise HTTPException(
             status_code=400,
             detail="Cannot delete congestion index with existing associated transit incidents."
-        )
+        ) from exc
 # ------------------------------------------------------------------------------
 # 8. Primary Entity CRUD Endpoints (Transit Incidents)
 # ------------------------------------------------------------------------------
 @app.post("/incidents", response_model=IncidentResponse, status_code=status.HTTP_201_CREATED)
 def create_incident(
     data: IncidentCreate,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(CAN_WRITE),
     db: Session = Depends(get_db)
 ):
     related = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == data.congestion_index_id).first()
@@ -381,15 +276,15 @@ def create_incident(
         db.commit()
         db.refresh(incident)
         return incident
-    except IntegrityError:
+    except IntegrityError as exc:
         db.rollback()
-        raise HTTPException(status_code=409, detail=f"Incident code '{data.incident_code}' already exists.")
+        raise HTTPException(status_code=409, detail=f"Incident code '{data.incident_code}' already exists.") from exc
 
 @app.get("/incidents", response_model=List[IncidentResponse])
 def get_all_incidents(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=1000),  # Increased max limit to 1000 & default to 50
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(ANY_ROLE),
     db: Session = Depends(get_db)
 ):
     # Sorts by newest created incidents first
@@ -398,7 +293,7 @@ def get_all_incidents(
 @app.get("/incidents/{incident_id}", response_model=IncidentResponse)
 def get_incident_by_id(
     incident_id: int,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(ANY_ROLE),
     db: Session = Depends(get_db)
 ):
     incident = db.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
@@ -410,7 +305,7 @@ def get_incident_by_id(
 def update_incident(
     incident_id: int,
     data: IncidentUpdate,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(CAN_WRITE),
     db: Session = Depends(get_db)
 ):
     incident = db.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
@@ -429,14 +324,14 @@ def update_incident(
         db.commit()
         db.refresh(incident)
         return incident
-    except IntegrityError:
+    except IntegrityError as exc:
         db.rollback()
-        raise HTTPException(status_code=409, detail="Incident code conflict.")
+        raise HTTPException(status_code=409, detail="Incident code conflict.") from exc
 
 @app.delete("/incidents/{incident_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_incident(
     incident_id: int,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(CAN_DELETE),
     db: Session = Depends(get_db)
 ):
     incident = db.query(IncidentModel).filter(IncidentModel.id == incident_id).first()
@@ -452,7 +347,7 @@ def delete_incident(
 @app.get("/congestion-indexes/{index_id}/incidents", response_model=List[IncidentResponse])
 def get_incidents_by_congestion_index(
     index_id: int,
-    current_user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(ANY_ROLE),
     db: Session = Depends(get_db)
 ):
     parent = db.query(CongestionIndexModel).filter(CongestionIndexModel.id == index_id).first()

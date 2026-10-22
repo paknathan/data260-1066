@@ -1,0 +1,16 @@
+# Ruff config (HW7 Part 1). Used by `ruff check` and the pre-commit hook.
+line-length = 120
+target-version = "py310"
+src = ["code"]                      # so imports like `from sql_db import ...` count as first-party
+extend-exclude = [
+    "code/hw6_code",                # frozen HW6 snapshot
+    "code/venv", ".venv", "venv",
+    "reports",
+]
+
+[lint]
+select = ["E", "F", "I", "B"]       # pycodestyle errors, pyflakes, isort, bugbear
+ignore = [
+    "E501",                         # long lines: handled by line-length/formatter, not worth blocking commits
+    "B008",                         # FastAPI's `Depends(...)` in defaults is idiomatic
+]

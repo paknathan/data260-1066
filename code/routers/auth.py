@@ -1,62 +1,51 @@
-# routers/auth.py
-from fastapi import APIRouter, Request, HTTPException, status
-from fastapi.responses import JSONResponse
-import time
+"""HW7 Part 1 - JWT login and identity endpoints (replaces the HW4 session flow, kept at tag hw4)."""
 
-router = APIRouter()
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
 
-# Hardcoded credentials for testing (Replace with MySQL queries in Part 2)
-VALID_EMAIL = "admin@transit.org"
-VALID_PASSWORD = "password"
-IDLE_TIMEOUT = 3600
+from security import ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token, get_current_user, verify_password
+from sql_db import Role, UserModel, get_db
 
-@router.post("/login")
-async def login(request: Request):
-    """
-    Receives JSON body from Login.jsx with email and password.
-    Sets server-side session cookie upon success.
-    """
-    try:
-        data = await request.json()
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid JSON format")
+router = APIRouter(prefix="/auth", tags=["Auth (JWT)"])
 
-    email = data.get("email")
-    password = data.get("password")
 
-    if email == VALID_EMAIL and password == VALID_PASSWORD:
-        request.session["user"] = email
-        request.session["last_activity"] = time.time()
-        return JSONResponse(content={"message": "Logged in successfully", "email": email})
+class LoginRequest(BaseModel):
+    username: str = Field(..., min_length=1, max_length=120)
+    password: str = Field(..., min_length=1)
 
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Invalid email or password."
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    expires_in: int
+    role: Role
+
+
+class MeResponse(BaseModel):
+    id: int
+    username: str
+    role: Role
+
+
+@router.post("/login", response_model=TokenResponse)
+def login(body: LoginRequest, db: Session = Depends(get_db)) -> TokenResponse:
+    """Look the user up in MySQL, verify the bcrypt hash, and only then issue a JWT."""
+    user = db.query(UserModel).filter(UserModel.username == body.username).first()
+    if user is None or not verify_password(body.password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return TokenResponse(
+        access_token=create_access_token(user),
+        expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        role=user.role,
     )
 
-@router.get("/me")
-async def get_current_user(request: Request):
-    """
-    Checks active HTTP-only session cookie when App.jsx loads.
-    """
-    user = request.session.get("user")
-    last_activity = request.session.get("last_activity")
 
-    if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not logged in")
-
-    if last_activity and time.time() - last_activity > IDLE_TIMEOUT:
-        request.session.clear()
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Session expired")
-
-    request.session["last_activity"] = time.time()
-    return {"email": user}
-
-@router.post("/logout")
-@router.get("/logout")
-async def logout(request: Request):
-    """
-    Clears session cookie.
-    """
-    request.session.clear()
-    return {"message": "Logged out successfully"}
+@router.get("/me", response_model=MeResponse)
+def me(user: UserModel = Depends(get_current_user)) -> MeResponse:
+    """Return the identity and role encoded by the caller's valid token."""
+    return MeResponse(id=user.id, username=user.username, role=user.role)
