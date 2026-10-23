@@ -20,6 +20,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30")
 
 # auto_error=False so a missing header gives OUR 401 (not FastAPI's default 403).
 bearer_scheme = HTTPBearer(auto_error=False)
+__all__ = ["hash_password", "verify_password", "create_access_token", "decode_access_token", "get_current_user", "require_roles"]
 
 
 # ---------------------------------------------------------------- passwords
