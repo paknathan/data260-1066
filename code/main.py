@@ -365,4 +365,8 @@ def serve_react_app(full_path: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=PORT_BASE, reload=True)  # 8166
+
+    # Pass the app object (not "main:app") so this module is imported only once; a second import would
+    # re-declare the SQLAlchemy tables on the shared sql_db.Base. For auto-reload use:
+    #   uvicorn main:app --reload --port 8166
+    uvicorn.run(app, host="0.0.0.0", port=PORT_BASE)  # 8166
