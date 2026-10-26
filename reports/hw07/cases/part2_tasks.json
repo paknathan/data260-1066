@@ -1,0 +1,33 @@
+{
+  "description": "HW7 Part 2 fixed verification cases (s1066). `steps` = tool groups that must be executed in order; `expected` is used by the Part 3 verifier.",
+  "cases": [
+    {
+      "id": "A",
+      "title": "Search, then detail-lookup the first result",
+      "prompt": "Search for Route 22 incidents, then get the full details of the first search result. Report its incident ID, type, severity, delay and status.",
+      "steps": [["search_incidents"], ["get_incident_detail"]],
+      "expected": {"incident_id": "inc_101", "type": "Mechanical Delay", "delay_minutes": 18}
+    },
+    {
+      "id": "B",
+      "title": "Aggregate question, then one supporting example",
+      "prompt": "What is the average delay in minutes on Route 22? After answering, find one specific Route 22 incident that supports your answer and give its ID and delay.",
+      "steps": [["aggregate_route_stats"], ["search_incidents", "get_incident_detail"]],
+      "expected": {"avg_delay_minutes": 14.0, "example_ids": ["inc_101", "inc_103"]}
+    },
+    {
+      "id": "C",
+      "title": "Compare two entities: search plus two detail lookups",
+      "prompt": "Compare the two Light Rail incidents: search for Light Rail, look up the full details of each of the two results, and say which one has the longer delay and by how many minutes.",
+      "steps": [["search_incidents"], ["get_incident_detail"], ["get_incident_detail"]],
+      "distinct_detail_ids": 2,
+      "expected": {"ids": ["inc_102", "inc_105"], "longer": "inc_102", "difference_minutes": 17}
+    }
+  ],
+  "error_case": {
+    "id": "E",
+    "title": "Nonexistent ID",
+    "prompt": "Get the full details for incident inc_999.",
+    "steps": [["get_incident_detail"]]
+  }
+}
