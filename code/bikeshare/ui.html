@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bay Wheels Plan Advisor</title>
+<style>
+  :root { --bg:#f6f7f4; --card:#fff; --ink:#1d2321; --muted:#5d6762; --line:#dfe3df; --accent:#0b6e4f;
+          --accent-soft:#e3f1ec; --warn:#a35b00; --warn-soft:#fdf1e1; --bad:#a3271f; --mono:ui-monospace,Menlo,Consolas,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  header { padding:18px 24px; border-bottom:1px solid var(--line); background:var(--card); display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; }
+  header h1 { margin:0; font-size:20px; } header span { color:var(--muted); font-size:13px; }
+  main { max-width:1280px; margin:0 auto; padding:20px 24px 48px; }
+  form { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; display:grid; grid-template-columns:1fr 1.4fr .8fr auto; gap:12px; align-items:end; }
+  label { font-size:12px; font-weight:600; color:var(--muted); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:.04em; }
+  input[type=text], input[type=url] { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+  input[type=file] { font-size:13px; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:6px; padding:10px 22px; font:600 15px inherit; cursor:pointer; }
+  button:disabled { opacity:.55; cursor:wait; }
+  .strip { display:flex; gap:10px; margin:16px 0; flex-wrap:wrap; }
+  .metric { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:8px 14px; min-width:120px; }
+  .metric b { display:block; font-size:18px; } .metric small { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+  .cols { display:grid; grid-template-columns: 1fr 1.25fr; gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; min-width:0; }
+  .card h2 { font-size:14px; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  .tl { list-style:none; margin:0; padding:0; max-height:780px; overflow:auto; }
+  .tl li { border-left:3px solid var(--line); padding:6px 10px; margin-bottom:8px; }
+  .tl li.tool { border-color:var(--accent); } .tl li.err { border-color:var(--bad); } .tl li.final { border-color:#3557a7; }
+  .tl .head { font-weight:600; font-size:13px; } .tl .ms { color:var(--muted); font-weight:400; }
+  pre { margin:4px 0 0; font:12px/1.4 var(--mono); background:#f2f4f1; padding:6px 8px; border-radius:5px; white-space:pre-wrap; word-break:break-word; max-height:220px; overflow:auto; }
+  .decision { font-size:22px; font-weight:700; padding:12px 14px; border-radius:8px; background:var(--accent-soft); color:var(--accent); margin-bottom:10px; }
+  .decision.ppu { background:var(--warn-soft); color:var(--warn); }
+  table { border-collapse:collapse; width:100%; font-size:13px; margin:6px 0 14px; }
+  th, td { border-bottom:1px solid var(--line); padding:5px 8px; text-align:right; }
+  th:first-child, td:first-child { text-align:left; } th { color:var(--muted); font-weight:600; }
+  .muted { color:var(--muted); font-size:13px; } .mismatch { color:var(--bad); font-weight:600; }
+  ol.cites li { margin-bottom:6px; font-size:13px; } .cite-meta { font:12px var(--mono); color:var(--muted); word-break:break-all; }
+  ul.assume li { font-size:13px; }
+  .status { color:var(--muted); font-size:13px; margin-top:8px; }
+  @media (max-width:900px) { form, .cols { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header><h1>Bay Wheels Plan Advisor</h1><span>HW7 Part 4 · Nathan Pak (s1066) · LangGraph ReAct/MRKL agent · qwen3:8b</span></header>
+<main>
+  <form id="f">
+    <div><label for="csv">Trip CSV</label><input type="file" id="csv" accept=".csv,text/csv" required></div>
+    <div><label for="url">Pricing page URL</label><input type="url" id="url" value="https://www.lyft.com/bikes/bay-wheels/pricing" required></div>
+    <div><label for="label">Run label</label><input type="text" id="label" placeholder="e.g. scenario_membership"></div>
+    <div><button id="run" type="submit">Run</button></div>
+  </form>
+  <div class="status" id="status">Upload a Bay Wheels trip CSV, check the pricing URL, then Run.</div>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="cols">
+    <section class="card"><h2>Timeline · tool calls &amp; observations</h2><ul class="tl" id="timeline"><li class="muted">No run yet.</li></ul></section>
+    <section class="card" id="results"><h2>Results</h2><p class="muted">No run yet.</p></section>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money = (v) => (v === null || v === undefined || v === "" || isNaN(Number(v))) ? "–" : "$" + Number(v).toFixed(2);
+const num = (v) => (v === null || v === undefined || isNaN(Number(v))) ? "–" : Number(v).toLocaleString();
+
+function metric(label, value) { return `<div class="metric"><small>${esc(label)}</small><b>${esc(value)}</b></div>`; }
+
+function renderTimeline(items) {
+  if (!items.length) { $("timeline").innerHTML = '<li class="muted">No steps.</li>'; return; }
+  $("timeline").innerHTML = items.map(t => {
+    if (t.type === "tool") {
+      const obs = t.observation || {};
+      let shown = obs;
+      if (obs.success && obs.data && obs.data.rows) shown = {...obs, data: {...obs.data, rows: obs.data.rows.slice(0, 8)}};
+      return `<li class="tool"><div class="head">Step ${t.step}: ${esc(t.tool)} <span class="ms">${t.ms} ms · ${obs.success ? "ok" : "error"}</span></div>
+        <pre>input: ${esc(JSON.stringify(t.input))}</pre><pre>observation: ${esc(JSON.stringify(shown, null, 1)).slice(0, 2500)}</pre></li>`;
+    }
+    const cls = t.type === "error" ? "err" : t.type === "final" ? "final" : "";
+    return `<li class="${cls}"><div class="head">${esc(t.type)}${t.turn ? " · model turn " + t.turn : ""} <span class="ms">${t.ms ? t.ms + " ms" : ""}</span></div><div class="muted">${esc(t.text)}</div></li>`;
+  }).join("");
+}
+
+function renderResults(r) {
+  const e = r.engine_check || {}, a = r.agent_costs || {};
+  const ppu = r.decision === "Pay Per Ride/Minute";
+  const rows = [["Pay-per-use total", a.pay_per_use_total, e.pay_per_use_total],
+                ["Membership fees", a.membership_fees, e.membership_fees],
+                ["Membership residual (overage + ebike minutes)", a.membership_residual, e.membership_residual],
+                ["Membership total", a.membership_total, e.membership_total]];
+  const flag = (x, y) => (x != null && y != null && Math.abs(Number(x) - Number(y)) > Math.max(1, 0.02 * Math.abs(Number(y)))) ? ' class="mismatch"' : "";
+  let html = `<h2>Results</h2>`;
+  html += `<div class="decision ${ppu ? "ppu" : ""}">${esc(r.decision || "No valid decision (" + r.metrics.stop_reason + ")")}</div>`;
+  if (r.justification) html += `<p>${esc(r.justification)}</p>`;
+  html += `<h2>Cost comparison</h2><table><tr><th></th><th>Agent (calculator)</th><th>Engine check</th></tr>` +
+    rows.map(([l, x, y]) => `<tr><td>${l}</td><td${flag(x, y)}>${money(x)}</td><td>${money(y)}</td></tr>`).join("") +
+    `<tr><td>Rides / months in data</td><td>${num(a.rides)} / ${num(a.months)}</td><td>${num(e.rides)} / ${num(e.months)}</td></tr>` +
+    `<tr><td>Break-even rides per month vs actual</td><td>${num(a.break_even_rides_per_month)} vs ${num(a.rides_per_month)}</td><td>${num(e.break_even_rides_per_month)} vs ${num(e.rides_per_month)}</td></tr></table>`;
+  if (e.ok === false) html += `<p class="muted">Engine check unavailable: ${esc(JSON.stringify(e.missing_pricing || e.error))}</p>`;
+  if (e.ok && e.cheaper !== r.decision) html += `<p class="mismatch">Engine check disagrees: cheaper plan is ${esc(e.cheaper)}.</p>`;
+  if (e.weekly && e.weekly.length) {
+    const wk = e.weekly, shown = wk.length > 12 ? wk.slice(-12) : wk;
+    html += `<h2>By week${wk.length > 12 ? ` (last 12 of ${wk.length} weeks; full table in result.json)` : ""}</h2>
+      <table><tr><th>Week of</th><th>Rides</th><th>Avg min</th><th>Pay-per-use spend</th><th>Member residual</th></tr>` +
+      shown.map(w => `<tr><td>${w.week_start}</td><td>${w.rides}</td><td>${w.avg_duration_min}</td><td>${money(w.pay_per_use_spend)}</td><td>${money(w.member_residual)}</td></tr>`).join("") + `</table>`;
+  }
+  html += `<h2>Citations</h2><ol class="cites">` + (r.citations || []).map(c => `<li>“${esc(c.text)}”</li>`).join("") + `</ol>`;
+  (r.pricing_snapshots || []).forEach(s => {
+    html += `<div class="cite-meta">Source: <a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(s.source_url)}</a><br>Captured: ${esc(s.accessed_at)} · SHA-256 ${esc(s.sha256)}</div>`;
+  });
+  if ((r.assumptions || []).length) html += `<h2 style="margin-top:14px">Assumptions &amp; caveats</h2><ul class="assume">` + r.assumptions.map(x => `<li>${esc(x)}</li>`).join("") + `</ul>`;
+  $("results").innerHTML = html;
+}
+
+$("f").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const file = $("csv").files[0];
+  if (!file) return;
+  const csv_text = await file.text();
+  $("run").disabled = true;
+  const t0 = Date.now();
+  const tick = setInterval(() => { $("status").textContent = `Running agent… ${Math.round((Date.now() - t0) / 1000)} s (local model; this can take a few minutes)`; }, 500);
+  try {
+    const resp = await fetch("/api/bikeshare/run", {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({csv_text, pricing_url: $("url").value, label: $("label").value || null})});
+    const r = await resp.json();
+    if (!resp.ok) throw new Error(r.detail ? JSON.stringify(r.detail) : resp.statusText);
+    const m = r.metrics;
+    $("strip").innerHTML = metric("Steps (tool calls)", m.steps) + metric("Model turns", m.model_turns) +
+      metric("Total time", m.total_time_s + " s") + metric("Stop reason", m.stop_reason) + metric("Tokens", num(m.tokens));
+    renderTimeline(r.timeline || []);
+    renderResults(r);
+    $("status").textContent = `Done. Saved to reports/hw07/raw/part4/${r.label}/`;
+  } catch (err) {
+    $("status").textContent = "Error: " + err.message;
+  } finally { clearInterval(tick); $("run").disabled = false; }
+});
+</script>
+</body>
+</html>

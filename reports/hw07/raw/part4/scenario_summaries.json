@@ -1,0 +1,48 @@
+{
+  "scenario_membership": {
+    "rows": 600,
+    "source_file": "202509-baywheels-tripdata.csv.zip",
+    "construction": "600 real trips from one month; all >=30-min trips kept (max 150), rest random",
+    "seed": 1066,
+    "first_ride": "2025-09-01 00:28:29.323000",
+    "last_ride": "2025-09-30 23:11:34.931000",
+    "months": 1,
+    "rides_per_month": 600.0,
+    "ebike_rides": 475,
+    "classic_rides": 125,
+    "duration_min": {
+      "mean": 20.1,
+      "median": 12.0,
+      "max": 154.1,
+      "over_30": 150,
+      "over_45": 58
+    },
+    "member_casual": {
+      "member": 439,
+      "casual": 161
+    }
+  },
+  "scenario_paygo": {
+    "rows": 520,
+    "source_file": "202509-baywheels-tripdata.csv.zip",
+    "construction": "520 real short classic trips (<=20 min), re-dated to 5 rides/month over 104 months",
+    "seed": 1066,
+    "first_ride": "2017-02-20 18:19:15",
+    "last_ride": "2025-09-15 19:25:03",
+    "months": 104,
+    "rides_per_month": 5.0,
+    "ebike_rides": 0,
+    "classic_rides": 520,
+    "duration_min": {
+      "mean": 8.8,
+      "median": 8.0,
+      "max": 20.0,
+      "over_30": 0,
+      "over_45": 0
+    },
+    "member_casual": {
+      "member": 430,
+      "casual": 90
+    }
+  }
+}

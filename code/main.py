@@ -13,7 +13,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, relationship
 
 from database import PORT_BASE, init_mongo
-from routers import auth, documents, memory  # HW7: JWT auth; HW6: Mongo document API + chat memory
+from routers import auth, bikeshare, documents, memory  # HW7: JWT auth + Bay Wheels agent; HW6: Mongo docs + memory
 from security import get_current_user, require_roles
 from sql_db import (  # noqa: F401  (re-exported for seed.py)
     DATABASE_URL,
@@ -176,6 +176,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(auth.router)  # HW7: POST /auth/login, GET /auth/me
 app.include_router(documents.router)
 app.include_router(memory.router)
+app.include_router(bikeshare.router)  # HW7 Part 4: GET /bikeshare, POST /api/bikeshare/run
 
 # ------------------------------------------------------------------------------
 # 7. Secondary Entity CRUD Endpoints (Congestion Indexes)
