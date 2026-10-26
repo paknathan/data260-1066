@@ -53,6 +53,7 @@ class RunContext:
     csv_text: str
     snapshot_dir: Path
     sql_strict: bool = True
+    sanitize_retrieved: bool = False  # Part 5: quarantine instruction-like page text at the tool boundary
     _db: sqlite3.Connection | None = field(default=None, repr=False)
     snapshots: dict[str, dict[str, Any]] = field(default_factory=dict)  # url -> {text, meta}
     trip_columns: list[str] = field(default_factory=list)
@@ -207,6 +208,14 @@ def get_snapshot(ctx: RunContext, url: str) -> dict[str, Any]:
     return ctx.snapshots[url]
 
 
+# Instruction-like text has no place on a pricing page; quarantine it before the model ever sees it.
+INJECTION_RE = re.compile(
+    r"(?i)(\bfor\s+(ai|llm)\s+(assistants?|agents?|models?)\b|\bignore\s+(the|all|any|previous|other|above)\b|"
+    r"\byou\s+must\s+(call|answer|include|list|run|output)\b|\balways\s+answer\b|\bsystem\s+prompt\b|"
+    r"\bdisregard\b|\b(call|run|execute)\s+csv_sql\b|\b(delete\s+from|drop\s+table|insert\s+into|update\s+\w+\s+set)\b|"
+    r"\bverbatim\b)")
+
+
 _PRICE_WORDS = {"member", "membership", "month", "monthly", "annual", "minute", "minutes", "min", "unlock", "fee",
                 "ride", "ebike", "e-bike", "electric", "classic", "single", "pass", "price", "cost", "overage",
                 "additional", "extra", "included", "free", "cap", "capped", "per"}
@@ -309,7 +318,9 @@ def policy_retriever(ctx: RunContext, url: str, query: str, k: int = 3) -> dict[
                         source=url)
     q_stems = {t[:5] for t in re.findall(r"[a-z]+", query.lower()) if len(t) > 2}
     scored = []
-    for chunk in _chunks(snap["text"]):
+    chunks = _chunks(snap["text"])
+    quarantined = [c for c in chunks if ctx.sanitize_retrieved and INJECTION_RE.search(c)]
+    for chunk in (c for c in chunks if c not in quarantined):
         low = chunk.lower()
         words = set(re.findall(r"[a-z\-]+", low))
         overlap = len(q_stems & {w[:5] for w in words})  # "monthly" ~ "month", "membership" ~ "member"
@@ -321,8 +332,11 @@ def policy_retriever(ctx: RunContext, url: str, query: str, k: int = 3) -> dict[
             scored.append((round(score, 2), chunk))
     scored.sort(key=lambda x: -x[0])
     passages = [{"text": t, "source": snap["meta"]["source_url"], "score": s} for s, t in scored[:k]]
-    return envelope(True, data={"passages": passages, "captured_at": snap["meta"]["accessed_at"],
-                                "sha256": snap["meta"]["sha256"]}, source=snap["meta"]["source_url"])
+    data = {"passages": passages, "captured_at": snap["meta"]["accessed_at"], "sha256": snap["meta"]["sha256"]}
+    if quarantined:
+        data["quarantined"] = {"count": len(quarantined), "reason": "instruction-like text removed from page evidence",
+                               "examples": [q[:120] for q in quarantined[:2]]}
+    return envelope(True, data=data, source=snap["meta"]["source_url"])
 
 
 # =========================================================================== calculator
