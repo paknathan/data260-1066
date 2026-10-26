@@ -43,3 +43,38 @@ Fixed cases: `reports/hw07/cases/part2_tasks.json` (A, B, C). Raw per-attempt da
   `aggregate_route_stats` and then answered without retrieving a supporting incident, inventing the example
   (e.g. "inc_101 ... a delay of 14 minutes"; the real value is 18). The call-level repair path cannot catch
   this, because each call was valid - it is a task-level failure, which the Part 3 verifier + Reflexion retry targets.
+
+## Part 3 - Original loop vs Reflexion loop
+
+Run 2026-10-25 22:41-22:47; qwen3:8b, temperature 0.7, 7 trials x 3 fixed tasks per loop (interleaved, same settings).
+Reflexion bounds: <=2 retries, <=12 tool calls and <=20,000 tokens per task (reflection calls included).
+Success = deterministic verifier pass (`code/verifier.py`). Raw data: `raw/part3_comparison.csv` (one row per run),
+`raw/part3_runs.jsonl` (traces + per-attempt verdicts), `raw/part3_reflections.jsonl` (4 stored reflections + evidence),
+`raw/part3_false_rejections.jsonl` (empty - none observed).
+
+| Metric | Original loop | Reflexion loop |
+|---|---|---|
+| Task success | 18/21 (86%) | 21/21 (100%) |
+| Unsupported claims | 3 in 3/21 final answers | 0 in 0/21 final answers |
+| Retry rate | 0/21 (0%); 0 retries total | 4/21 (19%); 4 retries total |
+| Tool calls | 2.19 avg (46 total) | 2.52 avg (53 total) |
+| Tokens | 2,471 avg | 2,983 avg |
+| Latency (ms) | 8,689 avg | 10,535 avg |
+| Verifier false rejections | 0 of 3 rejections | 0 of 4 rejections |
+
+| Task | Original success | Reflexion success | Reflexion stop reasons |
+|---|---|---|---|
+| A | 7/7 | 7/7 | success 7 |
+| B | 4/7 | 7/7 | success 7 |
+| C | 7/7 | 7/7 | success 7 |
+
+**Notes**
+- Unsupported claims = answer statements no tool observation supports (an incident ID never returned by a tool, or a
+  per-incident delay that contradicts the tool data). All 3 in the original loop were the same Task B failure:
+  "inc_101 ... has a delay of 14 minutes" after only `aggregate_route_stats` (true delay: 18).
+- Reflexion fixed all 4 failing Task B attempts with exactly one retry each (stop reason `success` for 21/21; no
+  `budget_exhausted` or `human_review` was needed). Cost: +0.33 tool calls, +512 tokens and +1.8 s per task on average,
+  concentrated in the 4 retried runs (~4,250 tokens each vs ~2,240 for a first-try pass).
+- Verifier false rejections: 0. An independent answer-only oracle agreed with the verifier on all 46 judged attempts
+  (7 rejections were all genuinely wrong answers; no verifier pass was judged wrong by the oracle either).
+

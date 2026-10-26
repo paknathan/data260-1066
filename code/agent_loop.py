@@ -67,6 +67,7 @@ def run_agent(
     max_tool_calls: int = MAX_TOOL_CALLS,
     max_repairs: int = MAX_REPAIRS,
     extra_context: list[str] | None = None,
+    max_tokens: int | None = None,
 ) -> dict[str, Any]:
     """Run the tool loop for one user request and return the answer plus a full trace."""
     client = client or make_client()
@@ -98,6 +99,10 @@ def run_agent(
             final_answer = f"Model call failed: {exc}"
             break
         tokens += int(resp.get("_usage", {}).get("total_tokens", 0))
+        if max_tokens is not None and tokens > max_tokens:  # hard token budget (Part 3)
+            stop_reason = "token_budget"
+            final_answer = "Stopped: token budget exhausted."
+            break
         raw_calls = resp.get("tool_calls") or []
 
         # ---- no tool call: either a final answer or "text when a tool was required"
