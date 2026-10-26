@@ -1,0 +1,115 @@
+{
+  "homework": 7,
+  "sid4": 1066,
+  "commit": "da9bebeb20a3aaaf9613676ed01e34aed1771e34",
+  "commit_tags": [],
+  "working_tree_clean": true,
+  "generated_at": "2026-10-26T21:34:59+00:00",
+  "model": {
+    "name": "qwen3:8b (Ollama, local)",
+    "live_agent_check": true,
+    "temperature": 0.0
+  },
+  "config": {
+    "PORT_BASE": 8166,
+    "PREFIX": "s1066",
+    "DOMAIN_ID": 2
+  },
+  "seed": 1066,
+  "verify_seed": 261066,
+  "checks": [
+    {
+      "name": "part1_auth_and_roles",
+      "passed": true,
+      "detail": {
+        "login_valid": 200,
+        "login_invalid": 401,
+        "me_no_token": 401,
+        "me_bad_token": 401,
+        "create_reader": 403,
+        "create_writer": 201,
+        "list_reader": 200,
+        "delete_writer": 403,
+        "delete_moderator": 204
+      }
+    },
+    {
+      "name": "part2_agent_loop_task_A_live",
+      "passed": true,
+      "detail": {
+        "tools": [
+          "search_incidents",
+          "get_incident_detail"
+        ],
+        "stop_reason": "final_answer",
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "name": "part2_error_recovery_nonexistent_id",
+      "passed": true,
+      "detail": "Incident with ID 'inc_999' was not found."
+    },
+    {
+      "name": "part3_verifier_rejects_unsupported_and_accepts_grounded",
+      "passed": true,
+      "detail": {
+        "invented_example_rejected": true,
+        "grounded_answer_accepted": true
+      }
+    },
+    {
+      "name": "part4_tools_and_cost_engine",
+      "passed": true,
+      "detail": {
+        "retriever_finds_month_pass": true,
+        "csv_sql_select_ok": true,
+        "csv_sql_rejects_delete": true,
+        "calculator": true,
+        "calculator_rejects_code": true,
+        "winners": {
+          "scenario_membership": "Buy Monthly Membership",
+          "scenario_paygo": "Pay Per Ride/Minute"
+        }
+      }
+    },
+    {
+      "name": "part5_tool_boundary_blocks_compromised_model",
+      "passed": true,
+      "detail": {
+        "sql": {
+          "rows_after": 600,
+          "decision": "Buy Monthly Membership"
+        },
+        "exfil": {
+          "rows_after": 600,
+          "decision": null
+        },
+        "override": {
+          "rows_after": 600,
+          "decision": null
+        }
+      }
+    },
+    {
+      "name": "part6_glob_search_read_and_safety_gate",
+      "passed": true,
+      "detail": {
+        "debug_file": [
+          "b.py"
+        ],
+        "gate_correct": "10/10"
+      }
+    },
+    {
+      "name": "unit_tests_offline",
+      "passed": true,
+      "detail": "68 passed, 1 warning in 4.55s"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "total": 8,
+    "all_passed": true
+  }
+}
