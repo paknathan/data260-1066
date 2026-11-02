@@ -1,0 +1,102 @@
+{
+  "homework": 8,
+  "sid4": 1066,
+  "commit": "4246beb684599a6674bed6865ace719524dd0a74",
+  "commit_tags": [],
+  "working_tree_clean": true,
+  "generated_at": "2026-11-02T22:41:18+00:00",
+  "model": {
+    "name": "qwen3:8b (Ollama, local)",
+    "part3_agents": "--rule (deterministic, no model)"
+  },
+  "config": {
+    "PORT_BASE": 8166,
+    "PREFIX": "s1066",
+    "DOMAIN": "municipal transit incidents"
+  },
+  "seed": 1066,
+  "verify_seed": 261066,
+  "checks": [
+    {
+      "name": "unit_tests_offline",
+      "passed": true,
+      "detail": "16 passed in 7.47s"
+    },
+    {
+      "name": "live_topics_and_partitions",
+      "passed": true,
+      "detail": {
+        "s1066_inbox": 1,
+        "s1066_tasks": 2,
+        "s1066_drafts": 1,
+        "s1066_final": 1,
+        "s1066_dead_letter": 1,
+        "s1066_incident_requests": 1,
+        "s1066_incident_responses": 1
+      }
+    },
+    {
+      "name": "part1_create_get_over_kafka",
+      "passed": true,
+      "detail": {
+        "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8",
+        "correlation_ids_preserved": true
+      }
+    },
+    {
+      "name": "part2_full_journey_inbox_to_final",
+      "passed": true,
+      "detail": {
+        "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+        "status": "approved",
+        "stages_sent": [
+          "planner",
+          "reviewer",
+          "sender",
+          "writer"
+        ]
+      }
+    },
+    {
+      "name": "part3_duplicate_delivery",
+      "passed": true,
+      "detail": {
+        "before_finals": 2,
+        "after_finals": 1,
+        "after_duplicates_skipped": 1
+      }
+    },
+    {
+      "name": "part3_consumer_death",
+      "passed": true,
+      "detail": {
+        "before_final_received": false,
+        "after_final_received": true,
+        "after_redelivered_same_offset": true
+      }
+    },
+    {
+      "name": "part3_poison_message",
+      "passed": true,
+      "detail": {
+        "before_blocked": true,
+        "after_attempts": 3,
+        "after_good_completed": true
+      }
+    },
+    {
+      "name": "part3_ordering_unkeyed_vs_keyed",
+      "passed": true,
+      "detail": {
+        "unkeyed_entities_in_order": "1/4",
+        "keyed_entities_in_order": "4/4",
+        "keyed_one_partition_per_entity": true
+      }
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "total": 8,
+    "all_passed": true
+  }
+}
