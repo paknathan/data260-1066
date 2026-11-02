@@ -1,0 +1,50 @@
+2026-11-02 11:45:16.076 [demo] ==========================================================================================
+2026-11-02 11:45:16.076 [demo] Nathan Pak (s1066) | HW8 Part 1 | request topic=s1066_incident_requests | response topic=s1066_incident_responses
+2026-11-02 11:45:18.544 [demo] STEP 1  created correlation_id=ebedbea2-59c9-45b6-a272-d13df331b339
+2026-11-02 11:45:18.544 [demo] STEP 2-3  sending CREATE_INCIDENT to s1066_incident_requests
+2026-11-02 11:45:18.552 [demo_client] SEND -> s1066_incident_requests correlation_id=ebedbea2-59c9-45b6-a272-d13df331b339 message={"correlation_id": "ebedbea2-59c9-45b6-a272-d13df331b339", "reply_to": "s1066_incident_responses", "operation": "CREATE_INCIDENT", "data": {"incident_type": "Signal / Track Problem", "transit_mode": "Light Rail", "route_or_line": "Blue Line", "location": "Tasman Station", "date_reported": "2026-11-01", "time_reported": "08:15", "severity": "High", "status": "Under Investigation", "delay_minutes": 25, "description": "Signal failure between Tasman and Baypointe; trains single-tracking.", "reported_by": "Transit Staff"}}
+2026-11-02 11:45:18.609 [demo_client] RESPONSE <- s1066_incident_responses [partition 0 offset 0] correlation_id=ebedbea2-59c9-45b6-a272-d13df331b339 response={"correlation_id": "ebedbea2-59c9-45b6-a272-d13df331b339", "success": true, "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8", "message": "Incident created"}
+2026-11-02 11:45:18.609 [demo] STEP 6  CREATE response: {"correlation_id": "ebedbea2-59c9-45b6-a272-d13df331b339", "success": true, "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8", "message": "Incident created"}
+2026-11-02 11:45:18.609 [demo] STEP 7  generated incident_id=e3598f5e-53e4-42b0-bfd6-47a5e2e049c8
+2026-11-02 11:45:18.609 [demo] STEP 8  sending GET_INCIDENT incident_id=e3598f5e-53e4-42b0-bfd6-47a5e2e049c8 correlation_id=245d0f8b-c842-401a-94be-a4ac974bba77
+2026-11-02 11:45:18.610 [demo_client] SEND -> s1066_incident_requests correlation_id=245d0f8b-c842-401a-94be-a4ac974bba77 message={"correlation_id": "245d0f8b-c842-401a-94be-a4ac974bba77", "reply_to": "s1066_incident_responses", "operation": "GET_INCIDENT", "data": {"incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8"}}
+2026-11-02 11:45:18.621 [demo_client] RESPONSE <- s1066_incident_responses [partition 0 offset 1] correlation_id=245d0f8b-c842-401a-94be-a4ac974bba77 response={"correlation_id": "245d0f8b-c842-401a-94be-a4ac974bba77", "success": true, "incident": {"incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8", "incident_type": "Signal / Track Problem", "transit_mode": "Light Rail", "route_or_line": "Blue Line", "location": "Tasman Station", "date_reported": "2026-11-01", "time_reported": "08:15", "severity": "High", "status": "Under Investigation", "delay_minutes": 25, "description": "Signal failure between Tasman and Baypointe; trains single-tracking.", "reported_by": "Transit Staff"}}
+2026-11-02 11:45:19.122 [demo] ---- CREATE_INCIDENT full sequence (correlation_id=ebedbea2-59c9-45b6-a272-d13df331b339) ----
+2026-11-02 11:45:19.122 [demo]   19:45:18.552  client SEND      s1066_incident_requests    corr=ebedbea2-59c9-45b6-a272-d13df331b339 {"operation": "CREATE_INCIDENT"}
+2026-11-02 11:45:19.122 [demo]   19:45:18.556  worker RECEIVE   s1066_incident_requests    corr=ebedbea2-59c9-45b6-a272-d13df331b339 {"operation": "CREATE_INCIDENT"}
+2026-11-02 11:45:19.122 [demo]   19:45:18.565  worker PROCESS                              corr=ebedbea2-59c9-45b6-a272-d13df331b339 {"operation": "CREATE_INCIDENT", "success": true, "store_size": 1}
+2026-11-02 11:45:19.122 [demo]   19:45:18.608  worker REPLY     s1066_incident_responses   corr=ebedbea2-59c9-45b6-a272-d13df331b339 {"success": true, "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8"}
+2026-11-02 11:45:19.122 [demo]   19:45:18.609  client RESPONSE  s1066_incident_responses   corr=ebedbea2-59c9-45b6-a272-d13df331b339 {"success": true, "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8"}
+2026-11-02 11:45:19.123 [demo] ---- GET_INCIDENT full sequence (correlation_id=245d0f8b-c842-401a-94be-a4ac974bba77) ----
+2026-11-02 11:45:19.123 [demo]   19:45:18.611  client SEND      s1066_incident_requests    corr=245d0f8b-c842-401a-94be-a4ac974bba77 {"operation": "GET_INCIDENT"}
+2026-11-02 11:45:19.123 [demo]   19:45:18.619  worker RECEIVE   s1066_incident_requests    corr=245d0f8b-c842-401a-94be-a4ac974bba77 {"operation": "GET_INCIDENT"}
+2026-11-02 11:45:19.123 [demo]   19:45:18.620  worker PROCESS                              corr=245d0f8b-c842-401a-94be-a4ac974bba77 {"operation": "GET_INCIDENT", "success": true, "store_size": 1}
+2026-11-02 11:45:19.123 [demo]   19:45:18.621  worker REPLY     s1066_incident_responses   corr=245d0f8b-c842-401a-94be-a4ac974bba77 {"success": true}
+2026-11-02 11:45:19.123 [demo]   19:45:18.622  client RESPONSE  s1066_incident_responses   corr=245d0f8b-c842-401a-94be-a4ac974bba77 {"success": true}
+2026-11-02 11:45:19.123 [demo] STEP 10 retrieved incident:
+{
+  "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8",
+  "incident_type": "Signal / Track Problem",
+  "transit_mode": "Light Rail",
+  "route_or_line": "Blue Line",
+  "location": "Tasman Station",
+  "date_reported": "2026-11-01",
+  "time_reported": "08:15",
+  "severity": "High",
+  "status": "Under Investigation",
+  "delay_minutes": 25,
+  "description": "Signal failure between Tasman and Baypointe; trains single-tracking.",
+  "reported_by": "Transit Staff"
+}
+2026-11-02 11:45:19.123 [demo] STEP 10 correlation_id preserved: CREATE sent=ebedbea2-59c9-45b6-a272-d13df331b339 returned=ebedbea2-59c9-45b6-a272-d13df331b339 -> True | GET sent=245d0f8b-c842-401a-94be-a4ac974bba77 returned=245d0f8b-c842-401a-94be-a4ac974bba77 -> True
+2026-11-02 11:45:19.123 [demo] STEP 10 round trip matches: True
+2026-11-02 11:45:19.124 [demo_client] SEND -> s1066_incident_requests correlation_id=aa471f4a-3d06-4596-bbfc-3cf564184929 message={"correlation_id": "aa471f4a-3d06-4596-bbfc-3cf564184929", "reply_to": "s1066_incident_responses", "operation": "GET_INCIDENT", "data": {"incident_id": "does-not-exist"}}
+2026-11-02 11:45:19.127 [demo_client] RESPONSE <- s1066_incident_responses [partition 0 offset 2] correlation_id=aa471f4a-3d06-4596-bbfc-3cf564184929 response={"correlation_id": "aa471f4a-3d06-4596-bbfc-3cf564184929", "success": false, "error": "Incident not found"}
+2026-11-02 11:45:19.128 [demo] ERROR CASE GET_INCIDENT     -> success=False error='Incident not found' correlation_id=aa471f4a-3d06-4596-bbfc-3cf564184929
+2026-11-02 11:45:19.129 [demo_client] SEND -> s1066_incident_requests correlation_id=b7a8f663-5f75-4ea6-aa7d-d548e6d13d4f message={"correlation_id": "b7a8f663-5f75-4ea6-aa7d-d548e6d13d4f", "reply_to": "s1066_incident_responses", "operation": "CREATE_INCIDENT", "data": {"incident_type": "Signal / Track Problem", "transit_mode": "Light Rail", "route_or_line": "Blue Line", "location": "", "date_reported": "2026-11-01", "time_reported": "08:15", "severity": "Extreme", "status": "Under Investigation", "delay_minutes": 25, "description": "Signal failure between Tasman and Baypointe; trains single-tracking.", "reported_by": "Transit Staff"}}
+2026-11-02 11:45:19.130 [demo_client] RESPONSE <- s1066_incident_responses [partition 0 offset 3] correlation_id=b7a8f663-5f75-4ea6-aa7d-d548e6d13d4f response={"correlation_id": "b7a8f663-5f75-4ea6-aa7d-d548e6d13d4f", "success": false, "error": "Missing or empty required field(s): ['location']"}
+2026-11-02 11:45:19.131 [demo] ERROR CASE CREATE_INCIDENT  -> success=False error="Missing or empty required field(s): ['location']" correlation_id=b7a8f663-5f75-4ea6-aa7d-d548e6d13d4f
+2026-11-02 11:45:19.132 [demo_client] SEND -> s1066_incident_requests correlation_id=0bf5f391-c41d-46be-8bad-5f293a510ea1 message={"correlation_id": "0bf5f391-c41d-46be-8bad-5f293a510ea1", "reply_to": "s1066_incident_responses", "operation": "DELETE_INCIDENT", "data": {"incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8"}}
+2026-11-02 11:45:19.134 [demo_client] RESPONSE <- s1066_incident_responses [partition 0 offset 4] correlation_id=0bf5f391-c41d-46be-8bad-5f293a510ea1 response={"correlation_id": "0bf5f391-c41d-46be-8bad-5f293a510ea1", "success": false, "error": "Unknown operation"}
+2026-11-02 11:45:19.134 [demo] ERROR CASE DELETE_INCIDENT  -> success=False error='Unknown operation' correlation_id=0bf5f391-c41d-46be-8bad-5f293a510ea1
+2026-11-02 11:45:19.646 [demo] saved /Users/nathanpak/Desktop/Data260/data260-1066/reports/hw08/raw/part1_demo.json

@@ -1,0 +1,29 @@
+{
+  "ts": "2026-11-02T19:45:19.134414+00:00",
+  "create": {
+    "correlation_id": "ebedbea2-59c9-45b6-a272-d13df331b339",
+    "success": true,
+    "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8",
+    "message": "Incident created"
+  },
+  "get": {
+    "correlation_id": "245d0f8b-c842-401a-94be-a4ac974bba77",
+    "success": true,
+    "incident": {
+      "incident_id": "e3598f5e-53e4-42b0-bfd6-47a5e2e049c8",
+      "incident_type": "Signal / Track Problem",
+      "transit_mode": "Light Rail",
+      "route_or_line": "Blue Line",
+      "location": "Tasman Station",
+      "date_reported": "2026-11-01",
+      "time_reported": "08:15",
+      "severity": "High",
+      "status": "Under Investigation",
+      "delay_minutes": 25,
+      "description": "Signal failure between Tasman and Baypointe; trains single-tracking.",
+      "reported_by": "Transit Staff"
+    }
+  },
+  "create_correlation_id": "ebedbea2-59c9-45b6-a272-d13df331b339",
+  "get_correlation_id": "245d0f8b-c842-401a-94be-a4ac974bba77"
+}

@@ -1,0 +1,117 @@
+{
+  "sent": {
+    "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+    "question": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush and riders report a 20-minute delay. What happened and what should riders do?",
+    "created_at": "2026-11-02T20:52:20+00:00"
+  },
+  "final": {
+    "stage": "final",
+    "status": "approved",
+    "answer": "A Route 22 bus broke down at 1st and Santa Clara during the morning rush, causing a 20-minute delay. Riders should consider alternative routes or modes of transportation to minimize disruption. Check real-time updates through the transit app or website for the latest service information and schedule adjustments.",
+    "review_notes": "The answer accurately addresses the question, follows the plan, and provides clear guidance to riders without inventing new information.",
+    "question": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush and riders report a 20-minute delay. What happened and what should riders do?",
+    "pipeline": {
+      "plan_steps": 3,
+      "writer_instance": "Nathans-MBP-36548",
+      "model": "qwen3:8b"
+    },
+    "completed_at": "2026-11-02T20:52:43+00:00",
+    "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17"
+  },
+  "journey": [
+    {
+      "ts": "2026-11-02T20:52:20.551+00:00",
+      "agent": "sender",
+      "instance": "cli",
+      "event": "sent",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "out_topic": "s1066_inbox"
+    },
+    {
+      "ts": "2026-11-02T20:52:20.552+00:00",
+      "agent": "planner",
+      "instance": "Nathans-MBP-36444",
+      "event": "received",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "topic": "s1066_inbox",
+      "partition": 0,
+      "offset": 0,
+      "entity": null,
+      "seq": null
+    },
+    {
+      "ts": "2026-11-02T20:52:30.548+00:00",
+      "agent": "planner",
+      "instance": "Nathans-MBP-36444",
+      "event": "sent",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "out_topic": "s1066_tasks",
+      "topic": "s1066_inbox",
+      "partition": 0,
+      "offset": 0,
+      "entity": null,
+      "seq": null
+    },
+    {
+      "ts": "2026-11-02T20:52:30.549+00:00",
+      "agent": "writer",
+      "instance": "Nathans-MBP-36548",
+      "event": "received",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 0,
+      "entity": null,
+      "seq": null
+    },
+    {
+      "ts": "2026-11-02T20:52:35.521+00:00",
+      "agent": "writer",
+      "instance": "Nathans-MBP-36548",
+      "event": "sent",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 0,
+      "entity": null,
+      "seq": null
+    },
+    {
+      "ts": "2026-11-02T20:52:35.525+00:00",
+      "agent": "reviewer",
+      "instance": "Nathans-MBP-36553",
+      "event": "received",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "topic": "s1066_drafts",
+      "partition": 0,
+      "offset": 0,
+      "entity": null,
+      "seq": null
+    },
+    {
+      "ts": "2026-11-02T20:52:43.744+00:00",
+      "agent": "reviewer",
+      "instance": "Nathans-MBP-36553",
+      "event": "sent",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "out_topic": "s1066_final",
+      "topic": "s1066_drafts",
+      "partition": 0,
+      "offset": 0,
+      "entity": null,
+      "seq": null
+    },
+    {
+      "ts": "2026-11-02T20:52:43.750+00:00",
+      "agent": "sender",
+      "instance": "cli",
+      "event": "final_received",
+      "correlation_id": "ef749bee-8cb6-4b3e-9df2-50808d6abe17",
+      "topic": "s1066_final",
+      "partition": 0,
+      "offset": 0,
+      "status": "approved"
+    }
+  ]
+}

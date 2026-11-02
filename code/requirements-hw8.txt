@@ -1,0 +1,2 @@
+-r requirements-hw7.txt
+confluent-kafka>=2.5,<3
