@@ -49,11 +49,15 @@ class ProcessedStore:
         self.ids: set[str] = set(json.loads(self.path.read_text())) if self.path.exists() else set()
 
     def seen(self, corr: str) -> bool:
+        if corr not in self.ids and self.path.exists():
+            self.ids |= set(json.loads(self.path.read_text()))
         return corr in self.ids
 
     def add(self, corr: str) -> None:
+        if self.path.exists():
+            self.ids |= set(json.loads(self.path.read_text()))
         self.ids.add(corr)
-        tmp = self.path.with_suffix(".tmp")
+        tmp = self.path.with_suffix(f".{os.getpid()}.tmp")
         tmp.write_text(json.dumps(sorted(self.ids)))
         os.replace(tmp, self.path)
 
@@ -131,7 +135,7 @@ def run_agent(name: str, in_topic: str, out_topic: str, handler: Callable[[dict]
                 flow(name, args.instance, "duplicate_skipped", corr, **where)
                 consumer.commit(message=m, asynchronous=False)
                 continue
-            attempt = 0
+            attempt, done = 0, False
             while running["on"]:
                 attempt += 1
                 try:
@@ -150,6 +154,7 @@ def run_agent(name: str, in_topic: str, out_topic: str, handler: Callable[[dict]
                          entity=msg.get("entity"), seq=msg.get("seq"))
                     if not args.no_idempotency:
                         store.add(corr)
+                    done = True
                     break
                 except Exception as exc:
                     log.info("FAILED correlation_id=%s attempt=%d error=%s", corr, attempt, exc)
@@ -164,11 +169,14 @@ def run_agent(name: str, in_topic: str, out_topic: str, handler: Callable[[dict]
                         producer.flush(10)
                         log.info("DEAD-LETTER -> %s after %d attempts correlation_id=%s", DEAD_LETTER, attempt, corr)
                         flow(name, args.instance, "dead_lettered", corr, attempts=attempt, **where)
+                        done = True
                         break
                     time.sleep(0.5 * 2 ** (attempt - 1))  # bounded exponential backoff
-            if not args.commit_before:
+            if not args.commit_before and done:
                 consumer.commit(message=m, asynchronous=False)  # only after success or dead-lettering
                 log.info("COMMITTED offset %d after processing", m.offset() + 1)
+            elif not done:
+                log.info("stopped before finishing offset %d -> NOT committed (will be redelivered)", m.offset())
     finally:
         consumer.close()
         log.info("%s stopped", name)

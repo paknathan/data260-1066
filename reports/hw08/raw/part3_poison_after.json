@@ -1,0 +1,59 @@
+{
+  "label": "after",
+  "poison_tag": "POISON-2d9edf",
+  "good_correlation_id": "good-f77f1886",
+  "dead_letter": [
+    {
+      "attempts": 3,
+      "agent": "planner",
+      "error": "poison message: not a valid JSON object with correlation_id: b'POISON-2d9edf this is not JSON {{'",
+      "source": {
+        "topic": "s1066_inbox",
+        "partition": 0,
+        "offset": 7
+      }
+    }
+  ],
+  "good_message_completed": true,
+  "planner_failed_attempts_logged": 3,
+  "records": [
+    {
+      "topic": "s1066_dead_letter",
+      "partition": 0,
+      "offset": 1,
+      "received_at": "2026-11-02T21:45:51.867+00:00",
+      "body": {
+        "correlation_id": null,
+        "agent": "planner",
+        "error": "poison message: not a valid JSON object with correlation_id: b'POISON-2d9edf this is not JSON {{'",
+        "attempts": 3,
+        "source": {
+          "topic": "s1066_inbox",
+          "partition": 0,
+          "offset": 7
+        },
+        "original": "POISON-2d9edf this is not JSON {{"
+      }
+    },
+    {
+      "topic": "s1066_final",
+      "partition": 0,
+      "offset": 5,
+      "received_at": "2026-11-02T21:45:51.872+00:00",
+      "body": {
+        "stage": "final",
+        "status": "approved",
+        "answer": "Draft answer to: Route 68 detour at Monterey Rd - what should riders do? (followed 3 plan steps)",
+        "review_notes": "rule-based review",
+        "question": "Route 68 detour at Monterey Rd - what should riders do?",
+        "pipeline": {
+          "plan_steps": 3,
+          "writer_instance": "Nathans-MBP-39046",
+          "model": "rule"
+        },
+        "completed_at": "2026-11-02T21:45:51+00:00",
+        "correlation_id": "good-f77f1886"
+      }
+    }
+  ]
+}

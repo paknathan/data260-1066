@@ -1,0 +1,52 @@
+{
+  "correlation_id": "dup-81eaa223",
+  "label": "before",
+  "messages_sent": 2,
+  "final_messages": 2,
+  "planner_processed": 2,
+  "writer_processed": 2,
+  "reviewer_processed": 2,
+  "duplicates_skipped": 0,
+  "finals": [
+    {
+      "topic": "s1066_final",
+      "partition": 0,
+      "offset": 1,
+      "received_at": "2026-11-02T21:27:00.291+00:00",
+      "body": {
+        "stage": "final",
+        "status": "approved",
+        "answer": "Draft answer to: Route 22 bus breakdown at 1st and Santa Clara - what should riders do? (followed 3 plan steps)",
+        "review_notes": "rule-based review",
+        "question": "Route 22 bus breakdown at 1st and Santa Clara - what should riders do?",
+        "pipeline": {
+          "plan_steps": 3,
+          "writer_instance": "Nathans-MBP-38675",
+          "model": "rule"
+        },
+        "completed_at": "2026-11-02T21:27:00+00:00",
+        "correlation_id": "dup-81eaa223"
+      }
+    },
+    {
+      "topic": "s1066_final",
+      "partition": 0,
+      "offset": 2,
+      "received_at": "2026-11-02T21:27:00.293+00:00",
+      "body": {
+        "stage": "final",
+        "status": "approved",
+        "answer": "Draft answer to: Route 22 bus breakdown at 1st and Santa Clara - what should riders do? (followed 3 plan steps)",
+        "review_notes": "rule-based review",
+        "question": "Route 22 bus breakdown at 1st and Santa Clara - what should riders do?",
+        "pipeline": {
+          "plan_steps": 3,
+          "writer_instance": "Nathans-MBP-38675",
+          "model": "rule"
+        },
+        "completed_at": "2026-11-02T21:27:00+00:00",
+        "correlation_id": "dup-81eaa223"
+      }
+    }
+  ]
+}

@@ -105,3 +105,13 @@ def test_keyed_mode_routes_entity_to_one_partition(env):
         send({"correlation_id": f"o-{i}", "question": "q", "entity": "Route 22", "seq": i, "key_mode": "entity"})
     assert wait(lambda: sum(len(p) for p in fake_kafka.BROKER.topics[TASKS]) == 6)
     assert sorted(len(p) for p in fake_kafka.BROKER.topics[TASKS]) == [0, 6]
+
+
+def test_interrupted_message_is_not_committed(env):
+    a = args(delay=1.0)
+    start("writer", writer, TASKS, DRAFTS, a)
+    fake_kafka.Producer({}).produce(TASKS, key=b"k", value=json.dumps(
+        {"correlation_id": "w-1", "question": "q", "plan": {"steps": ["s"]}}).encode())
+    assert wait(lambda: (env / "flow.jsonl").exists() and "received" in (env / "flow.jsonl").read_text())
+    for k in list(fake_kafka.BROKER.committed):
+        assert k[0] != "s1066_writer_group"  # nothing committed while the message is still being processed

@@ -1,0 +1,411 @@
+{
+  "batch": "ord-keyed-362e",
+  "verify_seed": 261066,
+  "mode": "keyed",
+  "per_entity": {
+    "Route 22": {
+      "sent_seq": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "writer_seq": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "final_seq": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "partitions": [
+        1
+      ],
+      "writers": [
+        "writer-2"
+      ],
+      "in_order": true
+    },
+    "Blue Line": {
+      "sent_seq": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "writer_seq": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "final_seq": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "partitions": [
+        0
+      ],
+      "writers": [
+        "writer-1"
+      ],
+      "in_order": true
+    },
+    "Route 68": {
+      "sent_seq": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "writer_seq": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "final_seq": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "partitions": [
+        1
+      ],
+      "writers": [
+        "writer-2"
+      ],
+      "in_order": true
+    },
+    "Orange Line": {
+      "sent_seq": [
+        1,
+        2,
+        3
+      ],
+      "writer_seq": [
+        1,
+        2,
+        3
+      ],
+      "final_seq": [
+        1,
+        2,
+        3
+      ],
+      "partitions": [
+        0
+      ],
+      "writers": [
+        "writer-1"
+      ],
+      "in_order": true
+    }
+  },
+  "writer_order": [
+    {
+      "ts": "2026-11-02T22:22:29.272+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-01",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 16,
+      "entity": "Route 22",
+      "seq": 1
+    },
+    {
+      "ts": "2026-11-02T22:22:29.483+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-02",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 17,
+      "entity": "Route 68",
+      "seq": 1
+    },
+    {
+      "ts": "2026-11-02T22:22:29.715+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-06",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 18,
+      "entity": "Route 22",
+      "seq": 2
+    },
+    {
+      "ts": "2026-11-02T22:22:29.947+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-07",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 19,
+      "entity": "Route 68",
+      "seq": 2
+    },
+    {
+      "ts": "2026-11-02T22:22:30.175+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-08",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 20,
+      "entity": "Route 68",
+      "seq": 3
+    },
+    {
+      "ts": "2026-11-02T22:22:30.402+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-09",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 21,
+      "entity": "Route 68",
+      "seq": 4
+    },
+    {
+      "ts": "2026-11-02T22:22:30.565+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-00",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 15,
+      "entity": "Orange Line",
+      "seq": 1
+    },
+    {
+      "ts": "2026-11-02T22:22:30.624+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-12",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 22,
+      "entity": "Route 68",
+      "seq": 5
+    },
+    {
+      "ts": "2026-11-02T22:22:30.841+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-13",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 23,
+      "entity": "Route 22",
+      "seq": 3
+    },
+    {
+      "ts": "2026-11-02T22:22:31.069+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-16",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 24,
+      "entity": "Route 68",
+      "seq": 6
+    },
+    {
+      "ts": "2026-11-02T22:22:31.295+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-17",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 25,
+      "entity": "Route 22",
+      "seq": 4
+    },
+    {
+      "ts": "2026-11-02T22:22:31.525+00:00",
+      "agent": "writer",
+      "instance": "writer-2",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-19",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 1,
+      "offset": 26,
+      "entity": "Route 68",
+      "seq": 7
+    },
+    {
+      "ts": "2026-11-02T22:22:32.097+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-03",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 16,
+      "entity": "Orange Line",
+      "seq": 2
+    },
+    {
+      "ts": "2026-11-02T22:22:33.638+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-04",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 17,
+      "entity": "Blue Line",
+      "seq": 1
+    },
+    {
+      "ts": "2026-11-02T22:22:35.166+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-05",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 18,
+      "entity": "Blue Line",
+      "seq": 2
+    },
+    {
+      "ts": "2026-11-02T22:22:36.697+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-10",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 19,
+      "entity": "Blue Line",
+      "seq": 3
+    },
+    {
+      "ts": "2026-11-02T22:22:38.232+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-11",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 20,
+      "entity": "Blue Line",
+      "seq": 4
+    },
+    {
+      "ts": "2026-11-02T22:22:39.765+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-14",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 21,
+      "entity": "Blue Line",
+      "seq": 5
+    },
+    {
+      "ts": "2026-11-02T22:22:41.292+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-15",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 22,
+      "entity": "Blue Line",
+      "seq": 6
+    },
+    {
+      "ts": "2026-11-02T22:22:42.820+00:00",
+      "agent": "writer",
+      "instance": "writer-1",
+      "event": "sent",
+      "correlation_id": "ord-keyed-362e-18",
+      "out_topic": "s1066_drafts",
+      "topic": "s1066_tasks",
+      "partition": 0,
+      "offset": 23,
+      "entity": "Orange Line",
+      "seq": 3
+    }
+  ],
+  "final_order": [
+    "ord-keyed-362e-01",
+    "ord-keyed-362e-02",
+    "ord-keyed-362e-06",
+    "ord-keyed-362e-07",
+    "ord-keyed-362e-08",
+    "ord-keyed-362e-09",
+    "ord-keyed-362e-00",
+    "ord-keyed-362e-12",
+    "ord-keyed-362e-13",
+    "ord-keyed-362e-16",
+    "ord-keyed-362e-17",
+    "ord-keyed-362e-19",
+    "ord-keyed-362e-03",
+    "ord-keyed-362e-04",
+    "ord-keyed-362e-05",
+    "ord-keyed-362e-10",
+    "ord-keyed-362e-11",
+    "ord-keyed-362e-14",
+    "ord-keyed-362e-15",
+    "ord-keyed-362e-18"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "label": "before",
+  "poison_tag": "POISON-7955a5",
+  "good_correlation_id": "good-af3ab2f0",
+  "dead_letter": [],
+  "good_message_completed": false,
+  "planner_failed_attempts_logged": 30,
+  "records": []
+}
