@@ -57,6 +57,7 @@ class IncidentModel(Base):
     title = Column(String(255), nullable=False)               # Primary text field
     incident_code = Column(String(50), unique=True, nullable=False, index=True) # Unique field
     delay_minutes = Column(Integer, nullable=False, default=0) # Numeric field with default
+    view_count = Column(Integer, nullable=False, default=0, server_default="0")  # HW9: synced from Redis every 10 views
     congestion_index_id = Column(Integer, ForeignKey("Congestion_indexes.id", ondelete="RESTRICT"), nullable=False)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
