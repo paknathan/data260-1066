@@ -1,1 +1,6 @@
 redis>=5.0
+sentence-transformers>=2.7
+numpy
+fastapi
+confluent-kafka>=2.5,<3
+pyyaml

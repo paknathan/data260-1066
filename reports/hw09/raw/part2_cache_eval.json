@@ -1,0 +1,279 @@
+{
+  "run_at": "2026-11-06T01:32:50+00:00",
+  "summary": {
+    "threshold": 0.85,
+    "queries": 14,
+    "cache_hits": 7,
+    "cache_misses": 7,
+    "hit_rate_pct": 50.0,
+    "avg_latency_cached_ms": 541.66,
+    "avg_latency_uncached_ms": 23005.19,
+    "median_latency_cached_ms": 601.46,
+    "median_latency_uncached_ms": 19643.43,
+    "matched_expectation": "14/14",
+    "observed_speedup_x": 42.5
+  },
+  "results": [
+    {
+      "n": 1,
+      "category": "new",
+      "expected": "miss",
+      "question": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "answer": "Riders should check real-time updates for Route 22 via the transit app or website. Look for detour information or alternative routes provided by transit authorities. If necessary, consider using alternative transportation options like walking, biking, or a ride-share service to reach your destination. Stay informed and plan accordingly for the most up-to-date travel options.",
+      "is_cached": false,
+      "similarity": null,
+      "latency_ms": 31735.87,
+      "matched_query": null,
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 835.23,
+        "search_ms": 5.74,
+        "agent_ms": 30881.55,
+        "store_ms": 12.56
+      }
+    },
+    {
+      "n": 2,
+      "category": "new",
+      "expected": "miss",
+      "question": "Why is the Blue Line light rail delayed at Tasman station?",
+      "answer": "The Blue Line light rail may be delayed at Tasman station due to scheduled maintenance, construction, or an unexpected incident. To find the most accurate and up-to-date information, check the transit authority's website or app for real-time updates. Look for service alerts or notifications related to Tasman station. Riders should plan accordingly and consider alternative routes if advised. Stay informed for the latest updates.",
+      "is_cached": false,
+      "similarity": 0.2878,
+      "latency_ms": 21297.83,
+      "matched_query": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 1097.02,
+        "search_ms": 3.68,
+        "agent_ms": 20191.74,
+        "store_ms": 5.2
+      }
+    },
+    {
+      "n": 3,
+      "category": "new",
+      "expected": "miss",
+      "question": "How do I get a refund if my train was cancelled because of an incident?",
+      "answer": "If your train was cancelled due to an incident, first check the incident notice for refund information. If details aren't clear, contact the transit authority's customer service. When you call, have your proof of purchase and the cancellation notice ready. They will guide you through the refund process. Make sure to ask about any specific requirements or deadlines for refunds.",
+      "is_cached": false,
+      "similarity": 0.2955,
+      "latency_ms": 18893.62,
+      "matched_query": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 586.43,
+        "search_ms": 51.31,
+        "agent_ms": 18249.46,
+        "store_ms": 6.03
+      }
+    },
+    {
+      "n": 4,
+      "category": "exact",
+      "expected": "hit",
+      "question": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "answer": "Riders should check real-time updates for Route 22 via the transit app or website. Look for detour information or alternative routes provided by transit authorities. If necessary, consider using alternative transportation options like walking, biking, or a ride-share service to reach your destination. Stay informed and plan accordingly for the most up-to-date travel options.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 453.25,
+      "matched_query": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 439.24,
+        "search_ms": 13.97
+      }
+    },
+    {
+      "n": 5,
+      "category": "paraphrase",
+      "expected": "hit",
+      "question": "What is causing the delays on the Blue Line at Tasman station?",
+      "answer": "The Blue Line light rail may be delayed at Tasman station due to scheduled maintenance, construction, or an unexpected incident. To find the most accurate and up-to-date information, check the transit authority's website or app for real-time updates. Look for service alerts or notifications related to Tasman station. Riders should plan accordingly and consider alternative routes if advised. Stay informed for the latest updates.",
+      "is_cached": true,
+      "similarity": 0.8718,
+      "latency_ms": 359.52,
+      "matched_query": "Why is the Blue Line light rail delayed at Tasman station?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 355.66,
+        "search_ms": 3.84
+      }
+    },
+    {
+      "n": 6,
+      "category": "new",
+      "expected": "miss",
+      "question": "What safety steps should passengers follow if a train stops between stations?",
+      "answer": "If a train stops between stations, stay calm and do not open the doors. Follow the instructions of transit staff or emergency personnel. If needed, use the emergency communication system to alert authorities. Remain in your seat and wait for assistance. Do not attempt to exit the train unless directed by staff. Your safety is the priority.",
+      "is_cached": false,
+      "similarity": 0.4314,
+      "latency_ms": 19643.43,
+      "matched_query": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 30.78,
+        "search_ms": 4.89,
+        "agent_ms": 19601.19,
+        "store_ms": 6.35
+      }
+    },
+    {
+      "n": 7,
+      "category": "exact",
+      "expected": "hit",
+      "question": "Why is the Blue Line light rail delayed at Tasman station?",
+      "answer": "The Blue Line light rail may be delayed at Tasman station due to scheduled maintenance, construction, or an unexpected incident. To find the most accurate and up-to-date information, check the transit authority's website or app for real-time updates. Look for service alerts or notifications related to Tasman station. Riders should plan accordingly and consider alternative routes if advised. Stay informed for the latest updates.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 601.46,
+      "matched_query": "Why is the Blue Line light rail delayed at Tasman station?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 591.75,
+        "search_ms": 9.69
+      }
+    },
+    {
+      "n": 8,
+      "category": "paraphrase",
+      "expected": "hit",
+      "question": "My train got cancelled due to an incident. How can I get my money back?",
+      "answer": "If your train was cancelled due to an incident, first check the incident notice for refund information. If details aren't clear, contact the transit authority's customer service. When you call, have your proof of purchase and the cancellation notice ready. They will guide you through the refund process. Make sure to ask about any specific requirements or deadlines for refunds.",
+      "is_cached": true,
+      "similarity": 0.8991,
+      "latency_ms": 64.04,
+      "matched_query": "How do I get a refund if my train was cancelled because of an incident?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 56.87,
+        "search_ms": 7.14
+      }
+    },
+    {
+      "n": 9,
+      "category": "related",
+      "expected": "miss",
+      "question": "A bus on Route 64 broke down at Alum Rock station. What should riders do?",
+      "answer": "Riders should check for alternative routes or real-time updates from the transit authority. Use nearby shelters or waiting areas if the bus is delayed. If the delay exceeds expected wait times, contact customer service for further assistance.",
+      "is_cached": false,
+      "similarity": 0.7581,
+      "latency_ms": 17975.87,
+      "matched_query": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 218.07,
+        "search_ms": 62.61,
+        "agent_ms": 17687.79,
+        "store_ms": 7.14
+      }
+    },
+    {
+      "n": 10,
+      "category": "paraphrase",
+      "expected": "hit",
+      "question": "Route 22 bus broke down at 1st & Santa Clara in the morning rush - what should passengers do?",
+      "answer": "Riders should check real-time updates for Route 22 via the transit app or website. Look for detour information or alternative routes provided by transit authorities. If necessary, consider using alternative transportation options like walking, biking, or a ride-share service to reach your destination. Stay informed and plan accordingly for the most up-to-date travel options.",
+      "is_cached": true,
+      "similarity": 0.9394,
+      "latency_ms": 714.41,
+      "matched_query": "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 703.31,
+        "search_ms": 11.07
+      }
+    },
+    {
+      "n": 11,
+      "category": "new",
+      "expected": "miss",
+      "question": "How does the transit agency decide the severity level of an incident?",
+      "answer": "The transit agency determines incident severity by reviewing its reporting guidelines, which outline criteria like injuries, property damage, and service disruption. They then assess how these factors affect public safety and the continuity of transit operations.",
+      "is_cached": false,
+      "similarity": 0.3187,
+      "latency_ms": 19032.51,
+      "matched_query": "What safety steps should passengers follow if a train stops between stations?",
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 52.57,
+        "search_ms": 5.3,
+        "agent_ms": 18961.7,
+        "store_ms": 12.55
+      }
+    },
+    {
+      "n": 12,
+      "category": "paraphrase",
+      "expected": "hit",
+      "question": "If my train stops between stations, what safety steps should I follow?",
+      "answer": "If a train stops between stations, stay calm and do not open the doors. Follow the instructions of transit staff or emergency personnel. If needed, use the emergency communication system to alert authorities. Remain in your seat and wait for assistance. Do not attempt to exit the train unless directed by staff. Your safety is the priority.",
+      "is_cached": true,
+      "similarity": 0.927,
+      "latency_ms": 816.29,
+      "matched_query": "What safety steps should passengers follow if a train stops between stations?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 802.77,
+        "search_ms": 13.48
+      }
+    },
+    {
+      "n": 13,
+      "category": "related",
+      "expected": "miss",
+      "question": "Why is the Green Line light rail delayed at Ohlone/Chynoweth station?",
+      "answer": "The Green Line light rail may be delayed at Ohlone/Chynoweth station due to operational issues, maintenance, or unexpected events. To get the most accurate and up-to-date information, check the transit authority's website or app for real-time updates. Look for official alerts or service advisories related to the station or route. If further details are needed, contact the transit authority's customer service for assistance. Riders are advised to stay informed and allow extra travel time.",
+      "is_cached": false,
+      "similarity": 0.7825,
+      "latency_ms": 32457.18,
+      "matched_query": "Why is the Blue Line light rail delayed at Tasman station?",
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 58.45,
+        "search_ms": 5.5,
+        "agent_ms": 32383.05,
+        "store_ms": 9.8
+      }
+    },
+    {
+      "n": 14,
+      "category": "exact",
+      "expected": "hit",
+      "question": "How does the transit agency decide the severity level of an incident?",
+      "answer": "The transit agency determines incident severity by reviewing its reporting guidelines, which outline criteria like injuries, property damage, and service disruption. They then assess how these factors affect public safety and the continuity of transit operations.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 782.62,
+      "matched_query": "How does the transit agency decide the severity level of an incident?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 765.23,
+        "search_ms": 17.36
+      }
+    }
+  ],
+  "version_demo": {
+    "question": "Why is the Blue Line light rail delayed at Tasman station?",
+    "answer": "The Blue Line light rail may be delayed at Tasman station due to scheduled maintenance, construction, or an unexpected incident. To find the most accurate and up-to-date information, check the transit authority's website or app for real-time updates. Look for service alerts or notifications related to Tasman station. Riders should plan accordingly and consider alternative routes if advised. Stay informed for the latest updates.",
+    "is_cached": false,
+    "similarity": null,
+    "latency_ms": 25147.33,
+    "matched_query": null,
+    "data_version": "v2",
+    "status": "approved",
+    "timings": {
+      "embed_ms": 84.95,
+      "search_ms": 14.82,
+      "agent_ms": 25040.16,
+      "store_ms": 7.02
+    }
+  }
+}
