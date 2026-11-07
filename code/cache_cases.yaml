@@ -1,0 +1,89 @@
+# HW9 Part 3.1 - labeled semantic-cache test set (s1066, municipal transit incidents).
+#
+# Protocol: the 10 `seeds` are answered by the HW8 agent pipeline and stored first; they are the
+# ONLY cache entries during the sweep. Each of the 40 `cases` is then looked up against them.
+#   expected: hit  -> the case must be served the answer of seed `seed`
+#   expected: miss -> the case needs its own answer (serving any cached answer is a false hit)
+# Labels were fixed before any threshold sweep was run. Do not relabel after seeing results:
+# document any labeling mistake separately (see reports/hw09/METRICS.md).
+
+seeds:
+  - id: S01
+    query: "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?"
+  - id: S02
+    query: "Why is the Blue Line light rail delayed at Tasman station?"
+  - id: S03
+    query: "How do I get a refund if my train was cancelled because of an incident?"
+  - id: S04
+    query: "What safety steps should passengers follow if a train stops between stations?"
+  - id: S05
+    query: "How does the transit agency decide the severity level of an incident?"
+  - id: S06
+    query: "Is the Orange Line running a bus bridge between Mountain View and Whisman after the power outage?"
+  - id: S07
+    query: "How do I report a suspicious package left on a bus?"
+  - id: S08
+    query: "Will my monthly pass be extended if service is suspended for more than three days?"
+  - id: S09
+    query: "Why are northbound trains skipping Convention Center station this morning?"
+  - id: S10
+    query: "What should wheelchair users do if the elevator at Diridon station is out of service?"
+
+cases:
+  # ---- 10 exact duplicates (should hit their seed) ----------------------------------------
+  - {id: E01, category: exact, expected: hit, seed: S01, query: "A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?"}
+  - {id: E02, category: exact, expected: hit, seed: S02, query: "Why is the Blue Line light rail delayed at Tasman station?"}
+  - {id: E03, category: exact, expected: hit, seed: S03, query: "How do I get a refund if my train was cancelled because of an incident?"}
+  - {id: E04, category: exact, expected: hit, seed: S04, query: "What safety steps should passengers follow if a train stops between stations?"}
+  - {id: E05, category: exact, expected: hit, seed: S05, query: "How does the transit agency decide the severity level of an incident?"}
+  - {id: E06, category: exact, expected: hit, seed: S06, query: "Is the Orange Line running a bus bridge between Mountain View and Whisman after the power outage?"}
+  - {id: E07, category: exact, expected: hit, seed: S07, query: "How do I report a suspicious package left on a bus?"}
+  - {id: E08, category: exact, expected: hit, seed: S08, query: "Will my monthly pass be extended if service is suspended for more than three days?"}
+  - {id: E09, category: exact, expected: hit, seed: S09, query: "Why are northbound trains skipping Convention Center station this morning?"}
+  - {id: E10, category: exact, expected: hit, seed: S10, query: "What should wheelchair users do if the elevator at Diridon station is out of service?"}
+
+  # ---- 10 paraphrases (same meaning, same correct answer -> should hit their seed) ---------
+  - {id: P01, category: paraphrase, expected: hit, seed: S01, query: "Route 22 bus broke down at 1st & Santa Clara in the morning rush - what should passengers do?"}
+  - {id: P02, category: paraphrase, expected: hit, seed: S02, query: "What is causing the delays on the Blue Line at Tasman station?"}
+  - {id: P03, category: paraphrase, expected: hit, seed: S03, query: "My train got cancelled due to an incident. How can I get my money back?"}
+  - {id: P04, category: paraphrase, expected: hit, seed: S04, query: "If my train stops between stations, what safety steps should I follow?"}
+  - {id: P05, category: paraphrase, expected: hit, seed: S05, query: "How is the severity level of a transit incident determined?"}
+  - {id: P06, category: paraphrase, expected: hit, seed: S06, query: "After the power outage, is there a bus bridge on the Orange Line from Mountain View to Whisman?"}
+  - {id: P07, category: paraphrase, expected: hit, seed: S07, query: "What is the right way to report a suspicious package I see on a bus?"}
+  - {id: P08, category: paraphrase, expected: hit, seed: S08, query: "If service is suspended for over three days, does my monthly pass get extended?"}
+  - {id: P09, category: paraphrase, expected: hit, seed: S09, query: "This morning, why are trains going northbound not stopping at Convention Center?"}
+  - {id: P10, category: paraphrase, expected: hit, seed: S10, query: "The elevator at Diridon station is broken - what should wheelchair users do?"}
+
+  # ---- 10 superficially similar (same wording, DIFFERENT correct answer -> should miss) -----
+  - {id: D01, category: similar, expected: miss, seed: S01, query: "A bus on Route 23 caught fire at 1st and Santa Clara during the morning rush. What should riders do?",
+     why_different: "fire means evacuate and keep clear, not wait for a replacement bus; different route"}
+  - {id: D02, category: similar, expected: miss, seed: S02, query: "Why is the Green Line light rail delayed at Tasman station?",
+     why_different: "different line, so a different cause and different alternatives"}
+  - {id: D03, category: similar, expected: miss, seed: S03, query: "How do I get a refund if I bought the wrong ticket at the machine?",
+     why_different: "rider error at a ticket machine, not an incident cancellation; different refund policy"}
+  - {id: D04, category: similar, expected: miss, seed: S04, query: "What safety steps should the train operator follow if a train stops between stations?",
+     why_different: "operator procedure (radio control, secure train) instead of passenger guidance"}
+  - {id: D05, category: similar, expected: miss, seed: S05, query: "How does the transit agency decide when an incident is resolved?",
+     why_different: "asks about closing an incident, not about rating its severity"}
+  - {id: D06, category: similar, expected: miss, seed: S06, query: "Is the Orange Line running a bus bridge between Mountain View and Whisman during weekend track work?",
+     why_different: "planned weekend maintenance has a different schedule and notice than an outage"}
+  - {id: D07, category: similar, expected: miss, seed: S07, query: "How do I report a lost package left on a bus?",
+     why_different: "lost and found claim, not a security report (do not touch / call police)"}
+  - {id: D08, category: similar, expected: miss, seed: S08, query: "Will my monthly pass be extended if I am sick for more than three days?",
+     why_different: "personal illness is not a service suspension; the pass is not extended"}
+  - {id: D09, category: similar, expected: miss, seed: S09, query: "Why are southbound trains skipping Convention Center station this morning?",
+     why_different: "opposite direction; a different incident and platform"}
+  - {id: D10, category: similar, expected: miss, seed: S10, query: "What should wheelchair users do if the ramp on a Route 22 bus is out of service?",
+     why_different: "bus ramp failure (wait for the next accessible bus) instead of a station elevator outage"}
+
+  # ---- 10 unrelated domain questions (no cached answer applies -> should miss) -------------
+  - {id: U01, category: unrelated, expected: miss, query: "Can I bring my bicycle on light rail trains during rush hour?"}
+  - {id: U02, category: unrelated, expected: miss, query: "What are the hours of the transit customer service call center?"}
+  - {id: U03, category: unrelated, expected: miss, query: "How do I apply for a reduced-fare senior Clipper card?"}
+  - {id: U04, category: unrelated, expected: miss, query: "Is parking free at the Park and Ride lots?"}
+  - {id: U05, category: unrelated, expected: miss, query: "How often do buses run on Route 60 on Sundays?"}
+  - {id: U06, category: unrelated, expected: miss, query: "Are service animals allowed on buses and trains?"}
+  - {id: U07, category: unrelated, expected: miss, query: "How do I sign up for text alerts about service disruptions?"}
+  - {id: U08, category: unrelated, expected: miss, query: "What is the fare for a youth day pass?"}
+  - {id: U09, category: unrelated, expected: miss, query: "Does the transit agency run extra light rail service after events at SAP Center?"}
+  - {id: U10, category: unrelated, expected: miss, query: "How do I give feedback about a bus operator?"}
