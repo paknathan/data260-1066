@@ -1,0 +1,97 @@
+{
+  "run_at": "2026-11-08T23:44:03+00:00",
+  "database": "Municipal_rel",
+  "incident": "INC-2026-0001",
+  "question": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+  "before": 25,
+  "after": 55,
+  "original": 47,
+  "steps": [
+    {
+      "step": "1a fresh miss",
+      "db_delay_minutes": 25,
+      "verdict": "matches DB",
+      "question": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "answer": "The current delay for incident INC-2026-0001 is 25 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect potential delays on CA-85 N due to the collision. Check for further updates as conditions may change.",
+      "is_cached": false,
+      "similarity": null,
+      "latency_ms": 24276.97,
+      "matched_query": null,
+      "data_version": "v1",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 947.72,
+        "search_ms": 2.27,
+        "agent_ms": 23319.33,
+        "store_ms": 7.47
+      }
+    },
+    {
+      "step": "1b fresh hit",
+      "db_delay_minutes": 25,
+      "verdict": "matches DB",
+      "question": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "answer": "The current delay for incident INC-2026-0001 is 25 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect potential delays on CA-85 N due to the collision. Check for further updates as conditions may change.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 491.8,
+      "matched_query": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 484.83,
+        "search_ms": 6.95
+      }
+    },
+    {
+      "step": "2  stale hit",
+      "db_delay_minutes": 55,
+      "verdict": "STALE (answer is for an older record)",
+      "question": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "answer": "The current delay for incident INC-2026-0001 is 25 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect potential delays on CA-85 N due to the collision. Check for further updates as conditions may change.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 21.12,
+      "matched_query": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "data_version": "v1",
+      "timings": {
+        "embed_ms": 18.43,
+        "search_ms": 2.68
+      }
+    },
+    {
+      "step": "3a after invalidation",
+      "db_delay_minutes": 55,
+      "verdict": "matches DB",
+      "question": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "answer": "The current delay for incident INC-2026-0001 is 55 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect significant delays on CA-85 N due to the collision. Check real-time updates for further changes. Plan accordingly and allow extra travel time.",
+      "is_cached": false,
+      "similarity": null,
+      "latency_ms": 17921.73,
+      "matched_query": null,
+      "data_version": "v2",
+      "status": "approved",
+      "timings": {
+        "embed_ms": 17.66,
+        "search_ms": 2.31,
+        "agent_ms": 17897.39,
+        "store_ms": 4.23
+      }
+    },
+    {
+      "step": "3b new answer cached",
+      "db_delay_minutes": 55,
+      "verdict": "matches DB",
+      "question": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "answer": "The current delay for incident INC-2026-0001 is 55 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect significant delays on CA-85 N due to the collision. Check real-time updates for further changes. Plan accordingly and allow extra travel time.",
+      "is_cached": true,
+      "similarity": 1.0,
+      "latency_ms": 422.41,
+      "matched_query": "What is the current delay for incident INC-2026-0001, and what should riders expect?",
+      "data_version": "v2",
+      "timings": {
+        "embed_ms": 415.57,
+        "search_ms": 6.81
+      }
+    }
+  ]
+}

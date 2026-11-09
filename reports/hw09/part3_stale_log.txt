@@ -1,0 +1,38 @@
+2026-11-08 15:43:15.046 [numexpr.utils] NumExpr defaulting to 10 threads.
+2026-11-08 15:43:15.980 [sentence_transformers.SentenceTransformer] Use pytorch device_name: mps
+2026-11-08 15:43:15.980 [sentence_transformers.SentenceTransformer] Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-08 15:43:20.353 [semcache] created vector index s1066:semcache:idx (dim=384, COSINE, HNSW)
+=== Stale-answer demo | Municipal_rel.incidents INC-2026-0001 (original delay 47 min) ===
+question: What is the current delay for incident INC-2026-0001, and what should riders expect?
+
+--- Step 1: record delay = 25 min; first ask is a miss, second a hit ---
+2026-11-08 15:43:21.399 [semcache] CACHE MISS best_similarity=none (no entries for current data version) (threshold 0.85) -> running HW8 agent pipeline
+2026-11-08 15:43:21.537 [semcache] listening on s1066_final from offsets [96]
+2026-11-08 15:43:44.726 [semcache] CACHE MISS done latency=24277.0ms (agents 23319.3ms) stored=True
+[1a fresh miss] DB delay_minutes=25 | is_cached=False similarity=n/a latency=24277.0ms data_version=v1 -> matches DB
+         answer: The current delay for incident INC-2026-0001 is 25 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect potential delays on CA-85 N due to the collision. Check for further updates as conditions may change.
+
+2026-11-08 15:43:45.366 [semcache] CACHE HIT  similarity=1.0000 (threshold 0.85) latency=491.8ms matched='What is the current delay for incident INC-2026-0001, and what should riders expect?'
+[1b fresh hit] DB delay_minutes=25 | is_cached=True similarity=1.0000 latency=491.8ms data_version=v1 -> matches DB
+         answer: The current delay for incident INC-2026-0001 is 25 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect potential delays on CA-85 N due to the collision. Check for further updates as conditions may change.
+
+--- Step 2: NAIVE update to 55 min (database changed, cache NOT invalidated) ---
+2026-11-08 15:43:45.437 [semcache] CACHE HIT  similarity=1.0000 (threshold 0.85) latency=21.1ms matched='What is the current delay for incident INC-2026-0001, and what should riders expect?'
+[2  stale hit] DB delay_minutes=55 | is_cached=True similarity=1.0000 latency=21.1ms data_version=v1 -> STALE (answer is for an older record)
+         answer: The current delay for incident INC-2026-0001 is 25 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect potential delays on CA-85 N due to the collision. Check for further updates as conditions may change.
+
+--- Step 3: FIXED write path: update to 55 min + bump data version ---
+2026-11-08 15:43:45.440 [semcache] DATA VERSION -> v2 (incident INC-2026-0001 delay_minutes -> 55); older cache entries will no longer match
+2026-11-08 15:43:45.463 [semcache] CACHE MISS best_similarity=none (no entries for current data version) (threshold 0.85) -> running HW8 agent pipeline
+2026-11-08 15:43:45.543 [semcache] listening on s1066_final from offsets [97]
+2026-11-08 15:44:03.365 [semcache] CACHE MISS done latency=17921.7ms (agents 17897.4ms) stored=True
+[3a after invalidation] DB delay_minutes=55 | is_cached=False similarity=n/a latency=17921.7ms data_version=v2 -> matches DB
+         answer: The current delay for incident INC-2026-0001 is 55 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect significant delays on CA-85 N due to the collision. Check real-time updates for further changes. Plan accordingly and allow extra travel time.
+
+2026-11-08 15:44:03.797 [semcache] CACHE HIT  similarity=1.0000 (threshold 0.85) latency=422.4ms matched='What is the current delay for incident INC-2026-0001, and what should riders expect?'
+[3b new answer cached] DB delay_minutes=55 | is_cached=True similarity=1.0000 latency=422.4ms data_version=v2 -> matches DB
+         answer: The current delay for incident INC-2026-0001 is 55 minutes. This delay was last updated on November 8, 2026, at 15:43. Riders should expect significant delays on CA-85 N due to the collision. Check real-time updates for further changes. Plan accordingly and allow extra travel time.
+
+2026-11-08 15:44:03.812 [semcache] DATA VERSION -> v3 (incident INC-2026-0001 delay_minutes -> 47); older cache entries will no longer match
+(restored INC-2026-0001 delay_minutes to 47; data version bumped again)
+saved /Users/nathanpak/Desktop/Data260/data260-1066/reports/hw09/raw/part3_stale_demo.json

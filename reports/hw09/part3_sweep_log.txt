@@ -1,0 +1,151 @@
+2026-11-07 15:06:58.407 [numexpr.utils] NumExpr defaulting to 10 threads.
+2026-11-07 15:06:59.325 [sentence_transformers.SentenceTransformer] Use pytorch device_name: mps
+2026-11-07 15:06:59.325 [sentence_transformers.SentenceTransformer] Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-07 15:07:01.228 [semcache] created vector index s1066:semcache:idx (dim=384, COSINE, HNSW)
+=== Seeding cache with 10 answers from the HW8 pipeline (data_version=v1) ===
+  S01: A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?
+2026-11-07 15:07:02.936 [semcache] listening on s1066_final from offsets [58]
+      agent run: 23.5s status=approved
+  S02: Why is the Blue Line light rail delayed at Tasman station?
+2026-11-07 15:07:27.162 [semcache] listening on s1066_final from offsets [59]
+      agent run: 19.5s status=approved
+  S03: How do I get a refund if my train was cancelled because of an incident?
+2026-11-07 15:07:47.224 [semcache] listening on s1066_final from offsets [60]
+      agent run: 18.5s status=approved
+  S04: What safety steps should passengers follow if a train stops between stations?
+2026-11-07 15:08:06.334 [semcache] listening on s1066_final from offsets [61]
+      agent run: 19.6s status=approved
+  S05: How does the transit agency decide the severity level of an incident?
+2026-11-07 15:08:26.326 [semcache] listening on s1066_final from offsets [62]
+      agent run: 18.0s status=approved
+  S06: Is the Orange Line running a bus bridge between Mountain View and Whisman after the power outage?
+2026-11-07 15:08:45.209 [semcache] listening on s1066_final from offsets [63]
+      agent run: 22.3s status=approved
+  S07: How do I report a suspicious package left on a bus?
+2026-11-07 15:09:08.157 [semcache] listening on s1066_final from offsets [64]
+      agent run: 20.9s status=approved
+  S08: Will my monthly pass be extended if service is suspended for more than three days?
+2026-11-07 15:09:30.346 [semcache] listening on s1066_final from offsets [65]
+      agent run: 16.5s status=approved
+  S09: Why are northbound trains skipping Convention Center station this morning?
+2026-11-07 15:09:47.811 [semcache] listening on s1066_final from offsets [66]
+      agent run: 25.3s status=approved
+  S10: What should wheelchair users do if the elevator at Diridon station is out of service?
+2026-11-07 15:10:14.389 [semcache] listening on s1066_final from offsets [67]
+      agent run: 23.1s status=approved
+
+=== Looking up 40 labeled cases ===
+  E01 exact      expected=hit  best=S01 sim=1.0000 lookup=42.5ms | A bus on Route 22 broke down at 1st and Santa Clara during the morning rush. What should riders do?
+  E02 exact      expected=hit  best=S02 sim=1.0000 lookup=115.5ms | Why is the Blue Line light rail delayed at Tasman station?
+  E03 exact      expected=hit  best=S03 sim=1.0000 lookup=49.9ms | How do I get a refund if my train was cancelled because of an incident?
+  E04 exact      expected=hit  best=S04 sim=1.0000 lookup=51.2ms | What safety steps should passengers follow if a train stops between stations?
+  E05 exact      expected=hit  best=S05 sim=1.0000 lookup=49.7ms | How does the transit agency decide the severity level of an incident?
+  E06 exact      expected=hit  best=S06 sim=1.0000 lookup=48.0ms | Is the Orange Line running a bus bridge between Mountain View and Whisman after the power outage?
+  E07 exact      expected=hit  best=S07 sim=1.0000 lookup=41.0ms | How do I report a suspicious package left on a bus?
+  E08 exact      expected=hit  best=S08 sim=1.0000 lookup=31.2ms | Will my monthly pass be extended if service is suspended for more than three days?
+  E09 exact      expected=hit  best=S09 sim=1.0000 lookup=30.6ms | Why are northbound trains skipping Convention Center station this morning?
+  E10 exact      expected=hit  best=S10 sim=1.0000 lookup=29.1ms | What should wheelchair users do if the elevator at Diridon station is out of service?
+  P01 paraphrase expected=hit  best=S01 sim=0.9394 lookup=113.9ms | Route 22 bus broke down at 1st & Santa Clara in the morning rush - what should passengers do?
+2026-11-07 15:10:38.636 [semcache] listening on s1066_final from offsets [68]
+      agent run: 26.8s status=approved
+  P02 paraphrase expected=hit  best=S02 sim=0.8718 lookup=906.8ms | What is causing the delays on the Blue Line at Tasman station?
+2026-11-07 15:11:06.394 [semcache] listening on s1066_final from offsets [69]
+      agent run: 22.9s status=approved
+  P03 paraphrase expected=hit  best=S03 sim=0.8991 lookup=687.4ms | My train got cancelled due to an incident. How can I get my money back?
+2026-11-07 15:11:29.895 [semcache] listening on s1066_final from offsets [70]
+      agent run: 23.8s status=approved
+  P04 paraphrase expected=hit  best=S04 sim=0.9270 lookup=614.5ms | If my train stops between stations, what safety steps should I follow?
+2026-11-07 15:11:54.281 [semcache] listening on s1066_final from offsets [71]
+      agent run: 23.2s status=approved
+  P05 paraphrase expected=hit  best=S05 sim=0.9227 lookup=1027.1ms | How is the severity level of a transit incident determined?
+2026-11-07 15:12:18.578 [semcache] listening on s1066_final from offsets [72]
+      agent run: 28.2s status=approved
+  P06 paraphrase expected=hit  best=S06 sim=0.9367 lookup=876.7ms | After the power outage, is there a bus bridge on the Orange Line from Mountain View to Whisman?
+2026-11-07 15:12:47.704 [semcache] listening on s1066_final from offsets [73]
+      agent run: 24.6s status=approved
+  P07 paraphrase expected=hit  best=S07 sim=0.9537 lookup=700.6ms | What is the right way to report a suspicious package I see on a bus?
+  P08 paraphrase expected=hit  best=S08 sim=0.9837 lookup=16.9ms | If service is suspended for over three days, does my monthly pass get extended?
+  P09 paraphrase expected=hit  best=S09 sim=0.8848 lookup=40.5ms | This morning, why are trains going northbound not stopping at Convention Center?
+2026-11-07 15:13:13.005 [semcache] listening on s1066_final from offsets [74]
+      agent run: 27.4s status=approved
+  P10 paraphrase expected=hit  best=S10 sim=0.9371 lookup=772.8ms | The elevator at Diridon station is broken - what should wheelchair users do?
+2026-11-07 15:13:41.113 [semcache] listening on s1066_final from offsets [75]
+      agent run: 21.5s status=approved
+  D01 similar    expected=miss best=S01 sim=0.8441 lookup=570.9ms | A bus on Route 23 caught fire at 1st and Santa Clara during the morning rush. What should riders do?
+2026-11-07 15:14:03.280 [semcache] listening on s1066_final from offsets [76]
+      agent run: 23.2s status=approved
+  D02 similar    expected=miss best=S02 sim=0.9214 lookup=639.2ms | Why is the Green Line light rail delayed at Tasman station?
+2026-11-07 15:14:27.172 [semcache] listening on s1066_final from offsets [77]
+      agent run: 26.0s status=approved
+  D03 similar    expected=miss best=S03 sim=0.6497 lookup=725.7ms | How do I get a refund if I bought the wrong ticket at the machine?
+2026-11-07 15:14:53.841 [semcache] listening on s1066_final from offsets [78]
+      agent run: 22.2s status=approved
+  D04 similar    expected=miss best=S04 sim=0.9410 lookup=878.4ms | What safety steps should the train operator follow if a train stops between stations?
+2026-11-07 15:15:16.892 [semcache] listening on s1066_final from offsets [79]
+      agent run: 27.6s status=approved
+  D05 similar    expected=miss best=S05 sim=0.8248 lookup=647.8ms | How does the transit agency decide when an incident is resolved?
+2026-11-07 15:15:45.183 [semcache] listening on s1066_final from offsets [80]
+      agent run: 27.4s status=approved
+  D06 similar    expected=miss best=S06 sim=0.8369 lookup=782.3ms | Is the Orange Line running a bus bridge between Mountain View and Whisman during weekend track work?
+2026-11-07 15:16:13.409 [semcache] listening on s1066_final from offsets [81]
+      agent run: 25.9s status=approved
+  D07 similar    expected=miss best=S07 sim=0.8598 lookup=483.9ms | How do I report a lost package left on a bus?
+2026-11-07 15:16:39.794 [semcache] listening on s1066_final from offsets [82]
+      agent run: 23.2s status=approved
+  D08 similar    expected=miss best=S08 sim=0.7008 lookup=748.6ms | Will my monthly pass be extended if I am sick for more than three days?
+2026-11-07 15:17:03.739 [semcache] listening on s1066_final from offsets [83]
+      agent run: 23.4s status=approved
+  D09 similar    expected=miss best=S09 sim=0.9689 lookup=848.0ms | Why are southbound trains skipping Convention Center station this morning?
+2026-11-07 15:17:28.027 [semcache] listening on s1066_final from offsets [84]
+      agent run: 25.1s status=approved
+  D10 similar    expected=miss best=S10 sim=0.6689 lookup=769.9ms | What should wheelchair users do if the ramp on a Route 22 bus is out of service?
+2026-11-07 15:17:53.906 [semcache] listening on s1066_final from offsets [85]
+      agent run: 25.2s status=approved
+  U01 unrelated  expected=miss best=S04 sim=0.4589 lookup=787.6ms | Can I bring my bicycle on light rail trains during rush hour?
+2026-11-07 15:18:19.845 [semcache] listening on s1066_final from offsets [86]
+      agent run: 23.9s status=approved
+  U02 unrelated  expected=miss best=S08 sim=0.4227 lookup=850.5ms | What are the hours of the transit customer service call center?
+2026-11-07 15:18:44.638 [semcache] listening on s1066_final from offsets [87]
+      agent run: 24.5s status=approved
+  U03 unrelated  expected=miss best=S03 sim=0.1682 lookup=901.8ms | How do I apply for a reduced-fare senior Clipper card?
+2026-11-07 15:19:10.012 [semcache] listening on s1066_final from offsets [88]
+      agent run: 24.7s status=approved
+  U04 unrelated  expected=miss best=S10 sim=0.2642 lookup=1028.0ms | Is parking free at the Park and Ride lots?
+2026-11-07 15:19:35.730 [semcache] listening on s1066_final from offsets [89]
+      agent run: 23.4s status=approved
+  U05 unrelated  expected=miss best=S01 sim=0.3480 lookup=556.7ms | How often do buses run on Route 60 on Sundays?
+2026-11-07 15:19:59.699 [semcache] listening on s1066_final from offsets [90]
+      agent run: 24.6s status=approved
+  U06 unrelated  expected=miss best=S04 sim=0.4345 lookup=1072.0ms | Are service animals allowed on buses and trains?
+2026-11-07 15:20:25.396 [semcache] listening on s1066_final from offsets [91]
+      agent run: 25.6s status=approved
+  U07 unrelated  expected=miss best=S08 sim=0.3352 lookup=818.7ms | How do I sign up for text alerts about service disruptions?
+2026-11-07 15:20:51.855 [semcache] listening on s1066_final from offsets [92]
+      agent run: 22.6s status=approved
+  U08 unrelated  expected=miss best=S08 sim=0.2789 lookup=531.3ms | What is the fare for a youth day pass?
+2026-11-07 15:21:14.944 [semcache] listening on s1066_final from offsets [93]
+      agent run: 24.2s status=approved
+  U09 unrelated  expected=miss best=S02 sim=0.4762 lookup=703.1ms | Does the transit agency run extra light rail service after events at SAP Center?
+2026-11-07 15:21:39.797 [semcache] listening on s1066_final from offsets [94]
+      agent run: 24.3s status=approved
+  U10 unrelated  expected=miss best=S07 sim=0.4243 lookup=679.8ms | How do I give feedback about a bus operator?
+2026-11-07 15:22:04.786 [semcache] listening on s1066_final from offsets [95]
+      agent run: 24.5s status=approved
+
+=== Threshold sweep (40 cases; miss=$0.01, false hit=$5.00) ===
+| Threshold | Hit rate | False-hit rate | Mean latency (ms) | Total cost |
+|---|---|---|---|---|
+| 0.75 | 67.5% (27/40) | 25.9% (7/27 hits) | 8,358.2 | $35.13 (13 misses $0.13 + 7 false hits $35.00) |
+| 0.80 | 67.5% (27/40) | 25.9% (7/27 hits) | 8,358.2 | $35.13 (13 misses $0.13 + 7 false hits $35.00) |
+| 0.85 | 60.0% (24/40) | 16.7% (4/24 hits) | 10,272.4 | $20.16 (16 misses $0.16 + 4 false hits $20.00) |
+| 0.90 | 50.0% (20/40) | 15.0% (3/20 hits) | 12,703.6 | $15.20 (20 misses $0.20 + 3 false hits $15.00) |
+| 0.95 | 32.5% (13/40) | 7.7% (1/13 hits) | 17,152.4 | $5.27 (27 misses $0.27 + 1 false hits $5.00) |
+  0.75: false hits=['D01', 'D02', 'D04', 'D05', 'D06', 'D07', 'D09']  should-hit cases missed=0
+  0.80: false hits=['D01', 'D02', 'D04', 'D05', 'D06', 'D07', 'D09']  should-hit cases missed=0
+  0.85: false hits=['D02', 'D04', 'D07', 'D09']  should-hit cases missed=0
+  0.90: false hits=['D02', 'D04', 'D09']  should-hit cases missed=3
+  0.95: false hits=['D09']  should-hit cases missed=8
+
+Lowest total cost: threshold 0.95 ($5.27)
+
+saved /Users/nathanpak/Desktop/Data260/data260-1066/reports/hw09/raw/part3_sweep.json, part3_sweep.csv, part3_threshold_table.md, part3_false_hits.md
