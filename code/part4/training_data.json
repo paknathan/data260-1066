@@ -1,0 +1,34 @@
+[
+  {
+    "id": "T01",
+    "question": "What is the current delay for incident INC-2026-1101?"
+  },
+  {
+    "id": "T02",
+    "question": "What caused incident INC-2026-1102 and what should riders do?"
+  },
+  {
+    "id": "T03",
+    "question": "Is incident INC-2026-1103 resolved yet?"
+  },
+  {
+    "id": "T04",
+    "question": "How long is the delay for INC-2026-1104 and what is its status?"
+  },
+  {
+    "id": "T05",
+    "question": "How do I get a refund if my train was cancelled because of an incident?"
+  },
+  {
+    "id": "T06",
+    "question": "What is the delay for incident INC-2026-1199?"
+  },
+  {
+    "id": "T07",
+    "question": "Is parking free at the Park and Ride lots?"
+  },
+  {
+    "id": "T08",
+    "question": "How much is a one-way adult fare?"
+  }
+]

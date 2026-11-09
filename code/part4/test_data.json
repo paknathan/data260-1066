@@ -1,0 +1,50 @@
+[
+  {
+    "id": "X01",
+    "question": "What is the current delay for incident INC-2026-1110?"
+  },
+  {
+    "id": "X02",
+    "question": "What caused incident INC-2026-1107?"
+  },
+  {
+    "id": "X03",
+    "question": "Is incident INC-2026-1111 resolved?"
+  },
+  {
+    "id": "X04",
+    "question": "How long is the delay for INC-2026-1112 and what detour is in place?"
+  },
+  {
+    "id": "X05",
+    "question": "What is the status of incident INC-2026-1102?"
+  },
+  {
+    "id": "X06",
+    "question": "What should I do if I see a suspicious item on a bus?"
+  },
+  {
+    "id": "X07",
+    "question": "What should wheelchair users do if a station elevator is out of service?"
+  },
+  {
+    "id": "X08",
+    "question": "How much is a youth day pass?"
+  },
+  {
+    "id": "X09",
+    "question": "Where is the transit lost and found?"
+  },
+  {
+    "id": "X10",
+    "question": "What is the delay for incident INC-2026-1197?"
+  },
+  {
+    "id": "X11",
+    "question": "How often do buses run on Route 60 on Sundays?"
+  },
+  {
+    "id": "X12",
+    "question": "Are service animals allowed on buses and trains?"
+  }
+]

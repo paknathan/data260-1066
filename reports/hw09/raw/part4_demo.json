@@ -1,0 +1,166 @@
+{
+  "run_at": "2026-11-09T03:40:21+00:00",
+  "controlled_revision": {
+    "id": "C01",
+    "question": "What is the current delay for incident INC-2026-1101?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "Incident INC-2026-1101 is affecting Route 22 service near downtown. Riders should check for updates before travelling.",
+        "lessons_used": [],
+        "reference_used": false,
+        "injected": true,
+        "evaluation": {
+          "result": "REVISE",
+          "covered": true,
+          "failure_codes": [
+            "MISSING_FACT"
+          ],
+          "explanation": "Missing or incorrect: INC-2026-1101.delay_minutes.",
+          "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1101.delay_minutes. The answer must state all of these facts: INC-2026-1101.delay_minutes = 25. State these values exactly."
+        }
+      },
+      {
+        "attempt": 2,
+        "answer": "Incident INC-2026-1101 has a delay of 25 minutes on Route 22 near downtown. Riders should check for updates before traveling.",
+        "lessons_used": [],
+        "reference_used": false,
+        "evaluation": {
+          "result": "PASS",
+          "covered": true,
+          "failure_codes": [],
+          "feedback": null,
+          "explanation": "All required facts match the reference dataset."
+        }
+      }
+    ],
+    "n_attempts": 2,
+    "final_answer": "Incident INC-2026-1101 has a delay of 25 minutes on Route 22 near downtown. Riders should check for updates before traveling.",
+    "final_result": "PASS",
+    "covered": true,
+    "lessons_loaded": [],
+    "latency_ms": 5210.9
+  },
+  "reuse_without_lessons": {
+    "id": "R01",
+    "question": "What is the current delay for incident INC-2026-1108?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "The current delay for incident INC-2026-1108 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+        "lessons_used": [],
+        "reference_used": false,
+        "evaluation": {
+          "result": "REVISE",
+          "covered": true,
+          "failure_codes": [
+            "WRONG_VALUE"
+          ],
+          "explanation": "Missing or incorrect: INC-2026-1108.delay_minutes.",
+          "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1108.delay_minutes. The answer must state all of these facts: INC-2026-1108.delay_minutes = 20. State these values exactly."
+        }
+      }
+    ],
+    "n_attempts": 1,
+    "final_answer": "The current delay for incident INC-2026-1108 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+    "final_result": "FAIL",
+    "covered": true,
+    "lessons_loaded": [],
+    "latency_ms": 4773.9
+  },
+  "reuse_with_lessons": {
+    "id": "R01",
+    "question": "What is the current delay for incident INC-2026-1108?",
+    "attempts": [
+      {
+        "attempt": 1,
+        "answer": "The current delay for incident INC-2026-1108 is 20 minutes. The status is investigating. Buses are detouring via Alum Rock Ave with a temporary stop at Alum Rock & King.",
+        "lessons_used": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "reference_used": true,
+        "evaluation": {
+          "result": "PASS",
+          "covered": true,
+          "failure_codes": [],
+          "feedback": null,
+          "explanation": "All required facts match the reference dataset."
+        }
+      }
+    ],
+    "n_attempts": 1,
+    "final_answer": "The current delay for incident INC-2026-1108 is 20 minutes. The status is investigating. Buses are detouring via Alum Rock Ave with a temporary stop at Alum Rock & King.",
+    "final_result": "PASS",
+    "covered": true,
+    "lessons_loaded": [
+      "lesson_001",
+      "lesson_002"
+    ],
+    "latency_ms": 7022.4
+  },
+  "lessons": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_pattern": "The answer omits or invents a specific value that the reference dataset records (incident delay, status, cause, detour, fare or policy number).",
+      "correction": "Check the reference dataset before answering questions about incidents, fares or policies, and state the recorded values exactly.",
+      "created_at": "2026-11-08",
+      "use_count": 19,
+      "template": "REFERENCE_VALUE",
+      "trigger": "INC-\\d{4}-\\d{4}|delay|status|resolved|cause|detour|fare|pass|refund|policy|severity|alert|bike|bicycle|lost|suspicious|elevator|how much|how long|how many",
+      "action": "consult_reference",
+      "source_cases": [
+        "T01",
+        "T02",
+        "T04",
+        "T05",
+        "T08"
+      ],
+      "status": "kept",
+      "validation": {
+        "validated_at": "2026-11-09T03:39:06+00:00",
+        "failures_before": 9,
+        "failures_after": 1,
+        "fixed": [
+          "V01",
+          "V02",
+          "V04",
+          "V05",
+          "V06",
+          "V07",
+          "V08",
+          "V10"
+        ],
+        "regressed": [],
+        "new_unsupported_answers": [],
+        "decision": "kept"
+      }
+    },
+    {
+      "lesson_id": "lesson_002",
+      "failure_pattern": "The answer gives delays, fares or causes for an incident or topic that has no record in the reference dataset.",
+      "correction": "If the reference dataset has no record for the incident or topic, say you do not have that information and point riders to official service alerts; do not guess numbers or causes.",
+      "created_at": "2026-11-08",
+      "use_count": 11,
+      "template": "NO_RECORD",
+      "trigger": ".",
+      "action": "consult_reference",
+      "source_cases": [
+        "T06",
+        "T07"
+      ],
+      "status": "kept",
+      "validation": {
+        "validated_at": "2026-11-09T03:40:04+00:00",
+        "failures_before": 1,
+        "failures_after": 0,
+        "fixed": [
+          "V09"
+        ],
+        "regressed": [],
+        "new_unsupported_answers": [],
+        "decision": "kept"
+      }
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+
+--- TRAINING (evaluator repair, no lessons): 8 questions | repair=True | lessons=[] ---
+  [T01] PASS attempts=2 first=['WRONG_VALUE'] lessons=- 26.0s | What is the current delay for incident INC-2026-1101?
+  [T02] PASS attempts=2 first=['MISSING_FACT'] lessons=- 13.3s | What caused incident INC-2026-1102 and what should riders do?
+  [T03] PASS attempts=1 first=PASS lessons=- 3.0s | Is incident INC-2026-1103 resolved yet?
+  [T04] PASS attempts=2 first=['MISSING_FACT'] lessons=- 11.5s | How long is the delay for INC-2026-1104 and what is its status?
+  [T05] PASS attempts=2 first=['MISSING_FACT'] lessons=- 16.0s | How do I get a refund if my train was cancelled because of an incident?
+  [T06] PASS attempts=2 first=['UNSUPPORTED_ANSWER'] lessons=- 9.0s | What is the delay for incident INC-2026-1199?
+  [T07] PASS attempts=2 first=['UNSUPPORTED_ANSWER'] lessons=- 10.3s | Is parking free at the Park and Ride lots?
+  [T08] PASS attempts=2 first=['MISSING_FACT'] lessons=- 9.2s | How much is a one-way adult fare?
+
+Failure patterns on first attempts: {'REFERENCE_VALUE': ['T01', 'T02', 'T04', 'T05', 'T08'], 'NO_RECORD': ['T06', 'T07']}
+  LESSON CREATED lesson_001 (REFERENCE_VALUE) from repeated failures ['T01', 'T02', 'T04', 'T05', 'T08']
+  LESSON CREATED lesson_002 (NO_RECORD) from repeated failures ['T06', 'T07']
+
+--- VALIDATION before (single attempt, current kept lessons): 10 questions | repair=False | lessons=[] ---
+  [V01] FAIL attempts=1 first=['WRONG_VALUE'] lessons=- 4.6s | What is the current delay for incident INC-2026-1105?
+  [V02] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 5.1s | What caused INC-2026-1108 and what detour should riders use?
+  [V03] PASS attempts=1 first=PASS lessons=- 3.3s | Has incident INC-2026-1106 been resolved?
+  [V04] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 3.6s | What is the status of INC-2026-1109 and how long is the delay?
+  [V05] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 4.3s | Will my monthly pass be extended if service on my line is suspended?
+  [V06] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 5.2s | How do I sign up for text alerts about service disruptions?
+  [V07] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 5.4s | How many bicycles can ride on a light rail car?
+  [V08] FAIL attempts=1 first=['UNSUPPORTED_ANSWER'] lessons=- 4.8s | What is the delay for incident INC-2026-1198?
+  [V09] FAIL attempts=1 first=['UNSUPPORTED_ANSWER'] lessons=- 4.2s | Does the transit agency run extra light rail service after events at SAP Center?
+  [V10] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 3.8s | How does the agency decide the severity level of an incident?
+
+--- VALIDATION after adding lesson_001: 10 questions | repair=False | lessons=['lesson_001'] ---
+  [V01] PASS attempts=1 first=PASS lessons=['lesson_001'] 8.2s | What is the current delay for incident INC-2026-1105?
+  [V02] PASS attempts=1 first=PASS lessons=['lesson_001'] 7.1s | What caused INC-2026-1108 and what detour should riders use?
+  [V03] PASS attempts=1 first=PASS lessons=['lesson_001'] 6.4s | Has incident INC-2026-1106 been resolved?
+  [V04] PASS attempts=1 first=PASS lessons=['lesson_001'] 6.5s | What is the status of INC-2026-1109 and how long is the delay?
+  [V05] PASS attempts=1 first=PASS lessons=['lesson_001'] 5.0s | Will my monthly pass be extended if service on my line is suspended?
+  [V06] PASS attempts=1 first=PASS lessons=['lesson_001'] 4.8s | How do I sign up for text alerts about service disruptions?
+  [V07] PASS attempts=1 first=PASS lessons=['lesson_001'] 4.0s | How many bicycles can ride on a light rail car?
+  [V08] PASS attempts=1 first=PASS lessons=['lesson_001'] 3.6s | What is the delay for incident INC-2026-1198?
+  [V09] FAIL attempts=1 first=['UNSUPPORTED_ANSWER'] lessons=- 3.5s | Does the transit agency run extra light rail service after events at SAP Center?
+  [V10] PASS attempts=1 first=PASS lessons=['lesson_001'] 5.7s | How does the agency decide the severity level of an incident?
+  => lesson_001: failures 9 -> 1, fixed=['V01', 'V02', 'V04', 'V05', 'V06', 'V07', 'V08', 'V10'], regressed=[], new unsupported=[] => KEPT
+
+--- VALIDATION after adding lesson_002: 10 questions | repair=False | lessons=['lesson_001', 'lesson_002'] ---
+  [V01] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 8.2s | What is the current delay for incident INC-2026-1105?
+  [V02] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 7.4s | What caused INC-2026-1108 and what detour should riders use?
+  [V03] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.1s | Has incident INC-2026-1106 been resolved?
+  [V04] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.5s | What is the status of INC-2026-1109 and how long is the delay?
+  [V05] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.3s | Will my monthly pass be extended if service on my line is suspended?
+  [V06] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.7s | How do I sign up for text alerts about service disruptions?
+  [V07] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.0s | How many bicycles can ride on a light rail car?
+  [V08] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.5s | What is the delay for incident INC-2026-1198?
+  [V09] PASS attempts=1 first=PASS lessons=['lesson_002'] 4.8s | Does the transit agency run extra light rail service after events at SAP Center?
+  [V10] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 7.3s | How does the agency decide the severity level of an incident?
+  => lesson_002: failures 1 -> 0, fixed=['V09'], regressed=[], new unsupported=[] => KEPT
+
+================ 4.1 Controlled revision sequence ================
+Question: What is the current delay for incident INC-2026-1101?
+
+  Attempt 1 (INJECTED controlled test case) | lessons used: none | reference consulted: False
+  Answer: Incident INC-2026-1101 is affecting Route 22 service near downtown. Riders should check for updates before travelling.
+  Evaluator -> REVISE: Missing or incorrect: INC-2026-1101.delay_minutes.
+  Feedback: The answer does not match the reference dataset. Missing or incorrect: INC-2026-1101.delay_minutes. The answer must state all of these facts: INC-2026-1101.delay_minutes = 25. State these values exactly.
+
+  Attempt 2 | lessons used: none | reference consulted: False
+  Answer: Incident INC-2026-1101 has a delay of 25 minutes on Route 22 near downtown. Riders should check for updates before traveling.
+  Evaluator -> PASS: All required facts match the reference dataset.
+
+  Final result: PASS after 2 attempt(s) | latency 5.2s
+  Final response: Incident INC-2026-1101 has a delay of 25 minutes on Route 22 near downtown. Riders should check for updates before traveling.
+
+================ 4.2 Lesson created earlier, reused on a later question ================
+Stored lesson_001 (status=kept, created 2026-11-08 from failed answers ['T01', 'T02', 'T04', 'T05', 'T08'], use_count=18): The answer omits or invents a specific value that the reference dataset records (incident delay, status, cause, detour, fare or policy number).
+Stored lesson_002 (status=kept, created 2026-11-08 from failed answers ['T06', 'T07'], use_count=10): The answer gives delays, fares or causes for an incident or topic that has no record in the reference dataset.
+
+[without lessons]
+Question: What is the current delay for incident INC-2026-1108?
+
+  Attempt 1 | lessons used: none | reference consulted: False
+  Answer: The current delay for incident INC-2026-1108 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.
+  Evaluator -> REVISE: Missing or incorrect: INC-2026-1108.delay_minutes.
+  Feedback: The answer does not match the reference dataset. Missing or incorrect: INC-2026-1108.delay_minutes. The answer must state all of these facts: INC-2026-1108.delay_minutes = 20. State these values exactly.
+
+  Final result: FAIL after 1 attempt(s) | latency 4.8s
+  Final response: The current delay for incident INC-2026-1108 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.
+
+[with stored lessons loaded]
+Loaded lesson_001 -> use_count now 19
+Loaded lesson_002 -> use_count now 11
+Question: What is the current delay for incident INC-2026-1108?
+
+  Attempt 1 | lessons used: ['lesson_001', 'lesson_002'] | reference consulted: True
+  Answer: The current delay for incident INC-2026-1108 is 20 minutes. The status is investigating. Buses are detouring via Alum Rock Ave with a temporary stop at Alum Rock & King.
+  Evaluator -> PASS: All required facts match the reference dataset.
+
+  Final result: PASS after 1 attempt(s) | latency 7.0s
+  Final response: The current delay for incident INC-2026-1108 is 20 minutes. The status is investigating. Buses are detouring via Alum Rock Ave with a temporary stop at Alum Rock & King.
+
+--- TEST - Baseline: 12 questions | repair=False | lessons=[] ---
+  [X01] FAIL attempts=1 first=['WRONG_VALUE'] lessons=- 4.5s | What is the current delay for incident INC-2026-1110?
+  [X02] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 5.3s | What caused incident INC-2026-1107?
+  [X03] PASS attempts=1 first=PASS lessons=- 3.1s | Is incident INC-2026-1111 resolved?
+  [X04] FAIL attempts=1 first=['MISSING_FACT', 'WRONG_VALUE'] lessons=- 5.9s | How long is the delay for INC-2026-1112 and what detour is in place?
+  [X05] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 2.4s | What is the status of incident INC-2026-1102?
+  [X06] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 4.9s | What should I do if I see a suspicious item on a bus?
+  [X07] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 5.5s | What should wheelchair users do if a station elevator is out of service?
+  [X08] PASS attempts=1 first=PASS lessons=- 4.6s | How much is a youth day pass?
+  [X09] FAIL attempts=1 first=['MISSING_FACT'] lessons=- 3.4s | Where is the transit lost and found?
+  [X10] FAIL attempts=1 first=['UNSUPPORTED_ANSWER'] lessons=- 4.1s | What is the delay for incident INC-2026-1197?
+  [X11] FAIL attempts=1 first=['UNSUPPORTED_ANSWER'] lessons=- 5.0s | How often do buses run on Route 60 on Sundays?
+  [X12] FAIL attempts=1 first=['UNSUPPORTED_ANSWER'] lessons=- 5.3s | Are service animals allowed on buses and trains?
+
+--- TEST - Evaluator Repair: 12 questions | repair=True | lessons=[] ---
+  [X01] PASS attempts=2 first=['WRONG_VALUE'] lessons=- 10.0s | What is the current delay for incident INC-2026-1110?
+  [X02] PASS attempts=2 first=['MISSING_FACT'] lessons=- 11.0s | What caused incident INC-2026-1107?
+  [X03] PASS attempts=1 first=PASS lessons=- 2.7s | Is incident INC-2026-1111 resolved?
+  [X04] PASS attempts=2 first=['MISSING_FACT', 'WRONG_VALUE'] lessons=- 11.6s | How long is the delay for INC-2026-1112 and what detour is in place?
+  [X05] PASS attempts=2 first=['MISSING_FACT'] lessons=- 5.3s | What is the status of incident INC-2026-1102?
+  [X06] PASS attempts=2 first=['MISSING_FACT'] lessons=- 11.6s | What should I do if I see a suspicious item on a bus?
+  [X07] PASS attempts=2 first=['MISSING_FACT'] lessons=- 14.4s | What should wheelchair users do if a station elevator is out of service?
+  [X08] PASS attempts=1 first=PASS lessons=- 3.9s | How much is a youth day pass?
+  [X09] PASS attempts=2 first=['MISSING_FACT'] lessons=- 6.1s | Where is the transit lost and found?
+  [X10] PASS attempts=2 first=['UNSUPPORTED_ANSWER'] lessons=- 9.6s | What is the delay for incident INC-2026-1197?
+  [X11] PASS attempts=2 first=['UNSUPPORTED_ANSWER'] lessons=- 8.8s | How often do buses run on Route 60 on Sundays?
+  [X12] PASS attempts=2 first=['UNSUPPORTED_ANSWER'] lessons=- 10.9s | Are service animals allowed on buses and trains?
+
+--- TEST - Lesson Memory: 12 questions | repair=True | lessons=['lesson_001', 'lesson_002'] ---
+  [X01] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 7.0s | What is the current delay for incident INC-2026-1110?
+  [X02] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.6s | What caused incident INC-2026-1107?
+  [X03] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.0s | Is incident INC-2026-1111 resolved?
+  [X04] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.6s | How long is the delay for INC-2026-1112 and what detour is in place?
+  [X05] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 7.4s | What is the status of incident INC-2026-1102?
+  [X06] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 5.7s | What should I do if I see a suspicious item on a bus?
+  [X07] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.7s | What should wheelchair users do if a station elevator is out of service?
+  [X08] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 1.7s | How much is a youth day pass?
+  [X09] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.7s | Where is the transit lost and found?
+  [X10] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.7s | What is the delay for incident INC-2026-1197?
+  [X11] PASS attempts=1 first=PASS lessons=['lesson_002'] 4.1s | How often do buses run on Route 60 on Sundays?
+  [X12] PASS attempts=1 first=PASS lessons=['lesson_002'] 4.0s | Are service animals allowed on buses and trains?
+
+--- TEST - Validated Improvement: 12 questions | repair=True | lessons=['lesson_001', 'lesson_002'] ---
+  [X01] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 5.1s | What is the current delay for incident INC-2026-1110?
+  [X02] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.3s | What caused incident INC-2026-1107?
+  [X03] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.0s | Is incident INC-2026-1111 resolved?
+  [X04] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 6.6s | How long is the delay for INC-2026-1112 and what detour is in place?
+  [X05] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 5.7s | What is the status of incident INC-2026-1102?
+  [X06] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 5.9s | What should I do if I see a suspicious item on a bus?
+  [X07] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.6s | What should wheelchair users do if a station elevator is out of service?
+  [X08] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 1.8s | How much is a youth day pass?
+  [X09] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.5s | Where is the transit lost and found?
+  [X10] PASS attempts=1 first=PASS lessons=['lesson_001', 'lesson_002'] 4.8s | What is the delay for incident INC-2026-1197?
+  [X11] PASS attempts=1 first=PASS lessons=['lesson_002'] 4.0s | How often do buses run on Route 60 on Sundays?
+  [X12] PASS attempts=1 first=PASS lessons=['lesson_002'] 4.0s | Are service animals allowed on buses and trains?
+
+=== Final test results (test_data.json, 12 questions) ===
+| Variant | Correct answers | Incorrect answers | Average attempts | Average latency |
+|---|---|---|---|---|
+| Baseline | 2/12 | 10/12 | 1.00 | 4.5 s |
+| Evaluator Repair | 12/12 | 0/12 | 1.83 | 8.8 s |
+| Lesson Memory | 12/12 | 0/12 | 1.00 | 5.3 s |
+| Validated Improvement | 12/12 | 0/12 | 1.00 | 4.9 s |
+  Baseline: lessons=-
+  Evaluator Repair: lessons=-
+  Lesson Memory: lessons=['lesson_001', 'lesson_002']
+  Validated Improvement: lessons=['lesson_001', 'lesson_002']

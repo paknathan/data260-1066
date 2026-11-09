@@ -1,0 +1,42 @@
+[
+  {
+    "id": "V01",
+    "question": "What is the current delay for incident INC-2026-1105?"
+  },
+  {
+    "id": "V02",
+    "question": "What caused INC-2026-1108 and what detour should riders use?"
+  },
+  {
+    "id": "V03",
+    "question": "Has incident INC-2026-1106 been resolved?"
+  },
+  {
+    "id": "V04",
+    "question": "What is the status of INC-2026-1109 and how long is the delay?"
+  },
+  {
+    "id": "V05",
+    "question": "Will my monthly pass be extended if service on my line is suspended?"
+  },
+  {
+    "id": "V06",
+    "question": "How do I sign up for text alerts about service disruptions?"
+  },
+  {
+    "id": "V07",
+    "question": "How many bicycles can ride on a light rail car?"
+  },
+  {
+    "id": "V08",
+    "question": "What is the delay for incident INC-2026-1198?"
+  },
+  {
+    "id": "V09",
+    "question": "Does the transit agency run extra light rail service after events at SAP Center?"
+  },
+  {
+    "id": "V10",
+    "question": "How does the agency decide the severity level of an incident?"
+  }
+]

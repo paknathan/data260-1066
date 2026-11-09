@@ -1,0 +1,1561 @@
+{
+  "run_at": "2026-11-09T03:45:04+00:00",
+  "rows": [
+    {
+      "variant": "Baseline",
+      "correct": 2,
+      "incorrect": 10,
+      "avg_attempts": 1,
+      "avg_latency_ms": 4504.5,
+      "lessons": []
+    },
+    {
+      "variant": "Evaluator Repair",
+      "correct": 12,
+      "incorrect": 0,
+      "avg_attempts": 1.83,
+      "avg_latency_ms": 8840.6,
+      "lessons": []
+    },
+    {
+      "variant": "Lesson Memory",
+      "correct": 12,
+      "incorrect": 0,
+      "avg_attempts": 1,
+      "avg_latency_ms": 5289.6,
+      "lessons": [
+        "lesson_001",
+        "lesson_002"
+      ]
+    },
+    {
+      "variant": "Validated Improvement",
+      "correct": 12,
+      "incorrect": 0,
+      "avg_attempts": 1,
+      "avg_latency_ms": 4931.6,
+      "lessons": [
+        "lesson_001",
+        "lesson_002"
+      ]
+    }
+  ],
+  "results": {
+    "Baseline": [
+      {
+        "id": "X01",
+        "question": "What is the current delay for incident INC-2026-1110?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The current delay for incident INC-2026-1110 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "WRONG_VALUE"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1110.delay_minutes.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1110.delay_minutes. The answer must state all of these facts: INC-2026-1110.delay_minutes = 45. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The current delay for incident INC-2026-1110 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 4524.9
+      },
+      {
+        "id": "X02",
+        "question": "What caused incident INC-2026-1107?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1107 was caused by a mechanical failure in the train's braking system, leading to an unexpected stop on the tracks. The issue was resolved after emergency services and transit staff arrived on the scene.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1107.cause.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1107.cause. The answer must state all of these facts: INC-2026-1107.cause = medical emergency on board. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1107 was caused by a mechanical failure in the train's braking system, leading to an unexpected stop on the tracks. The issue was resolved after emergency services and transit staff arrived on the scene.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 5306.4
+      },
+      {
+        "id": "X03",
+        "question": "Is incident INC-2026-1111 resolved?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1111 has been resolved. Service has been restored, and no further action is required.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1111 has been resolved. Service has been restored, and no further action is required.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 3126.1
+      },
+      {
+        "id": "X04",
+        "question": "How long is the delay for INC-2026-1112 and what detour is in place?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The delay for INC-2026-1112 is approximately 30 minutes. A detour is in place along Blossom Hill Road due to construction, redirecting traffic via San Jose Creek Parkway. Check real-time updates for the latest info.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT",
+                "WRONG_VALUE"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1112.delay_minutes, INC-2026-1112.rider_guidance.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1112.delay_minutes, INC-2026-1112.rider_guidance. The answer must state all of these facts: INC-2026-1112.delay_minutes = 15; INC-2026-1112.rider_guidance = Buses detour via 3rd St during the parade; stops on 1st St are closed.. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The delay for INC-2026-1112 is approximately 30 minutes. A detour is in place along Blossom Hill Road due to construction, redirecting traffic via San Jose Creek Parkway. Check real-time updates for the latest info.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 5883.1
+      },
+      {
+        "id": "X05",
+        "question": "What is the status of incident INC-2026-1102?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1102 has been resolved. No further action is required.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1102.status.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1102.status. The answer must state all of these facts: INC-2026-1102.status = investigating. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1102 has been resolved. No further action is required.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 2433.3
+      },
+      {
+        "id": "X06",
+        "question": "What should I do if I see a suspicious item on a bus?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "If you see a suspicious item on a bus, immediately notify a transit employee or call 911. Do not touch the item. Stay calm and follow staff instructions to ensure your safety and the safety of others.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: POL-SUSPICIOUS-ITEM.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-SUSPICIOUS-ITEM. The answer must state all of these facts: POL-SUSPICIOUS-ITEM = Do not touch the item; move away and tell the operator or call Transit Police at 408-555-0199.. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "If you see a suspicious item on a bus, immediately notify a transit employee or call 911. Do not touch the item. Stay calm and follow staff instructions to ensure your safety and the safety of others.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 4858.1
+      },
+      {
+        "id": "X07",
+        "question": "What should wheelchair users do if a station elevator is out of service?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "If a station elevator is out of service, wheelchair users should check for alternative access, such as ramps or stairs, and use the station's customer service desk for assistance. They may also call the transit agency for real-time updates and possible shuttle services. Always ask for help if needed.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: POL-ELEVATOR-OUTAGE.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-ELEVATOR-OUTAGE. The answer must state all of these facts: POL-ELEVATOR-OUTAGE = During an elevator outage, call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator.. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "If a station elevator is out of service, wheelchair users should check for alternative access, such as ramps or stairs, and use the station's customer service desk for assistance. They may also call the transit agency for real-time updates and possible shuttle services. Always ask for help if needed.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 5518.2
+      },
+      {
+        "id": "X08",
+        "question": "How much is a youth day pass?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "A Youth Day Pass costs $3.00 and is valid for one day, allowing unlimited rides on all San Jose Municipal Transportation (SJMT) buses and light rail. It's available to youth ages 5-18.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "A Youth Day Pass costs $3.00 and is valid for one day, allowing unlimited rides on all San Jose Municipal Transportation (SJMT) buses and light rail. It's available to youth ages 5-18.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 4594.7
+      },
+      {
+        "id": "X09",
+        "question": "Where is the transit lost and found?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The transit lost and found is located at the Santa Clara Station, near the customer service desk. You can check there for lost items or report any lost belongings.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: POL-LOST-FOUND.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-LOST-FOUND. The answer must state all of these facts: POL-LOST-FOUND = Lost and found is at the River Oaks Customer Service Center, open weekdays 8 am to 5 pm.. State these values exactly."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The transit lost and found is located at the Santa Clara Station, near the customer service desk. You can check there for lost items or report any lost belongings.",
+        "final_result": "FAIL",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 3407.3
+      },
+      {
+        "id": "X10",
+        "question": "What is the delay for incident INC-2026-1197?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The delay for incident INC-2026-1197 is approximately 15 minutes. Service is expected to resume normally shortly. Riders are advised to check real-time updates for the most current information.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": false,
+              "failure_codes": [
+                "UNSUPPORTED_ANSWER"
+              ],
+              "explanation": "No reference record exists for this question, but the answer states specific values not supported by the reference.",
+              "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The delay for incident INC-2026-1197 is approximately 15 minutes. Service is expected to resume normally shortly. Riders are advised to check real-time updates for the most current information.",
+        "final_result": "FAIL",
+        "covered": false,
+        "lessons_loaded": [],
+        "latency_ms": 4065.8
+      },
+      {
+        "id": "X11",
+        "question": "How often do buses run on Route 60 on Sundays?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Buses on Route 60 run every 30 minutes on Sundays from 6:00 AM to 9:00 PM. Frequencies may vary during holidays or special events. Check the SJTA website for real-time updates.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": false,
+              "failure_codes": [
+                "UNSUPPORTED_ANSWER"
+              ],
+              "explanation": "No reference record exists for this question, but the answer states specific values not supported by the reference.",
+              "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "Buses on Route 60 run every 30 minutes on Sundays from 6:00 AM to 9:00 PM. Frequencies may vary during holidays or special events. Check the SJTA website for real-time updates.",
+        "final_result": "FAIL",
+        "covered": false,
+        "lessons_loaded": [],
+        "latency_ms": 5049.6
+      },
+      {
+        "id": "X12",
+        "question": "Are service animals allowed on buses and trains?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Yes, service animals are allowed on all San Jose Municipal Transit buses and trains. They must be properly trained and under control. Riders with service animals should inform the transit operator for assistance. Service animals are defined as dogs or other animals trained to perform tasks for individuals with disabilities.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": false,
+              "failure_codes": [
+                "UNSUPPORTED_ANSWER"
+              ],
+              "explanation": "No reference record exists for this question, but the answer does not say the information is unavailable.",
+              "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "Yes, service animals are allowed on all San Jose Municipal Transit buses and trains. They must be properly trained and under control. Riders with service animals should inform the transit operator for assistance. Service animals are defined as dogs or other animals trained to perform tasks for individuals with disabilities.",
+        "final_result": "FAIL",
+        "covered": false,
+        "lessons_loaded": [],
+        "latency_ms": 5286.4
+      }
+    ],
+    "Evaluator Repair": [
+      {
+        "id": "X01",
+        "question": "What is the current delay for incident INC-2026-1110?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The current delay for incident INC-2026-1110 is 15 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "WRONG_VALUE"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1110.delay_minutes.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1110.delay_minutes. The answer must state all of these facts: INC-2026-1110.delay_minutes = 45. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "The current delay for incident INC-2026-1110 is 45 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "The current delay for incident INC-2026-1110 is 45 minutes. Service is expected to resume shortly. Riders are advised to check real-time updates for the most accurate information.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 9967.7
+      },
+      {
+        "id": "X02",
+        "question": "What caused incident INC-2026-1107?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1107 was caused by a mechanical failure in the train's braking system, leading to an unexpected stop on the tracks. The issue was resolved after emergency services and transit staff arrived on the scene.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1107.cause.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1107.cause. The answer must state all of these facts: INC-2026-1107.cause = medical emergency on board. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "The incident INC-2026-1107 was caused by a medical emergency on board. A passenger experienced a sudden health issue, prompting the train to stop. Emergency responders and transit staff arrived promptly to assist the passenger.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "The incident INC-2026-1107 was caused by a medical emergency on board. A passenger experienced a sudden health issue, prompting the train to stop. Emergency responders and transit staff arrived promptly to assist the passenger.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 11042.0
+      },
+      {
+        "id": "X03",
+        "question": "Is incident INC-2026-1111 resolved?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1111 has been resolved. Service has been restored, and no further action is required.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1111 has been resolved. Service has been restored, and no further action is required.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 2736.8
+      },
+      {
+        "id": "X04",
+        "question": "How long is the delay for INC-2026-1112 and what detour is in place?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The delay for INC-2026-1112 is approximately 30 minutes. A detour is in place along Blossom Hill Road due to construction, redirecting traffic via San Jose Creek Parkway. Check real-time updates for the latest info.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT",
+                "WRONG_VALUE"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1112.delay_minutes, INC-2026-1112.rider_guidance.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1112.delay_minutes, INC-2026-1112.rider_guidance. The answer must state all of these facts: INC-2026-1112.delay_minutes = 15; INC-2026-1112.rider_guidance = Buses detour via 3rd St during the parade; stops on 1st St are closed.. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "The delay for INC-2026-1112 is 15 minutes. Buses detour via 3rd St during the parade; stops on 1st St are closed.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "The delay for INC-2026-1112 is 15 minutes. Buses detour via 3rd St during the parade; stops on 1st St are closed.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 11635.8
+      },
+      {
+        "id": "X05",
+        "question": "What is the status of incident INC-2026-1102?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1102 has been resolved. No further action is required.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: INC-2026-1102.status.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1102.status. The answer must state all of these facts: INC-2026-1102.status = investigating. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "The incident INC-2026-1102.status is investigating.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "The incident INC-2026-1102.status is investigating.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 5337.4
+      },
+      {
+        "id": "X06",
+        "question": "What should I do if I see a suspicious item on a bus?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "If you see a suspicious item on a bus, immediately notify a transit employee or call 911. Do not touch the item. Stay calm and follow staff instructions to ensure your safety and the safety of others.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: POL-SUSPICIOUS-ITEM.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-SUSPICIOUS-ITEM. The answer must state all of these facts: POL-SUSPICIOUS-ITEM = Do not touch the item; move away and tell the operator or call Transit Police at 408-555-0199.. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "If you see a suspicious item on a bus, do not touch it. Move away and immediately tell the operator or call Transit Police at 408-555-0199. Stay calm and follow staff instructions to ensure your safety and the safety of others.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "If you see a suspicious item on a bus, do not touch it. Move away and immediately tell the operator or call Transit Police at 408-555-0199. Stay calm and follow staff instructions to ensure your safety and the safety of others.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 11568.2
+      },
+      {
+        "id": "X07",
+        "question": "What should wheelchair users do if a station elevator is out of service?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Wheelchair users should check for alternative access, such as ramps or stairs, and use the transit agency's real-time service alerts for updates. If no accessible route is available, they can request assistance from station staff or call the transit agency's customer service for help. Always prioritize safety and seek guidance if needed.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: POL-ELEVATOR-OUTAGE.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-ELEVATOR-OUTAGE. The answer must state all of these facts: POL-ELEVATOR-OUTAGE = During an elevator outage, call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator.. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "During an elevator outage, call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator. Check for alternative access like ramps or stairs. If no accessible route is available, use the transit agency's real-time service alerts for updates. Always prioritize safety and seek guidance if needed.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "During an elevator outage, call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator. Check for alternative access like ramps or stairs. If no accessible route is available, use the transit agency's real-time service alerts for updates. Always prioritize safety and seek guidance if needed.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 14421.2
+      },
+      {
+        "id": "X08",
+        "question": "How much is a youth day pass?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "A Youth Day Pass costs $3.00 and is valid for one day, allowing unlimited rides on all San Jose Municipal Transportation (SJMT) buses and light rail. It's available to youth ages 5-18.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "A Youth Day Pass costs $3.00 and is valid for one day, allowing unlimited rides on all San Jose Municipal Transportation (SJMT) buses and light rail. It's available to youth ages 5-18.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 3948.8
+      },
+      {
+        "id": "X09",
+        "question": "Where is the transit lost and found?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The transit lost and found is located at the Santa Clara Station, near the customer service desk. You can check there for lost items or report any lost belongings.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": true,
+              "failure_codes": [
+                "MISSING_FACT"
+              ],
+              "explanation": "Missing or incorrect: POL-LOST-FOUND.",
+              "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-LOST-FOUND. The answer must state all of these facts: POL-LOST-FOUND = Lost and found is at the River Oaks Customer Service Center, open weekdays 8 am to 5 pm.. State these values exactly."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "POL-LOST-FOUND = Lost and found is at the River Oaks Customer Service Center, open weekdays 8 am to 5 pm.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "POL-LOST-FOUND = Lost and found is at the River Oaks Customer Service Center, open weekdays 8 am to 5 pm.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [],
+        "latency_ms": 6098.0
+      },
+      {
+        "id": "X10",
+        "question": "What is the delay for incident INC-2026-1197?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The delay for incident INC-2026-1197 is approximately 15 minutes. Service is expected to resume normally shortly. Riders are advised to check real-time updates for the most current information.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": false,
+              "failure_codes": [
+                "UNSUPPORTED_ANSWER"
+              ],
+              "explanation": "No reference record exists for this question, but the answer states specific values not supported by the reference.",
+              "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "I do not have information about incident INC-2026-1197. Please check official service alerts for the most current updates on delays or service changes.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "I do not have information about incident INC-2026-1197. Please check official service alerts for the most current updates on delays or service changes.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [],
+        "latency_ms": 9559.1
+      },
+      {
+        "id": "X11",
+        "question": "How often do buses run on Route 60 on Sundays?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Buses on Route 60 run every 30 minutes on Sundays from 6:00 AM to 9:00 PM. Frequencies may vary during holidays or special events. Check the SJTA website for real-time updates.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": false,
+              "failure_codes": [
+                "UNSUPPORTED_ANSWER"
+              ],
+              "explanation": "No reference record exists for this question, but the answer states specific values not supported by the reference.",
+              "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "I don't have specific information about bus frequencies for Route 60 on Sundays. For the most accurate and up-to-date schedule, please check official SJTA service alerts or real-time updates.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "I don't have specific information about bus frequencies for Route 60 on Sundays. For the most accurate and up-to-date schedule, please check official SJTA service alerts or real-time updates.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [],
+        "latency_ms": 8841.7
+      },
+      {
+        "id": "X12",
+        "question": "Are service animals allowed on buses and trains?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Yes, service animals are allowed on all San Jose Municipal Transit buses and trains. They must be properly trained and under control. Riders with service animals should inform the transit operator for assistance. Service animals are defined as dogs or other animals trained to perform tasks for individuals with disabilities.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "REVISE",
+              "covered": false,
+              "failure_codes": [
+                "UNSUPPORTED_ANSWER"
+              ],
+              "explanation": "No reference record exists for this question, but the answer does not say the information is unavailable.",
+              "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+            }
+          },
+          {
+            "attempt": 2,
+            "answer": "I don't have specific information on service animals for San Jose Municipal Transit. For the most accurate and up-to-date details, please check official service alerts or contact the transit authority directly.",
+            "lessons_used": [],
+            "reference_used": false,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 2,
+        "final_answer": "I don't have specific information on service animals for San Jose Municipal Transit. For the most accurate and up-to-date details, please check official service alerts or contact the transit authority directly.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [],
+        "latency_ms": 10930.1
+      }
+    ],
+    "Lesson Memory": [
+      {
+        "id": "X01",
+        "question": "What is the current delay for incident INC-2026-1110?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The current delay for incident INC-2026-1110 is 45 minutes. The status is investigating, and the cause is a fire in the engine compartment. Riders should board the shuttle at Stevens Creek & Monroe and stay clear of the area.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The current delay for incident INC-2026-1110 is 45 minutes. The status is investigating, and the cause is a fire in the engine compartment. Riders should board the shuttle at Stevens Creek & Monroe and stay clear of the area.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 7008.0
+      },
+      {
+        "id": "X02",
+        "question": "What caused incident INC-2026-1107?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1107 was caused by a medical emergency on board the Blue Line light rail at Convention Center station. The delay was 10 minutes, and the issue is resolved. Trains are running normally again.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1107 was caused by a medical emergency on board the Blue Line light rail at Convention Center station. The delay was 10 minutes, and the issue is resolved. Trains are running normally again.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 6626.2
+      },
+      {
+        "id": "X03",
+        "question": "Is incident INC-2026-1111 resolved?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1111 is resolved. The Orange Line light rail had a door malfunction at Alum Rock station, causing an 8-minute delay. Trains are now running normally.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1111 is resolved. The Orange Line light rail had a door malfunction at Alum Rock station, causing an 8-minute delay. Trains are now running normally.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 6048.9
+      },
+      {
+        "id": "X04",
+        "question": "How long is the delay for INC-2026-1112 and what detour is in place?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The delay for INC-2026-1112 is 15 minutes. The detour involves Route 72 buses taking a route via 3rd St during the parade, with stops on 1st St closed.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The delay for INC-2026-1112 is 15 minutes. The detour involves Route 72 buses taking a route via 3rd St during the parade, with stops on 1st St closed.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 6641.5
+      },
+      {
+        "id": "X05",
+        "question": "What is the status of incident INC-2026-1102?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The status of incident INC-2026-1102 is \"investigating.\" The Blue Line light rail experienced a signal failure between Tasman and Baypointe, causing an 18-minute delay. Trains are single-tracking in this area; allow extra travel time.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The status of incident INC-2026-1102 is \"investigating.\" The Blue Line light rail experienced a signal failure between Tasman and Baypointe, causing an 18-minute delay. Trains are single-tracking in this area; allow extra travel time.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 7434.9
+      },
+      {
+        "id": "X06",
+        "question": "What should I do if I see a suspicious item on a bus?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "If you see a suspicious item on a bus, do not touch it. Move away and immediately tell the bus operator or call Transit Police at 408-555-0199. Do not attempt to handle or investigate the item.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "If you see a suspicious item on a bus, do not touch it. Move away and immediately tell the bus operator or call Transit Police at 408-555-0199. Do not attempt to handle or investigate the item.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 5729.0
+      },
+      {
+        "id": "X07",
+        "question": "What should wheelchair users do if a station elevator is out of service?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Wheelchair users should call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator during an elevator outage.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "Wheelchair users should call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator during an elevator outage.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 4699.6
+      },
+      {
+        "id": "X08",
+        "question": "How much is a youth day pass?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "A youth day pass costs $3.00.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "A youth day pass costs $3.00.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 1733.3
+      },
+      {
+        "id": "X09",
+        "question": "Where is the transit lost and found?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The transit lost and found is at the River Oaks Customer Service Center, open weekdays from 8 am to 5 pm. This information is based on policy POL-LOST-FOUND.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The transit lost and found is at the River Oaks Customer Service Center, open weekdays from 8 am to 5 pm. This information is based on policy POL-LOST-FOUND.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 4743.2
+      },
+      {
+        "id": "X10",
+        "question": "What is the delay for incident INC-2026-1197?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The reference dataset does not have a record for incident INC-2026-1197. For the most accurate and up-to-date information, please check official service alerts or contact customer service.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The reference dataset does not have a record for incident INC-2026-1197. For the most accurate and up-to-date information, please check official service alerts or contact customer service.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 4706.5
+      },
+      {
+        "id": "X11",
+        "question": "How often do buses run on Route 60 on Sundays?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "We do not have record of bus frequency for Route 60 on Sundays. Please check official service alerts or contact SJTA for the most accurate and up-to-date information.",
+            "lessons_used": [
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "We do not have record of bus frequency for Route 60 on Sundays. Please check official service alerts or contact SJTA for the most accurate and up-to-date information.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [
+          "lesson_002"
+        ],
+        "latency_ms": 4061.4
+      },
+      {
+        "id": "X12",
+        "question": "Are service animals allowed on buses and trains?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "We do not have specific information on service animal policies for our transit system. For the most accurate and up-to-date details, please check official service alerts or contact our customer service team.",
+            "lessons_used": [
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "We do not have specific information on service animal policies for our transit system. For the most accurate and up-to-date details, please check official service alerts or contact our customer service team.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [
+          "lesson_002"
+        ],
+        "latency_ms": 4042.6
+      }
+    ],
+    "Validated Improvement": [
+      {
+        "id": "X01",
+        "question": "What is the current delay for incident INC-2026-1110?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The current delay for incident INC-2026-1110 is 45 minutes. The status is investigating, and the cause is a fire in the engine compartment. Riders should board the shuttle at Stevens Creek & Monroe and stay clear of the area.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The current delay for incident INC-2026-1110 is 45 minutes. The status is investigating, and the cause is a fire in the engine compartment. Riders should board the shuttle at Stevens Creek & Monroe and stay clear of the area.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 5052.6
+      },
+      {
+        "id": "X02",
+        "question": "What caused incident INC-2026-1107?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1107 was caused by a medical emergency on board the Blue Line light rail at Convention Center station. The delay was 10 minutes, and the issue is resolved. Trains are running normally again.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1107 was caused by a medical emergency on board the Blue Line light rail at Convention Center station. The delay was 10 minutes, and the issue is resolved. Trains are running normally again.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 6287.4
+      },
+      {
+        "id": "X03",
+        "question": "Is incident INC-2026-1111 resolved?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The incident INC-2026-1111 is resolved. The Orange Line light rail had a door malfunction at Alum Rock station, causing an 8-minute delay. Trains are now running normally.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The incident INC-2026-1111 is resolved. The Orange Line light rail had a door malfunction at Alum Rock station, causing an 8-minute delay. Trains are now running normally.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 5967.3
+      },
+      {
+        "id": "X04",
+        "question": "How long is the delay for INC-2026-1112 and what detour is in place?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The delay for INC-2026-1112 is 15 minutes. The detour involves Route 72 buses taking a route via 3rd St during the parade, with stops on 1st St closed.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The delay for INC-2026-1112 is 15 minutes. The detour involves Route 72 buses taking a route via 3rd St during the parade, with stops on 1st St closed.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 6619.4
+      },
+      {
+        "id": "X05",
+        "question": "What is the status of incident INC-2026-1102?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The status of incident INC-2026-1102 is \"investigating.\" The Blue Line light rail experienced a signal failure between Tasman and Baypointe, causing an 18-minute delay. Trains are single-tracking in this area; allow extra travel time.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The status of incident INC-2026-1102 is \"investigating.\" The Blue Line light rail experienced a signal failure between Tasman and Baypointe, causing an 18-minute delay. Trains are single-tracking in this area; allow extra travel time.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 5693.8
+      },
+      {
+        "id": "X06",
+        "question": "What should I do if I see a suspicious item on a bus?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "If you see a suspicious item on a bus, do not touch it. Move away and immediately tell the bus operator or call Transit Police at 408-555-0199. Do not attempt to handle or investigate the item.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "If you see a suspicious item on a bus, do not touch it. Move away and immediately tell the bus operator or call Transit Police at 408-555-0199. Do not attempt to handle or investigate the item.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 5904.2
+      },
+      {
+        "id": "X07",
+        "question": "What should wheelchair users do if a station elevator is out of service?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "Wheelchair users should call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator during an elevator outage.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "Wheelchair users should call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator during an elevator outage.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 4577.6
+      },
+      {
+        "id": "X08",
+        "question": "How much is a youth day pass?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "A youth day pass costs $3.00.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "A youth day pass costs $3.00.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 1836.9
+      },
+      {
+        "id": "X09",
+        "question": "Where is the transit lost and found?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The transit lost and found is at the River Oaks Customer Service Center, open weekdays from 8 am to 5 pm. This information is based on policy POL-LOST-FOUND.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": true,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "All required facts match the reference dataset."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The transit lost and found is at the River Oaks Customer Service Center, open weekdays from 8 am to 5 pm. This information is based on policy POL-LOST-FOUND.",
+        "final_result": "PASS",
+        "covered": true,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 4478.8
+      },
+      {
+        "id": "X10",
+        "question": "What is the delay for incident INC-2026-1197?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "The reference dataset does not have a record for incident INC-2026-1197. For the most accurate and up-to-date information, please check official service alerts or contact customer service.",
+            "lessons_used": [
+              "lesson_001",
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "The reference dataset does not have a record for incident INC-2026-1197. For the most accurate and up-to-date information, please check official service alerts or contact customer service.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [
+          "lesson_001",
+          "lesson_002"
+        ],
+        "latency_ms": 4785.6
+      },
+      {
+        "id": "X11",
+        "question": "How often do buses run on Route 60 on Sundays?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "We do not have record of bus frequency for Route 60 on Sundays. Please check official service alerts or contact SJTA for the most accurate and up-to-date information.",
+            "lessons_used": [
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "We do not have record of bus frequency for Route 60 on Sundays. Please check official service alerts or contact SJTA for the most accurate and up-to-date information.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [
+          "lesson_002"
+        ],
+        "latency_ms": 3961.6
+      },
+      {
+        "id": "X12",
+        "question": "Are service animals allowed on buses and trains?",
+        "attempts": [
+          {
+            "attempt": 1,
+            "answer": "We do not have specific information on service animal policies for our transit system. For the most accurate and up-to-date details, please check official service alerts or contact our customer service team.",
+            "lessons_used": [
+              "lesson_002"
+            ],
+            "reference_used": true,
+            "evaluation": {
+              "result": "PASS",
+              "covered": false,
+              "failure_codes": [],
+              "feedback": null,
+              "explanation": "No reference record exists; the answer correctly declines without inventing details."
+            }
+          }
+        ],
+        "n_attempts": 1,
+        "final_answer": "We do not have specific information on service animal policies for our transit system. For the most accurate and up-to-date details, please check official service alerts or contact our customer service team.",
+        "final_result": "PASS",
+        "covered": false,
+        "lessons_loaded": [
+          "lesson_002"
+        ],
+        "latency_ms": 4013.5
+      }
+    ]
+  }
+}

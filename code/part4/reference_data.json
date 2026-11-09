@@ -1,0 +1,288 @@
+{
+  "_about": "HW9 Part 4 ground truth for s1066 municipal transit incidents. Used by the Evaluator Agent (and by the Answering Agent only when a lesson tells it to consult the reference). *_patterns are the evaluator's matching rules.",
+  "status_patterns": {
+    "investigating": "investigat",
+    "resolved": "resolved|restored|cleared",
+    "scheduled": "scheduled|planned"
+  },
+  "incidents": [
+    {
+      "incident_code": "INC-2026-1101",
+      "title": "Route 22 bus mechanical breakdown",
+      "line": "Route 22",
+      "location": "1st St & Santa Clara St",
+      "cause": "mechanical breakdown (engine failure)",
+      "delay_minutes": 25,
+      "status": "investigating",
+      "rider_guidance": "Transfer to Route 23 at 1st & San Fernando; a replacement bus is on the way.",
+      "cause_patterns": [
+        "breakdown|broke down|mechanical|engine"
+      ],
+      "guidance_patterns": [
+        "Route 23|replacement bus"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1102",
+      "title": "Blue Line signal failure",
+      "line": "Blue Line light rail",
+      "location": "between Tasman and Baypointe",
+      "cause": "signal failure",
+      "delay_minutes": 18,
+      "status": "investigating",
+      "rider_guidance": "Trains are single-tracking between Tasman and Baypointe; allow extra time.",
+      "cause_patterns": [
+        "signal"
+      ],
+      "guidance_patterns": [
+        "single.track"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1103",
+      "title": "Green Line power outage",
+      "line": "Green Line light rail",
+      "location": "Ohlone/Chynoweth station",
+      "cause": "overhead power outage",
+      "delay_minutes": 40,
+      "status": "resolved",
+      "rider_guidance": "Service has been restored; residual delays are clearing.",
+      "cause_patterns": [
+        "power|outage"
+      ],
+      "guidance_patterns": [
+        "restored"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1104",
+      "title": "Orange Line weekend track work",
+      "line": "Orange Line light rail",
+      "location": "Mountain View to Whisman",
+      "cause": "planned track maintenance",
+      "delay_minutes": 15,
+      "status": "scheduled",
+      "rider_guidance": "A bus bridge runs every 15 minutes between Mountain View and Whisman.",
+      "cause_patterns": [
+        "track (work|maintenance)|maintenance"
+      ],
+      "guidance_patterns": [
+        "bus bridge"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1105",
+      "title": "Rapid 500 collision",
+      "line": "Rapid 500",
+      "location": "Santa Clara St & 10th St",
+      "cause": "traffic collision",
+      "delay_minutes": 30,
+      "status": "investigating",
+      "rider_guidance": "Buses detour via San Carlos St; stops between 4th and 10th St are temporarily closed.",
+      "cause_patterns": [
+        "collision|crash|accident"
+      ],
+      "guidance_patterns": [
+        "San Carlos"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1106",
+      "title": "Route 60 flat tire",
+      "line": "Route 60",
+      "location": "Winchester Transit Center",
+      "cause": "flat tire",
+      "delay_minutes": 12,
+      "status": "resolved",
+      "rider_guidance": "The bus was replaced and service is back on schedule.",
+      "cause_patterns": [
+        "flat tire|tire"
+      ],
+      "guidance_patterns": [
+        "replaced|back on schedule"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1107",
+      "title": "Blue Line medical emergency",
+      "line": "Blue Line light rail",
+      "location": "Convention Center station",
+      "cause": "medical emergency on board",
+      "delay_minutes": 10,
+      "status": "resolved",
+      "rider_guidance": "Trains are running normally again.",
+      "cause_patterns": [
+        "medical"
+      ],
+      "guidance_patterns": [
+        "running normally|normal"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1108",
+      "title": "Route 66 traffic signal outage",
+      "line": "Route 66",
+      "location": "King Rd & Story Rd",
+      "cause": "traffic signal outage at the intersection",
+      "delay_minutes": 20,
+      "status": "investigating",
+      "rider_guidance": "Buses detour via Alum Rock Ave; use the temporary stop at Alum Rock & King.",
+      "cause_patterns": [
+        "signal outage|traffic signal|signal"
+      ],
+      "guidance_patterns": [
+        "Alum Rock"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1109",
+      "title": "Green Line trespasser on tracks",
+      "line": "Green Line light rail",
+      "location": "near Diridon station",
+      "cause": "trespasser on the tracks",
+      "delay_minutes": 35,
+      "status": "investigating",
+      "rider_guidance": "Trains are holding at Diridon and Tamien; use Route 64 as an alternative.",
+      "cause_patterns": [
+        "trespass"
+      ],
+      "guidance_patterns": [
+        "Route 64|holding"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1110",
+      "title": "Route 23 bus fire",
+      "line": "Route 23",
+      "location": "Stevens Creek Blvd & Winchester Blvd",
+      "cause": "fire in the engine compartment",
+      "delay_minutes": 45,
+      "status": "investigating",
+      "rider_guidance": "The bus was evacuated; riders should board the shuttle at Stevens Creek & Monroe and stay clear of the area.",
+      "cause_patterns": [
+        "fire"
+      ],
+      "guidance_patterns": [
+        "shuttle|evacuat"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1111",
+      "title": "Orange Line door malfunction",
+      "line": "Orange Line light rail",
+      "location": "Alum Rock station",
+      "cause": "door malfunction",
+      "delay_minutes": 8,
+      "status": "resolved",
+      "rider_guidance": "The train was taken out of service; trains are running normally.",
+      "cause_patterns": [
+        "door"
+      ],
+      "guidance_patterns": [
+        "out of service|running normally"
+      ]
+    },
+    {
+      "incident_code": "INC-2026-1112",
+      "title": "Route 72 parade detour",
+      "line": "Route 72",
+      "location": "downtown San Jose",
+      "cause": "downtown parade street closure",
+      "delay_minutes": 15,
+      "status": "scheduled",
+      "rider_guidance": "Buses detour via 3rd St during the parade; stops on 1st St are closed.",
+      "cause_patterns": [
+        "parade"
+      ],
+      "guidance_patterns": [
+        "3rd St|Third St"
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "policy_id": "POL-REFUND",
+      "match": "refund",
+      "fact": "Riders can request a refund for a trip cancelled by an incident within 30 days, online or at a customer service center.",
+      "required_patterns": [
+        "\\b30\\b|thirty"
+      ]
+    },
+    {
+      "policy_id": "POL-PASS-EXTENSION",
+      "match": "monthly pass",
+      "fact": "If service on a rider's line is suspended for more than 3 consecutive days, monthly passes are extended by the number of days suspended.",
+      "required_patterns": [
+        "extend",
+        "\\b3\\b|three"
+      ]
+    },
+    {
+      "policy_id": "POL-SEVERITY",
+      "match": "severity",
+      "fact": "Severity is High for delays of 30 minutes or more or any injury, Medium for 10-29 minute delays, and Low for delays under 10 minutes.",
+      "required_patterns": [
+        "\\b30\\b",
+        "\\b10\\b"
+      ]
+    },
+    {
+      "policy_id": "POL-ADULT-FARE",
+      "match": "adult fare|one-way|single.ride",
+      "fact": "A one-way adult fare is $2.50.",
+      "required_patterns": [
+        "2\\.50"
+      ]
+    },
+    {
+      "policy_id": "POL-YOUTH-DAY-PASS",
+      "match": "youth day pass",
+      "fact": "A youth day pass costs $3.00.",
+      "required_patterns": [
+        "\\$\\s?3(\\.00)?\\b"
+      ]
+    },
+    {
+      "policy_id": "POL-BIKES",
+      "match": "bicycle|bike",
+      "fact": "Up to 4 bicycles are allowed per light rail car; buses carry 2 bikes on the front rack.",
+      "required_patterns": [
+        "\\b4\\b|four"
+      ]
+    },
+    {
+      "policy_id": "POL-TEXT-ALERTS",
+      "match": "text alert|sms",
+      "fact": "Text ALERTS to 41411 to subscribe to service disruption alerts.",
+      "required_patterns": [
+        "41411"
+      ]
+    },
+    {
+      "policy_id": "POL-LOST-FOUND",
+      "match": "lost and found|lost item",
+      "fact": "Lost and found is at the River Oaks Customer Service Center, open weekdays 8 am to 5 pm.",
+      "required_patterns": [
+        "River Oaks"
+      ]
+    },
+    {
+      "policy_id": "POL-SUSPICIOUS-ITEM",
+      "match": "suspicious",
+      "fact": "Do not touch the item; move away and tell the operator or call Transit Police at 408-555-0199.",
+      "required_patterns": [
+        "(do not|don't|never) touch",
+        "408-555-0199"
+      ]
+    },
+    {
+      "policy_id": "POL-ELEVATOR-OUTAGE",
+      "match": "elevator",
+      "fact": "During an elevator outage, call 408-555-0142 to request the free accessible shuttle from the nearest station with a working elevator.",
+      "required_patterns": [
+        "shuttle",
+        "408-555-0142"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,724 @@
+{
+  "run_at": "2026-11-09T03:40:04+00:00",
+  "log": [
+    {
+      "lesson_id": "lesson_001",
+      "validated_at": "2026-11-09T03:39:06+00:00",
+      "failures_before": 9,
+      "failures_after": 1,
+      "fixed": [
+        "V01",
+        "V02",
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V10"
+      ],
+      "regressed": [],
+      "new_unsupported_answers": [],
+      "decision": "kept",
+      "before": {
+        "correct": 1,
+        "incorrect": 9,
+        "avg_attempts": 1,
+        "avg_latency_ms": 4419.8
+      },
+      "after": {
+        "correct": 9,
+        "incorrect": 1,
+        "avg_attempts": 1,
+        "avg_latency_ms": 5487.4
+      },
+      "after_results": [
+        {
+          "id": "V01",
+          "question": "What is the current delay for incident INC-2026-1105?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The current delay for incident INC-2026-1105 is 30 minutes. The status is investigating. Buses are detouring via San Carlos St, and stops between 4th and 10th St are temporarily closed.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The current delay for incident INC-2026-1105 is 30 minutes. The status is investigating. Buses are detouring via San Carlos St, and stops between 4th and 10th St are temporarily closed.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 8244.7
+        },
+        {
+          "id": "V02",
+          "question": "What caused INC-2026-1108 and what detour should riders use?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The cause of INC-2026-1108 was a traffic signal outage at the intersection of King Rd & Story Rd. Riders should take a detour via Alum Rock Ave and use the temporary stop at Alum Rock & King Rd.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The cause of INC-2026-1108 was a traffic signal outage at the intersection of King Rd & Story Rd. Riders should take a detour via Alum Rock Ave and use the temporary stop at Alum Rock & King Rd.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 7100.7
+        },
+        {
+          "id": "V03",
+          "question": "Has incident INC-2026-1106 been resolved?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The incident INC-2026-1106 has been resolved. The cause was a flat tire on Route 60 at Winchester Transit Center, causing a 12-minute delay. Service was restored with a replacement bus.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The incident INC-2026-1106 has been resolved. The cause was a flat tire on Route 60 at Winchester Transit Center, causing a 12-minute delay. Service was restored with a replacement bus.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 6363.6
+        },
+        {
+          "id": "V04",
+          "question": "What is the status of INC-2026-1109 and how long is the delay?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The status of INC-2026-1109 is \"investigating,\" and the delay is 35 minutes. Trains are holding at Diridon and Tamien; use Route 64 as an alternative.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The status of INC-2026-1109 is \"investigating,\" and the delay is 35 minutes. Trains are holding at Diridon and Tamien; use Route 64 as an alternative.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 6470.6
+        },
+        {
+          "id": "V05",
+          "question": "Will my monthly pass be extended if service on my line is suspended?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Yes, your monthly pass will be extended by the number of days service is suspended if the suspension lasts more than 3 consecutive days. This is covered under policy POL-PASS-EXTENSION.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "Yes, your monthly pass will be extended by the number of days service is suspended if the suspension lasts more than 3 consecutive days. This is covered under policy POL-PASS-EXTENSION.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 4953.5
+        },
+        {
+          "id": "V06",
+          "question": "How do I sign up for text alerts about service disruptions?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "To sign up for text alerts about service disruptions, text \"ALERTS\" to 41411. This subscription is governed by policy POL-TEXT-ALERTS.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "To sign up for text alerts about service disruptions, text \"ALERTS\" to 41411. This subscription is governed by policy POL-TEXT-ALERTS.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 4835.7
+        },
+        {
+          "id": "V07",
+          "question": "How many bicycles can ride on a light rail car?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Up to 4 bicycles are allowed per light rail car. Buses carry 2 bikes on the front rack. This is per policy POL-BIKES.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "Up to 4 bicycles are allowed per light rail car. Buses carry 2 bikes on the front rack. This is per policy POL-BIKES.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 4043.1
+        },
+        {
+          "id": "V08",
+          "question": "What is the delay for incident INC-2026-1198?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The incident INC-2026-1198 was not found in our records. Please verify the incident number and try again.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": false,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "No reference record exists; the answer correctly declines without inventing details."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The incident INC-2026-1198 was not found in our records. Please verify the incident number and try again.",
+          "final_result": "PASS",
+          "covered": false,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 3624.6
+        },
+        {
+          "id": "V09",
+          "question": "Does the transit agency run extra light rail service after events at SAP Center?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Yes, the San Jose Light Rail often runs extra service after major events at SAP Center, especially during weekends. Check real-time updates via the SJTA app or website for the most accurate schedule.",
+              "lessons_used": [],
+              "reference_used": false,
+              "evaluation": {
+                "result": "REVISE",
+                "covered": false,
+                "failure_codes": [
+                  "UNSUPPORTED_ANSWER"
+                ],
+                "explanation": "No reference record exists for this question, but the answer does not say the information is unavailable.",
+                "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "Yes, the San Jose Light Rail often runs extra service after major events at SAP Center, especially during weekends. Check real-time updates via the SJTA app or website for the most accurate schedule.",
+          "final_result": "FAIL",
+          "covered": false,
+          "lessons_loaded": [],
+          "latency_ms": 3538.5
+        },
+        {
+          "id": "V10",
+          "question": "How does the agency decide the severity level of an incident?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The agency determines severity based on delay duration or injury: High for 30+ minutes or any injury, Medium for 10-29 minutes, and Low for under 10 minutes, as per policy POL-SEVERITY.",
+              "lessons_used": [
+                "lesson_001"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The agency determines severity based on delay duration or injury: High for 30+ minutes or any injury, Medium for 10-29 minutes, and Low for under 10 minutes, as per policy POL-SEVERITY.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001"
+          ],
+          "latency_ms": 5699.3
+        }
+      ]
+    },
+    {
+      "lesson_id": "lesson_002",
+      "validated_at": "2026-11-09T03:40:04+00:00",
+      "failures_before": 1,
+      "failures_after": 0,
+      "fixed": [
+        "V09"
+      ],
+      "regressed": [],
+      "new_unsupported_answers": [],
+      "decision": "kept",
+      "before": {
+        "correct": 9,
+        "incorrect": 1,
+        "avg_attempts": 1,
+        "avg_latency_ms": 5487.4
+      },
+      "after": {
+        "correct": 10,
+        "incorrect": 0,
+        "avg_attempts": 1,
+        "avg_latency_ms": 5781.1
+      },
+      "after_results": [
+        {
+          "id": "V01",
+          "question": "What is the current delay for incident INC-2026-1105?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The current delay for incident INC-2026-1105 is 30 minutes. The status is investigating. Buses are detouring via San Carlos St, and stops between 4th and 10th St are temporarily closed.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The current delay for incident INC-2026-1105 is 30 minutes. The status is investigating. Buses are detouring via San Carlos St, and stops between 4th and 10th St are temporarily closed.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 8174.6
+        },
+        {
+          "id": "V02",
+          "question": "What caused INC-2026-1108 and what detour should riders use?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The incident INC-2026-1108 was caused by a traffic signal outage at the intersection of King Rd & Story Rd on Route 66. Riders should take a detour via Alum Rock Ave and use the temporary stop at Alum Rock & King Rd.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The incident INC-2026-1108 was caused by a traffic signal outage at the intersection of King Rd & Story Rd on Route 66. Riders should take a detour via Alum Rock Ave and use the temporary stop at Alum Rock & King Rd.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 7446.3
+        },
+        {
+          "id": "V03",
+          "question": "Has incident INC-2026-1106 been resolved?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The incident INC-2026-1106 has been resolved. The flat tire on Route 60 at Winchester Transit Center caused a 12-minute delay, but service is now back on schedule.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The incident INC-2026-1106 has been resolved. The flat tire on Route 60 at Winchester Transit Center caused a 12-minute delay, but service is now back on schedule.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 6095.1
+        },
+        {
+          "id": "V04",
+          "question": "What is the status of INC-2026-1109 and how long is the delay?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The status of INC-2026-1109 is \"investigating,\" and the delay is 35 minutes. Trains are holding at Diridon and Tamien; use Route 64 as an alternative.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The status of INC-2026-1109 is \"investigating,\" and the delay is 35 minutes. Trains are holding at Diridon and Tamien; use Route 64 as an alternative.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 6459.8
+        },
+        {
+          "id": "V05",
+          "question": "Will my monthly pass be extended if service on my line is suspended?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "If service on your line is suspended for more than 3 consecutive days, your monthly pass will be extended by the number of suspended days. Check official service alerts for confirmation.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "If service on your line is suspended for more than 3 consecutive days, your monthly pass will be extended by the number of suspended days. Check official service alerts for confirmation.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 4317.5
+        },
+        {
+          "id": "V06",
+          "question": "How do I sign up for text alerts about service disruptions?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "To sign up for text alerts about service disruptions, text \"ALERTS\" to 41411. This service is governed by policy POL-TEXT-ALERTS.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "To sign up for text alerts about service disruptions, text \"ALERTS\" to 41411. This service is governed by policy POL-TEXT-ALERTS.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 4738.2
+        },
+        {
+          "id": "V07",
+          "question": "How many bicycles can ride on a light rail car?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "Up to 4 bicycles are allowed per light rail car. Buses carry 2 bikes on the front rack. This policy is outlined in POL-BIKES.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "Up to 4 bicycles are allowed per light rail car. Buses carry 2 bikes on the front rack. This policy is outlined in POL-BIKES.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 3956.8
+        },
+        {
+          "id": "V08",
+          "question": "What is the delay for incident INC-2026-1198?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The reference dataset does not have a record for incident INC-2026-1198. For the most accurate and up-to-date information, please check official service alerts or contact customer service.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": false,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "No reference record exists; the answer correctly declines without inventing details."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The reference dataset does not have a record for incident INC-2026-1198. For the most accurate and up-to-date information, please check official service alerts or contact customer service.",
+          "final_result": "PASS",
+          "covered": false,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 4528.7
+        },
+        {
+          "id": "V09",
+          "question": "Does the transit agency run extra light rail service after events at SAP Center?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "We do not have record of extra light rail service after events at SAP Center. For real-time service updates, please check official service alerts or contact TriMet directly.",
+              "lessons_used": [
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": false,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "No reference record exists; the answer correctly declines without inventing details."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "We do not have record of extra light rail service after events at SAP Center. For real-time service updates, please check official service alerts or contact TriMet directly.",
+          "final_result": "PASS",
+          "covered": false,
+          "lessons_loaded": [
+            "lesson_002"
+          ],
+          "latency_ms": 4751.7
+        },
+        {
+          "id": "V10",
+          "question": "How does the agency decide the severity level of an incident?",
+          "attempts": [
+            {
+              "attempt": 1,
+              "answer": "The agency determines incident severity based on delay duration and injuries. High severity is for delays of 30 minutes or more or any injury. Medium severity is for delays between 10-29 minutes. Low severity is for delays under 10 minutes. This is outlined in policy POL-SEVERITY.",
+              "lessons_used": [
+                "lesson_001",
+                "lesson_002"
+              ],
+              "reference_used": true,
+              "evaluation": {
+                "result": "PASS",
+                "covered": true,
+                "failure_codes": [],
+                "feedback": null,
+                "explanation": "All required facts match the reference dataset."
+              }
+            }
+          ],
+          "n_attempts": 1,
+          "final_answer": "The agency determines incident severity based on delay duration and injuries. High severity is for delays of 30 minutes or more or any injury. Medium severity is for delays between 10-29 minutes. Low severity is for delays under 10 minutes. This is outlined in policy POL-SEVERITY.",
+          "final_result": "PASS",
+          "covered": true,
+          "lessons_loaded": [
+            "lesson_001",
+            "lesson_002"
+          ],
+          "latency_ms": 7342.8
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_pattern": "The answer omits or invents a specific value that the reference dataset records (incident delay, status, cause, detour, fare or policy number).",
+      "correction": "Check the reference dataset before answering questions about incidents, fares or policies, and state the recorded values exactly.",
+      "created_at": "2026-11-08",
+      "use_count": 18,
+      "template": "REFERENCE_VALUE",
+      "trigger": "INC-\\d{4}-\\d{4}|delay|status|resolved|cause|detour|fare|pass|refund|policy|severity|alert|bike|bicycle|lost|suspicious|elevator|how much|how long|how many",
+      "action": "consult_reference",
+      "source_cases": [
+        "T01",
+        "T02",
+        "T04",
+        "T05",
+        "T08"
+      ],
+      "status": "kept",
+      "validation": {
+        "validated_at": "2026-11-09T03:39:06+00:00",
+        "failures_before": 9,
+        "failures_after": 1,
+        "fixed": [
+          "V01",
+          "V02",
+          "V04",
+          "V05",
+          "V06",
+          "V07",
+          "V08",
+          "V10"
+        ],
+        "regressed": [],
+        "new_unsupported_answers": [],
+        "decision": "kept"
+      }
+    },
+    {
+      "lesson_id": "lesson_002",
+      "failure_pattern": "The answer gives delays, fares or causes for an incident or topic that has no record in the reference dataset.",
+      "correction": "If the reference dataset has no record for the incident or topic, say you do not have that information and point riders to official service alerts; do not guess numbers or causes.",
+      "created_at": "2026-11-08",
+      "use_count": 10,
+      "template": "NO_RECORD",
+      "trigger": ".",
+      "action": "consult_reference",
+      "source_cases": [
+        "T06",
+        "T07"
+      ],
+      "status": "kept",
+      "validation": {
+        "validated_at": "2026-11-09T03:40:04+00:00",
+        "failures_before": 1,
+        "failures_after": 0,
+        "fixed": [
+          "V09"
+        ],
+        "regressed": [],
+        "new_unsupported_answers": [],
+        "decision": "kept"
+      }
+    }
+  ]
+}

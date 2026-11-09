@@ -1,0 +1,366 @@
+{
+  "run_at": "2026-11-09T03:37:27+00:00",
+  "summary": {
+    "correct": 8,
+    "incorrect": 0,
+    "avg_attempts": 1.88,
+    "avg_latency_ms": 12271.3
+  },
+  "failures": {
+    "REFERENCE_VALUE": [
+      "T01",
+      "T02",
+      "T04",
+      "T05",
+      "T08"
+    ],
+    "NO_RECORD": [
+      "T06",
+      "T07"
+    ]
+  },
+  "lessons": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_pattern": "The answer omits or invents a specific value that the reference dataset records (incident delay, status, cause, detour, fare or policy number).",
+      "correction": "Check the reference dataset before answering questions about incidents, fares or policies, and state the recorded values exactly.",
+      "created_at": "2026-11-08",
+      "use_count": 0,
+      "template": "REFERENCE_VALUE",
+      "trigger": "INC-\\d{4}-\\d{4}|delay|status|resolved|cause|detour|fare|pass|refund|policy|severity|alert|bike|bicycle|lost|suspicious|elevator|how much|how long|how many",
+      "action": "consult_reference",
+      "source_cases": [
+        "T01",
+        "T02",
+        "T04",
+        "T05",
+        "T08"
+      ],
+      "status": "candidate",
+      "validation": null
+    },
+    {
+      "lesson_id": "lesson_002",
+      "failure_pattern": "The answer gives delays, fares or causes for an incident or topic that has no record in the reference dataset.",
+      "correction": "If the reference dataset has no record for the incident or topic, say you do not have that information and point riders to official service alerts; do not guess numbers or causes.",
+      "created_at": "2026-11-08",
+      "use_count": 0,
+      "template": "NO_RECORD",
+      "trigger": ".",
+      "action": "consult_reference",
+      "source_cases": [
+        "T06",
+        "T07"
+      ],
+      "status": "candidate",
+      "validation": null
+    }
+  ],
+  "results": [
+    {
+      "id": "T01",
+      "question": "What is the current delay for incident INC-2026-1101?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The current delay for incident INC-2026-1101 is 15 minutes. Service is expected to resume shortly once the issue is resolved. Riders are advised to check real-time updates for the most accurate information.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": true,
+            "failure_codes": [
+              "WRONG_VALUE"
+            ],
+            "explanation": "Missing or incorrect: INC-2026-1101.delay_minutes.",
+            "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1101.delay_minutes. The answer must state all of these facts: INC-2026-1101.delay_minutes = 25. State these values exactly."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "The current delay for incident INC-2026-1101 is 25 minutes. Service is expected to resume shortly once the issue is resolved. Riders are advised to check real-time updates for the most accurate information.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": true,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "All required facts match the reference dataset."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "The current delay for incident INC-2026-1101 is 25 minutes. Service is expected to resume shortly once the issue is resolved. Riders are advised to check real-time updates for the most accurate information.",
+      "final_result": "PASS",
+      "covered": true,
+      "lessons_loaded": [],
+      "latency_ms": 25962.1
+    },
+    {
+      "id": "T02",
+      "question": "What caused incident INC-2026-1102 and what should riders do?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The incident INC-2026-1102 was caused by a signal malfunction at a light rail crossing. Riders should avoid the area, follow real-time updates via the transit app, and use alternative routes if necessary. Stay safe and informed.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": true,
+            "failure_codes": [
+              "MISSING_FACT"
+            ],
+            "explanation": "Missing or incorrect: INC-2026-1102.rider_guidance.",
+            "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1102.rider_guidance. The answer must state all of these facts: INC-2026-1102.cause = signal failure; INC-2026-1102.rider_guidance = Trains are single-tracking between Tasman and Baypointe; allow extra time.. State these values exactly."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "The incident INC-2026-1102 was caused by a signal failure. Riders should know that trains are single-tracking between Tasman and Baypointe and allow extra time. Follow real-time updates via the transit app for further guidance. Stay safe and informed.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": true,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "All required facts match the reference dataset."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "The incident INC-2026-1102 was caused by a signal failure. Riders should know that trains are single-tracking between Tasman and Baypointe and allow extra time. Follow real-time updates via the transit app for further guidance. Stay safe and informed.",
+      "final_result": "PASS",
+      "covered": true,
+      "lessons_loaded": [],
+      "latency_ms": 13269.7
+    },
+    {
+      "id": "T03",
+      "question": "Is incident INC-2026-1103 resolved yet?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The incident INC-2026-1103 has been resolved. Service has returned to normal, and no further action is required.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": true,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "All required facts match the reference dataset."
+          }
+        }
+      ],
+      "n_attempts": 1,
+      "final_answer": "The incident INC-2026-1103 has been resolved. Service has returned to normal, and no further action is required.",
+      "final_result": "PASS",
+      "covered": true,
+      "lessons_loaded": [],
+      "latency_ms": 2966.3
+    },
+    {
+      "id": "T04",
+      "question": "How long is the delay for INC-2026-1104 and what is its status?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The delay for incident INC-2026-1104 is currently 15 minutes, and the status is under investigation. Service is expected to resume once the cause is identified. Apologies for the inconvenience.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": true,
+            "failure_codes": [
+              "MISSING_FACT"
+            ],
+            "explanation": "Missing or incorrect: INC-2026-1104.status.",
+            "feedback": "The answer does not match the reference dataset. Missing or incorrect: INC-2026-1104.status. The answer must state all of these facts: INC-2026-1104.delay_minutes = 15; INC-2026-1104.status = scheduled. State these values exactly."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "The delay for incident INC-2026-1104 is 15 minutes, and the status is scheduled. Service is expected to resume once the cause is identified. Apologies for the inconvenience.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": true,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "All required facts match the reference dataset."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "The delay for incident INC-2026-1104 is 15 minutes, and the status is scheduled. Service is expected to resume once the cause is identified. Apologies for the inconvenience.",
+      "final_result": "PASS",
+      "covered": true,
+      "lessons_loaded": [],
+      "latency_ms": 11486.0
+    },
+    {
+      "id": "T05",
+      "question": "How do I get a refund if my train was cancelled because of an incident?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "If your train was cancelled due to an incident, contact TriMet at (408) 796-2222 or visit their website. Refunds are typically issued for canceled trips, but you may need to provide details like your trip date, route, and ticket information. Check TriMet’s refund policy for specific guidelines.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": true,
+            "failure_codes": [
+              "MISSING_FACT"
+            ],
+            "explanation": "Missing or incorrect: POL-REFUND.",
+            "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-REFUND. The answer must state all of these facts: POL-REFUND = Riders can request a refund for a trip cancelled by an incident within 30 days, online or at a customer service center.. State these values exactly."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "If your train was cancelled due to an incident, you can request a refund within 30 days. Refunds are available online or at a customer service center. POL-REFUND = Riders can request a refund for a trip cancelled by an incident within 30 days, online or at a customer service center.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": true,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "All required facts match the reference dataset."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "If your train was cancelled due to an incident, you can request a refund within 30 days. Refunds are available online or at a customer service center. POL-REFUND = Riders can request a refund for a trip cancelled by an incident within 30 days, online or at a customer service center.",
+      "final_result": "PASS",
+      "covered": true,
+      "lessons_loaded": [],
+      "latency_ms": 16013.6
+    },
+    {
+      "id": "T06",
+      "question": "What is the delay for incident INC-2026-1199?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The delay for incident INC-2026-1199 is approximately 15 minutes. Service is expected to resume normally shortly. Riders are advised to check real-time updates for the most current information.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": false,
+            "failure_codes": [
+              "UNSUPPORTED_ANSWER"
+            ],
+            "explanation": "No reference record exists for this question, but the answer states specific values not supported by the reference.",
+            "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "I do not have information about incident INC-2026-1199. Please check official service alerts for the most current updates on delays or service changes.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": false,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "No reference record exists; the answer correctly declines without inventing details."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "I do not have information about incident INC-2026-1199. Please check official service alerts for the most current updates on delays or service changes.",
+      "final_result": "PASS",
+      "covered": false,
+      "lessons_loaded": [],
+      "latency_ms": 9005.9
+    },
+    {
+      "id": "T07",
+      "question": "Is parking free at the Park and Ride lots?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "Parking at San Jose Park and Ride lots is free for all vehicles. This includes both regular and disabled parking spaces. However, some lots may have restrictions or additional fees for extended parking. Always check the specific lot's signage for details.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": false,
+            "failure_codes": [
+              "UNSUPPORTED_ANSWER"
+            ],
+            "explanation": "No reference record exists for this question, but the answer does not say the information is unavailable.",
+            "feedback": "The reference dataset has no record for this incident or topic. Say that you do not have that information and point riders to official service alerts. Do not state delays, fares or causes."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "I don't have specific information about parking fees at San Jose Park and Ride lots. Please check official service alerts or contact the San Jose Municipal Transportation Department for the most accurate and up-to-date details.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": false,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "No reference record exists; the answer correctly declines without inventing details."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "I don't have specific information about parking fees at San Jose Park and Ride lots. Please check official service alerts or contact the San Jose Municipal Transportation Department for the most accurate and up-to-date details.",
+      "final_result": "PASS",
+      "covered": false,
+      "lessons_loaded": [],
+      "latency_ms": 10261.1
+    },
+    {
+      "id": "T08",
+      "question": "How much is a one-way adult fare?",
+      "attempts": [
+        {
+          "attempt": 1,
+          "answer": "The one-way adult fare for San Jose Municipal Transportation is $2.00. This applies to all adult riders using standard fare media like Clipper or cash.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "REVISE",
+            "covered": true,
+            "failure_codes": [
+              "MISSING_FACT"
+            ],
+            "explanation": "Missing or incorrect: POL-ADULT-FARE.",
+            "feedback": "The answer does not match the reference dataset. Missing or incorrect: POL-ADULT-FARE. The answer must state all of these facts: POL-ADULT-FARE = A one-way adult fare is $2.50.. State these values exactly."
+          }
+        },
+        {
+          "attempt": 2,
+          "answer": "The one-way adult fare is $2.50. This applies to all adult riders using standard fare media like Clipper or cash. POL-ADULT-FARE = $2.50.",
+          "lessons_used": [],
+          "reference_used": false,
+          "evaluation": {
+            "result": "PASS",
+            "covered": true,
+            "failure_codes": [],
+            "feedback": null,
+            "explanation": "All required facts match the reference dataset."
+          }
+        }
+      ],
+      "n_attempts": 2,
+      "final_answer": "The one-way adult fare is $2.50. This applies to all adult riders using standard fare media like Clipper or cash. POL-ADULT-FARE = $2.50.",
+      "final_result": "PASS",
+      "covered": true,
+      "lessons_loaded": [],
+      "latency_ms": 9205.8
+    }
+  ]
+}

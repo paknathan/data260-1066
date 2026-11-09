@@ -1,0 +1,64 @@
+[
+  {
+    "lesson_id": "lesson_001",
+    "failure_pattern": "The answer omits or invents a specific value that the reference dataset records (incident delay, status, cause, detour, fare or policy number).",
+    "correction": "Check the reference dataset before answering questions about incidents, fares or policies, and state the recorded values exactly.",
+    "created_at": "2026-11-08",
+    "use_count": 19,
+    "template": "REFERENCE_VALUE",
+    "trigger": "INC-\\d{4}-\\d{4}|delay|status|resolved|cause|detour|fare|pass|refund|policy|severity|alert|bike|bicycle|lost|suspicious|elevator|how much|how long|how many",
+    "action": "consult_reference",
+    "source_cases": [
+      "T01",
+      "T02",
+      "T04",
+      "T05",
+      "T08"
+    ],
+    "status": "kept",
+    "validation": {
+      "validated_at": "2026-11-09T03:39:06+00:00",
+      "failures_before": 9,
+      "failures_after": 1,
+      "fixed": [
+        "V01",
+        "V02",
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V10"
+      ],
+      "regressed": [],
+      "new_unsupported_answers": [],
+      "decision": "kept"
+    }
+  },
+  {
+    "lesson_id": "lesson_002",
+    "failure_pattern": "The answer gives delays, fares or causes for an incident or topic that has no record in the reference dataset.",
+    "correction": "If the reference dataset has no record for the incident or topic, say you do not have that information and point riders to official service alerts; do not guess numbers or causes.",
+    "created_at": "2026-11-08",
+    "use_count": 11,
+    "template": "NO_RECORD",
+    "trigger": ".",
+    "action": "consult_reference",
+    "source_cases": [
+      "T06",
+      "T07"
+    ],
+    "status": "kept",
+    "validation": {
+      "validated_at": "2026-11-09T03:40:04+00:00",
+      "failures_before": 1,
+      "failures_after": 0,
+      "fixed": [
+        "V09"
+      ],
+      "regressed": [],
+      "new_unsupported_answers": [],
+      "decision": "kept"
+    }
+  }
+]
